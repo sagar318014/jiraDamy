@@ -1,0 +1,35 @@
+﻿@model jiraDamy.entits.taskDataTable
+@{
+    ViewBag.Title = "FilForm";
+}
+
+@using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
+{<div class="col-lg-6 col-md-6 col-sm-6">
+        <form>
+            <div style="display:inline-block;width:300px;">
+                <div style="font-weight:600;">Add new task</div>
+                <lebel>Task Name</lebel>
+                <div>@Html.TextBoxFor(x => x.taskName)</div>
+                @Html.ValidationMessageFor(x => x.taskName)
+                <lebel>Description</lebel>
+                <div>@Html.TextBoxFor(x => x.description)</div>
+                @Html.ValidationMessageFor(x => x.description)
+                <div style="margin-top:15px;">
+                    <input type="submit" style="background-color:forestgreen;float:left" value="Add" />
+
+                    <button style="background-color:red;float:right;">Clear All</button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+<div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li style="font-size:30px">@Html.ActionLink("Form", "FilForm", "Home")</li>
+            <li style="font-size:30px">@Html.ActionLink("Todo", "Index", "Home")</li>
+            <li style="font-size:30px">@Html.ActionLink("Active", "About", "Home")</li>
+            <li style="font-size:30px">@Html.ActionLink("Completed", "Contact", "Home")</li>
+        </ul>
+    </div>
+ </div>

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="taskDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="statusTable">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="int" Nullable="false" />
+          <Property Name="statusName" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="taskDataTable">
+          <Key>
+            <PropertyRef Name="taskId" />
+          </Key>
+          <Property Name="taskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taskName" Type="varchar" MaxLength="50" />
+          <Property Name="taskStatus" Type="int" />
+        </EntityType>
+        <Association Name="FK_taskDataTable_statusTable">
+          <End Role="statusTable" Type="Self.statusTable" Multiplicity="0..1" />
+          <End Role="taskDataTable" Type="Self.taskDataTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statusTable">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="taskDataTable">
+              <PropertyRef Name="taskStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="taskDatabaseModelStoreContainer">
+          <EntitySet Name="statusTable" EntityType="Self.statusTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="taskDataTable" EntityType="Self.taskDataTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_taskDataTable_statusTable" Association="Self.FK_taskDataTable_statusTable">
+            <End Role="statusTable" EntitySet="statusTable" />
+            <End Role="taskDataTable" EntitySet="taskDataTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="taskDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="taskDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="statusTables" EntityType="taskDatabaseModel.statusTable" />
+          <EntitySet Name="taskDataTables" EntityType="taskDatabaseModel.taskDataTable" />
+          <AssociationSet Name="FK_taskDataTable_statusTable" Association="taskDatabaseModel.FK_taskDataTable_statusTable">
+            <End Role="statusTable" EntitySet="statusTables" />
+            <End Role="taskDataTable" EntitySet="taskDataTables" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="statusTable">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="Int32" Nullable="false" />
+          <Property Name="statusName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="taskDataTables" Relationship="taskDatabaseModel.FK_taskDataTable_statusTable" FromRole="statusTable" ToRole="taskDataTable" />
+        </EntityType>
+        <EntityType Name="taskDataTable">
+          <Key>
+            <PropertyRef Name="taskId" />
+          </Key>
+          <Property Name="taskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taskName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="taskStatus" Type="Int32" />
+          <NavigationProperty Name="statusTable" Relationship="taskDatabaseModel.FK_taskDataTable_statusTable" FromRole="taskDataTable" ToRole="statusTable" />
+        </EntityType>
+        <Association Name="FK_taskDataTable_statusTable">
+          <End Type="taskDatabaseModel.statusTable" Role="statusTable" Multiplicity="0..1" />
+          <End Type="taskDatabaseModel.taskDataTable" Role="taskDataTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statusTable">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="taskDataTable">
+              <PropertyRef Name="taskStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="taskDatabaseModelStoreContainer" CdmEntityContainer="taskDatabaseEntities">
+          <EntitySetMapping Name="statusTables">
+            <EntityTypeMapping TypeName="taskDatabaseModel.statusTable">
+              <MappingFragment StoreEntitySet="statusTable">
+                <ScalarProperty Name="statusName" ColumnName="statusName" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="taskDataTables">
+            <EntityTypeMapping TypeName="taskDatabaseModel.taskDataTable">
+              <MappingFragment StoreEntitySet="taskDataTable">
+                <ScalarProperty Name="taskStatus" ColumnName="taskStatus" />
+                <ScalarProperty Name="taskName" ColumnName="taskName" />
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

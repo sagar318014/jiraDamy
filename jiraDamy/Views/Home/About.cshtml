@@ -1,0 +1,59 @@
+﻿
+
+@model List<jiraDamy.entits.taskDataTable>
+
+
+@{
+    ViewBag.Title = "About";
+}
+@*<h2>@ViewBag.Title.</h2>*@
+@*<h3>@ViewBag.Message</h3>
+
+    <p>Use this area to provide additional information.</p>*@
+
+<div class="container">
+    <div class="row">
+
+
+
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li style="font-size:30px">@Html.ActionLink("Form", "FilForm", "Home")</li>
+                    <li style="font-size:30px">@Html.ActionLink("Todo", "Index", "Home")</li>
+                    <li style="font-size:30px">@Html.ActionLink("Active", "About", "Home")</li>
+                    <li style="font-size:30px">@Html.ActionLink("Completed", "Contact", "Home")</li>
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <table style="width:300px; font-size:19px; ">
+                    <thead style="background-color: cornflowerblue; padding: 10px;">
+                        <tr style="color: white;">
+                            <th style="padding: 10px;">My Active Task List</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.taskName</td>
+                            <td>@item.description</td>
+                            <td>
+                                <a href="@Url.Action("MoveInToCompleted",new {id = item.taskId })" class="btn btn-success">Move</a>
+                                <a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>
