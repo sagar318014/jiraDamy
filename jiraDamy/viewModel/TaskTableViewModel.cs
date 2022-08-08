@@ -9,7 +9,7 @@ using Xunit.Sdk;
 
 namespace jiraDamy.viewModel
 {
-    public class taskTableDamy
+    public class TaskTableViewModel
     {
         public int taskId { get; set; }
 

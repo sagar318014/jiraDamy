@@ -1,0 +1,30 @@
+﻿@model jiraDamy.viewModel.TaskTableViewModel
+@{
+    ViewBag.Title = "FilForm";
+}
+
+
+@Model.description
+
+@using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
+{<div class="col-lg-6 col-md-6 col-sm-6">
+        <div style="display:inline-block;width:300px;">
+            <div style="font-weight:600;">Add new task</div>
+            <lebel>Task Name</lebel>
+            <div>@Html.TextBoxFor(x => x.taskName)</div>
+            @Html.ValidationMessageFor(x => x.taskName)
+            <lebel>Description</lebel>
+            <div>@Html.TextBoxFor(x => x.description)</div>
+            @Html.ValidationMessageFor(x => x.description)
+            <div style="margin-top:15px;">
+
+                <button type="reset" style="background-color:lightcoral;float:right;">Clear All</button>
+                <button type="submit" style="background-color: lightgreen; float: right;">Add</button>
+
+            </div>
+        </div>
+    </div>
+}
+<div class="col-lg-6 col-md-6 col-sm-6">
+    @{Html.RenderPartial("PartialLinksView","AddTask");}
+</div>

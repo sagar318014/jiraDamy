@@ -1,4 +1,5 @@
 ﻿using jiraDamy.entits;
+using jiraDamy.viewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace jiraDamy.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Todo()
         {
             //read all
             using (var db = new taskDatabaseEntities())
@@ -17,7 +18,7 @@ namespace jiraDamy.Controllers
                 List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 1).ToList();
                 return View(tbllist);
             }
-            
+
 
 
             //get single
@@ -35,10 +36,10 @@ namespace jiraDamy.Controllers
             //    };
             //}
 
-            
+
         }
 
-        public ActionResult About()
+        public ActionResult Active()
         {
             using (var db = new taskDatabaseEntities())
             {
@@ -46,35 +47,28 @@ namespace jiraDamy.Controllers
                 return View(tbllist);
             }
 
-            
+
         }
 
-        public ActionResult FilForm()
+        // Form show
+        [HttpGet]
+        public ActionResult AddTask()
         {
             ViewBag.Message = "Your application description page.";
-            
-            taskDataTable obj = new taskDataTable();
-            
-            return View(obj);
+
+            TaskTableViewModel model = new TaskTableViewModel();
+
+            return View(model);
         }
 
-        public ActionResult Contact()
-        {
-            using (var db = new taskDatabaseEntities())
-            {
-                List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 3).ToList();
-                return View(tbllist);
-            }
-
-        }
         [HttpPost]
-        public ActionResult AddTask(taskDataTable model)
+        public ActionResult AddTask(TaskTableViewModel model)
         {
             //create one
             if (!ModelState.IsValid)
             {
 
-                return View("FilForm", model);
+                return View("AddTask", model);
             }
 
             using (var db = new taskDatabaseEntities())
@@ -89,9 +83,20 @@ namespace jiraDamy.Controllers
                 db.SaveChanges();
                 List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 1).ToList();
 
-                return View("Index", tbllist);
+                return View("Todo", tbllist);
             }
         }
+
+        public ActionResult Completed()
+        {
+            using (var db = new taskDatabaseEntities())
+            {
+                List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 3).ToList();
+                return View(tbllist);
+            }
+
+        }
+
         public ActionResult MoveInToActive(int id)
         {
             using (var db = new taskDatabaseEntities())
@@ -100,15 +105,14 @@ namespace jiraDamy.Controllers
 
                 foreach (var item in db.taskDataTables)
                 {
-                    if(item.taskId == id)
+                    if (item.taskId == id)
                     {
                         item.taskStatus = 2;
                     }
                 }
                 db.SaveChanges();
 
-                var list = db.taskDataTables.Where(x => x.taskStatus == 2).ToList(); 
-                return View("About", list);
+                return RedirectToAction("Active");
             }
 
         }
@@ -126,8 +130,7 @@ namespace jiraDamy.Controllers
                 }
                 db.SaveChanges();
 
-                var list = db.taskDataTables.Where(x => x.taskStatus == 3).ToList();
-                return View("Contact", list);
+                return RedirectToAction("Completed");
             }
 
         }
@@ -139,14 +142,12 @@ namespace jiraDamy.Controllers
                 var res = db.taskDataTables.Where(x => x.taskId == id).First();
                 db.taskDataTables.Remove(res);
                 db.SaveChanges();
-
-                var list = db.taskDataTables.ToList();
-                return View("Index", list);
+                return RedirectToAction("AddTask");
             }
-            
+
         }
 
-       
+
     }
 }
 //@model jiraDamy.entits.taskDataTable

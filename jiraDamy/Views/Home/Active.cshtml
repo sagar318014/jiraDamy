@@ -1,0 +1,48 @@
+﻿
+
+@model List<jiraDamy.entits.taskDataTable>
+
+
+@{
+    ViewBag.Title = "Active";
+}
+
+<div class="container">
+    <div class="row">
+
+
+
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            @{Html.RenderPartial("PartialLinksView", "Active");}
+
+            <div class="text-center">
+                <table class="table table-striped">
+                    <thead >
+                        <tr >
+                            <th>My Active Task List</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.taskName</td>
+                                <td>@item.description</td>
+                                <td>
+                                    <a href="@Url.Action("MoveInToCompleted",new {id = item.taskId })" class="btn btn-success">Move</a>
+                                    <a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>

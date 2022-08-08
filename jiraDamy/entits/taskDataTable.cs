@@ -16,13 +16,13 @@ namespace jiraDamy.entits
     public partial class taskDataTable
     {
         public int taskId { get; set; }
-        
-        [Required(ErrorMessage ="please enter task name")]
+
         public string taskName { get; set; }
         public Nullable<int> taskStatus { get; set; }
 
-        [Required(ErrorMessage = "pleas enter description")]
         public string description { get; set; }
         public virtual statusTable statusTable { get; set; }
+
+
     }
 }
