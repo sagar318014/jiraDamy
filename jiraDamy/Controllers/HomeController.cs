@@ -1,10 +1,13 @@
-﻿using jiraDamy.entits;
-using jiraDamy.viewModel;
+﻿
+using BusinessLogic;
+using DataAcess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ViewModel;
+
 
 namespace jiraDamy.Controllers
 {
@@ -71,20 +74,10 @@ namespace jiraDamy.Controllers
                 return View("AddTask", model);
             }
 
-            using (var db = new taskDatabaseEntities())
-            {
-                taskDataTable AddTask = new taskDataTable();
-                AddTask.taskName = model.taskName;
-                AddTask.description = model.description;
-                AddTask.taskStatus = 1;
+            new BL_Todo().SaveTodo(model);
 
-
-                db.taskDataTables.Add(AddTask);
-                db.SaveChanges();
-                List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 1).ToList();
-
-                return View("Todo", tbllist);
-            }
+            return RedirectToAction("Todo");
+            
         }
 
         public ActionResult Completed()
