@@ -39,6 +39,17 @@ namespace jiraDamy.Controllers
 
         }
 
+        public ActionResult getdata()
+        {
+            return Json(new
+            {
+                data = new List<dynamic>() {
+                    new {id = 1, text =  "sagar"},
+                    new {id = 2, text =  "gavand"},
+            }
+            },JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Active()
         {
             using (var db = new taskDatabaseEntities())

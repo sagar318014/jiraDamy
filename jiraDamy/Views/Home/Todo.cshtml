@@ -4,44 +4,38 @@
 
 @{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
+@section Grid{
+    @{Html.RenderPartial("PartialLinksView", "Todo");}
 
-<div class="container">
-    <div class="row">
 
+    <div class="text-center">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.taskName</td>
+                        <td>@item.description</td>
+                        <td>
+                            <a href="@Url.Action("MoveInToActive",new {id = item.taskId })" class="btn btn-success">Move</a>
+                            <a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
 
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            @{Html.RenderPartial("PartialLinksView", "Todo");}
+                }
 
-            <div class="text-center">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Task Name</th>
-                            <th>Description</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.taskName</td>
-                                <td>@item.description</td>
-                                <td>
-                                    <a href="@Url.Action("MoveInToActive",new {id = item.taskId })" class="btn btn-success">Move</a>
-                                    <a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
+            </tbody>
 
-                        }
-
-                    </tbody>
-
-                </table>
-
-            </div>
-        </div>
+        </table>
 
     </div>
-</div>
+}
