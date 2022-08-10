@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace jiraDamy.entits
+namespace DataAcess.entits
 {
     using System;
     using System.Data.Entity;

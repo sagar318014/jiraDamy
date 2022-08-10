@@ -19,6 +19,7 @@
           <Property Name="taskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="taskName" Type="varchar" MaxLength="50" />
           <Property Name="taskStatus" Type="int" />
+          <Property Name="description" Type="varchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_taskDataTable_statusTable">
           <End Role="statusTable" Type="Self.statusTable" Multiplicity="0..1" />
@@ -68,6 +69,7 @@
           <Property Name="taskName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="taskStatus" Type="Int32" />
           <NavigationProperty Name="statusTable" Relationship="taskDatabaseModel.FK_taskDataTable_statusTable" FromRole="taskDataTable" ToRole="statusTable" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_taskDataTable_statusTable">
           <End Type="taskDatabaseModel.statusTable" Role="statusTable" Multiplicity="0..1" />
@@ -98,6 +100,7 @@
           <EntitySetMapping Name="taskDataTables">
             <EntityTypeMapping TypeName="taskDatabaseModel.taskDataTable">
               <MappingFragment StoreEntitySet="taskDataTable">
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="taskStatus" ColumnName="taskStatus" />
                 <ScalarProperty Name="taskName" ColumnName="taskName" />
                 <ScalarProperty Name="taskId" ColumnName="taskId" />

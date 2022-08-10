@@ -1,0 +1,14 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="col-lg-5">
+        @RenderSection("AddTaskForm",false)
+    </div>
+    <div class="col-lg-7">
+        @RenderSection("Grid", false)
+    </div>
+</div>
+
+@RenderSection("scripts",false)
