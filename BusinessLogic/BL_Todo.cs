@@ -29,10 +29,18 @@ namespace BusinessLogic
 
             List<taskDataTable> TodoList = new DAL_Todo().TaskList(id);
 
-            for (int i = 0; i < TodoList.Count; i++)
+
+
+            foreach (var item in TodoList)
             {
-                Todo[i].taskName = TodoList[i].taskName;
-                Todo[i].description = TodoList[i].description;
+                TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
+
+                taskTableViewModel.description = item.description;
+                taskTableViewModel.taskId = item.taskId;
+                taskTableViewModel.taskName = item.taskName;
+                taskTableViewModel.taskStatus = item.taskStatus;
+
+                Todo.Add(taskTableViewModel);
             }
             return Todo;
 
@@ -47,10 +55,16 @@ namespace BusinessLogic
 
             List<taskDataTable> ActiveList = new DAL_Todo().TaskList(id);
 
-            for (int i = 0; i < ActiveList.Count; i++)
+            foreach (var item in ActiveList)
             {
-                Active[i].taskName = ActiveList[i].taskName;
-                Active[i].description = ActiveList[i].description;
+                TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
+
+                taskTableViewModel.description = item.description;
+                taskTableViewModel.taskId = item.taskId;
+                taskTableViewModel.taskName = item.taskName;
+                taskTableViewModel.taskStatus = item.taskStatus;
+
+                Active.Add(taskTableViewModel);
             }
             return Active;
 
@@ -61,16 +75,18 @@ namespace BusinessLogic
             List<TaskTableViewModel> Completed = new List<TaskTableViewModel>();
 
             List<taskDataTable> CompletedList = new DAL_Todo().TaskList(id);
-            
-            for(int i = 0;i< CompletedList.Count; i++) 
-            { 
-                Completed[i].taskName = CompletedList[i].taskName;
-                Completed[i].description = CompletedList[i].description;
+            foreach (var item in CompletedList)
+            {
+                TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
+
+                taskTableViewModel.description = item.description;
+                taskTableViewModel.taskId = item.taskId;
+                taskTableViewModel.taskName = item.taskName;
+                taskTableViewModel.taskStatus = item.taskStatus;
+
+                Completed.Add(taskTableViewModel);
             }
-
-
-
-
+            
             return Completed;
 
         }

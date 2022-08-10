@@ -22,9 +22,9 @@ namespace jiraDamy.Controllers
             //    return View(tbllist);
             //}
 
-            List < TaskTableViewModel > Todo  = new BL_Todo().TodoList(1);
+            List<TaskTableViewModel> Todo = new BL_Todo().TodoList(1);
 
-            return RedirectToAction("Todo", Todo); 
+            return View("Todo", Todo);
 
             //get single
             //using (var db = new TaskManagementEntities())
@@ -48,7 +48,7 @@ namespace jiraDamy.Controllers
         {
             List<TaskTableViewModel> Active = new BL_Todo().ActiveList(2);
 
-            return RedirectToAction("Active", Active);
+            return View("Active", Active);
             //using (var db = new taskDatabaseEntities())
             //{
             //    List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 2).ToList();
@@ -60,9 +60,9 @@ namespace jiraDamy.Controllers
 
         public ActionResult Completed()
         {
-            List < TaskTableViewModel > Completed = new BL_Todo().CompletedList(3);
+            List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
 
-            return RedirectToAction("Completed", Completed);
+            return View("Completed", Completed);
             //using (var db = new taskDatabaseEntities())
             //{
             //    List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 3).ToList();
@@ -95,10 +95,10 @@ namespace jiraDamy.Controllers
             new BL_Todo().SaveTodo(model);
 
             return RedirectToAction("Todo");
-            
+
         }
 
-      
+
 
         public ActionResult MoveInToActive(int Id)
         {
