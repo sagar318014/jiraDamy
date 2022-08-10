@@ -136,61 +136,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="entits\statusTable.cs">
-      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
-    </Compile>
-    <Compile Include="entits\taskDatabaseJira.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>taskDatabaseJira.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="entits\taskDatabaseJira.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
-    </Compile>
-    <Compile Include="entits\taskDatabaseJira.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>taskDatabaseJira.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="entits\taskDataTable.cs">
-      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="viewModel\TaskTableViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="entits\taskDatabaseJira.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>taskDatabaseJira.Context.cs</LastGenOutput>
-      <DependentUpon>taskDatabaseJira.edmx</DependentUpon>
-    </Content>
-    <Content Include="entits\taskDatabaseJira.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>taskDatabaseJira.edmx</DependentUpon>
-      <LastGenOutput>taskDatabaseJira.cs</LastGenOutput>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="entits\taskDatabaseJira.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>taskDatabaseJira.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="entits\taskDatabaseJira.edmx.diagram">
-      <DependentUpon>taskDatabaseJira.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -238,6 +199,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{C5429185-733C-4F7F-96C8-BFBC5B7B8F2B}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{44279a37-bc5e-47df-bf61-9e3a0de275fe}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
