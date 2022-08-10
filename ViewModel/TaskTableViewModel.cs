@@ -1,13 +1,11 @@
-﻿using jiraDamy.entits;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
-using Xunit;
-using Xunit.Sdk;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace jiraDamy.viewModel
+namespace ViewModel
 {
     public class TaskTableViewModel
     {
@@ -19,6 +17,5 @@ namespace jiraDamy.viewModel
 
         [Required(ErrorMessage = "pleas enter description")]
         public string description { get; set; }
-        public virtual statusTable statusTable { get; set; }
     }
 }
