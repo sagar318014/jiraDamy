@@ -1,6 +1,6 @@
 ﻿
 using BusinessLogic;
-using DataAcess;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +16,15 @@ namespace jiraDamy.Controllers
         public ActionResult Todo()
         {
             //read all
-            using (var db = new taskDatabaseEntities())
-            {
-                List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 1).ToList();
-                return View(tbllist);
-            }
+            //using (var db = new taskDatabaseEntities())
+            //{
+            //    List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 1).ToList();
+            //    return View(tbllist);
+            //}
 
+            List < TaskTableViewModel > Todo  = new BL_Todo().TodoList(1);
 
+            return RedirectToAction("Todo", Todo); 
 
             //get single
             //using (var db = new TaskManagementEntities())
@@ -44,12 +46,28 @@ namespace jiraDamy.Controllers
 
         public ActionResult Active()
         {
-            using (var db = new taskDatabaseEntities())
-            {
-                List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 2).ToList();
-                return View(tbllist);
-            }
+            List<TaskTableViewModel> Active = new BL_Todo().ActiveList(2);
 
+            return RedirectToAction("Active", Active);
+            //using (var db = new taskDatabaseEntities())
+            //{
+            //    List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 2).ToList();
+            //    return View(tbllist);
+            //}
+
+
+        }
+
+        public ActionResult Completed()
+        {
+            List < TaskTableViewModel > Completed = new BL_Todo().CompletedList(3);
+
+            return RedirectToAction("Completed", Completed);
+            //using (var db = new taskDatabaseEntities())
+            //{
+            //    List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 3).ToList();
+            //    return View(tbllist);
+            //}
 
         }
 
@@ -80,64 +98,64 @@ namespace jiraDamy.Controllers
             
         }
 
-        public ActionResult Completed()
-        {
-            using (var db = new taskDatabaseEntities())
-            {
-                List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 3).ToList();
-                return View(tbllist);
-            }
+      
 
+        public ActionResult MoveInToActive(int Id)
+        {
+            //using (var db = new taskDatabaseEntities())
+            //{
+
+
+            //    foreach (var item in db.taskDataTables)
+            //    {
+            //        if (item.taskId == id)
+            //        {
+            //            item.taskStatus = 2;
+            //        }
+            //    }
+            //    db.SaveChanges();
+
+            //    return RedirectToAction("Active");
+            //}
+
+
+            new BL_Todo().MoveToActive(Id);
+
+            return RedirectToAction("Active");
         }
 
-        public ActionResult MoveInToActive(int id)
+        public ActionResult MoveInToCompleted(int Id)
         {
-            using (var db = new taskDatabaseEntities())
-            {
+            //using (var db = new taskDatabaseEntities())
+            //{
+            //    foreach (var item in db.taskDataTables)
+            //    {
+            //        if (item.taskId == id)
+            //        {
+            //            item.taskStatus = 3;
+            //        }
+            //    }
+            //    db.SaveChanges();
+
+            //    return RedirectToAction("Completed");
+            //}
 
 
-                foreach (var item in db.taskDataTables)
-                {
-                    if (item.taskId == id)
-                    {
-                        item.taskStatus = 2;
-                    }
-                }
-                db.SaveChanges();
+            new BL_Todo().MoveToCompleted(Id);
 
-                return RedirectToAction("Active");
-            }
-
-        }
-
-        public ActionResult MoveInToCompleted(int id)
-        {
-            using (var db = new taskDatabaseEntities())
-            {
-                foreach (var item in db.taskDataTables)
-                {
-                    if (item.taskId == id)
-                    {
-                        item.taskStatus = 3;
-                    }
-                }
-                db.SaveChanges();
-
-                return RedirectToAction("Completed");
-            }
-
+            return RedirectToAction("Completed");
         }
         public ActionResult Delete(int id)
         {
-            using (var db = new taskDatabaseEntities())
-            {
+            //using (var db = new taskDatabaseEntities())
+            //{
 
-                var res = db.taskDataTables.Where(x => x.taskId == id).First();
-                db.taskDataTables.Remove(res);
-                db.SaveChanges();
-                return RedirectToAction("AddTask");
-            }
-
+            //    var res = db.taskDataTables.Where(x => x.taskId == id).First();
+            //    db.taskDataTables.Remove(res);
+            //    db.SaveChanges();
+            //    return RedirectToAction("AddTask");
+            //}
+            return RedirectToAction("AddTask");
         }
 
 

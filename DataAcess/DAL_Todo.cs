@@ -39,5 +39,52 @@ namespace DataAcess
             }
 
         }
+
+
+
+        public List<taskDataTable> TaskList(int id)
+        {
+            using (var db = new taskDatabaseEntities())
+            {
+                List<taskDataTable> TaskList = db.taskDataTables.Where(x => x.taskStatus == id).ToList();
+                return TaskList;
+
+            }
+        
+        }
+
+
+        public void MoveNext(int Id,int Status )
+        {
+
+            using (var db = new taskDatabaseEntities())
+            {
+
+
+                foreach (var item in db.taskDataTables)
+                {
+                    if (item.taskId == Id)
+                    {
+                        item.taskStatus = Status;
+                    }
+                }
+                db.SaveChanges();
+
+                
+            }
+
+            //using (var db = new taskDatabaseEntities())
+            //{
+
+            //    db.taskDataTables.Add(AddTask);
+            //    db.SaveChanges();
+
+            //}
+        }
+
+
+
+
+
     }
 }
