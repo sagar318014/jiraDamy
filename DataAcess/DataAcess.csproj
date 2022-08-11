@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL_Todo.cs" />
+    <Compile Include="entits\LoginAuthentication.cs">
+      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
+    </Compile>
     <Compile Include="entits\statusTable.cs">
       <DependentUpon>taskDatabaseJira.tt</DependentUpon>
     </Compile>

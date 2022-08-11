@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="taskDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'taskDatabase.dbo.LoginAuthentication' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LoginAuthentication">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="8" Nullable="false" />
+        </EntityType>
         <EntityType Name="statusTable">
           <Key>
             <PropertyRef Name="statusID" />
@@ -36,6 +46,12 @@
         <EntityContainer Name="taskDatabaseModelStoreContainer">
           <EntitySet Name="statusTable" EntityType="Self.statusTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="taskDataTable" EntityType="Self.taskDataTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginAuthentication" EntityType="Self.LoginAuthentication" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LoginAuthentication].[UserName] AS [UserName], 
+    [LoginAuthentication].[Password] AS [Password]
+    FROM [dbo].[LoginAuthentication] AS [LoginAuthentication]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_taskDataTable_statusTable" Association="Self.FK_taskDataTable_statusTable">
             <End Role="statusTable" EntitySet="statusTable" />
             <End Role="taskDataTable" EntitySet="taskDataTable" />
@@ -52,6 +68,7 @@
             <End Role="statusTable" EntitySet="statusTables" />
             <End Role="taskDataTable" EntitySet="taskDataTables" />
           </AssociationSet>
+          <EntitySet Name="LoginAuthentications" EntityType="taskDatabaseModel.LoginAuthentication" />
         </EntityContainer>
         <EntityType Name="statusTable">
           <Key>
@@ -83,6 +100,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LoginAuthentication">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -104,6 +129,14 @@
                 <ScalarProperty Name="taskStatus" ColumnName="taskStatus" />
                 <ScalarProperty Name="taskName" ColumnName="taskName" />
                 <ScalarProperty Name="taskId" ColumnName="taskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginAuthentications">
+            <EntityTypeMapping TypeName="taskDatabaseModel.LoginAuthentication">
+              <MappingFragment StoreEntitySet="LoginAuthentication">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

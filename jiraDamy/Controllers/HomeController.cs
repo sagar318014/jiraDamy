@@ -169,24 +169,11 @@ namespace jiraDamy.Controllers
             return RedirectToAction("AddTask");
         }
 
+        public ActionResult LoginPage()
+        {
+            return View ("LoginPage");
+        }
+
 
     }
 }
-//@model jiraDamy.entits.taskDataTable
-
-
-//@Html.TextBoxFor(x => x.taskName)
-
-//List<jiraDamy.entits.taskDataTable>
-
-//@model List<jiraDamy.entits.taskDataTable>
-
-// public ActionResult taskList()
-//{
-
-
-//    var tlist = db.taskDataTables.ToList();
-
-
-//    return View(tlist);
-//}
