@@ -12,10 +12,10 @@
     <div class="container body-content">
         @RenderBody()        
     </div>
-    <div class="common-error-message-container" id="common-error-message-container">
+    <template class="common-error-message-container" id="common-error-message-container">
         <div class="row"><div class="col-lg-12" id="common-errom-message-heading"></div></div>
         <div class="row"><div class="col-lg-2" onclick="">OK</div><div class="col-lg-2" onclick="">Cancel</div></div>
-    </div>
+    </template>
     @Scripts.Render("~/bundles/jquery")
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
