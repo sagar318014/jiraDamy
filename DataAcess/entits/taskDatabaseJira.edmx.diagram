@@ -8,6 +8,10 @@
         <EntityTypeShape EntityType="taskDatabaseModel.statusTable" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="taskDatabaseModel.taskDataTable" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="taskDatabaseModel.FK_taskDataTable_statusTable" />
+        <EntityTypeShape EntityType="taskDatabaseModel.Role" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="taskDatabaseModel.User" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="taskDatabaseModel.FK_Role_Role" />
+        <AssociationConnector Association="taskDatabaseModel.FK_User_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -51,7 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\DAL_Authentication.cs" />
     <Compile Include="DAL_Todo.cs" />
+    <Compile Include="entits\Role.cs">
+      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
+    </Compile>
     <Compile Include="entits\statusTable.cs">
       <DependentUpon>taskDatabaseJira.tt</DependentUpon>
     </Compile>
@@ -73,6 +77,10 @@
     <Compile Include="entits\taskDataTable.cs">
       <DependentUpon>taskDatabaseJira.tt</DependentUpon>
     </Compile>
+    <Compile Include="entits\User.cs">
+      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GenericEntity\GenericEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

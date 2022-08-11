@@ -27,5 +27,7 @@ namespace DataAcess.entits
     
         public virtual DbSet<statusTable> statusTables { get; set; }
         public virtual DbSet<taskDataTable> taskDataTables { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
