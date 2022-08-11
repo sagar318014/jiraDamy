@@ -15,31 +15,13 @@ namespace jiraDamy.Controllers
     {
         public ActionResult Todo()
         {
-            //read all
-            //using (var db = new taskDatabaseEntities())
-            //{
-            //    List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 1).ToList();
-            //    return View(tbllist);
-            //}
+            
 
             List<TaskTableViewModel> Todo = new BL_Todo().TodoList(1);
 
             return View("Todo", Todo);
 
-            //get single
-            //using (var db = new TaskManagementEntities())
-            //{
-            //  var tasks = db.tasks.where(x => x.status_id == 1).tolist();
-            //}
-
-            //get single
-            //using (var db = new TaskManagementEntities())
-            //{
-            //    foreach (var item in db.tasks)
-            //    {
-
-            //    };
-            //}
+           
 
 
         }
@@ -49,11 +31,7 @@ namespace jiraDamy.Controllers
             List<TaskTableViewModel> Active = new BL_Todo().ActiveList(2);
 
             return View("Active", Active);
-            //using (var db = new taskDatabaseEntities())
-            //{
-            //    List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 2).ToList();
-            //    return View(tbllist);
-            //}
+           
 
 
         }
@@ -63,11 +41,7 @@ namespace jiraDamy.Controllers
             List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
 
             return View("Completed", Completed);
-            //using (var db = new taskDatabaseEntities())
-            //{
-            //    List<taskDataTable> tbllist = db.taskDataTables.Where(x => x.taskStatus == 3).ToList();
-            //    return View(tbllist);
-            //}
+          
 
         }
 
@@ -102,23 +76,7 @@ namespace jiraDamy.Controllers
 
         public ActionResult MoveInToActive(int Id)
         {
-            //using (var db = new taskDatabaseEntities())
-            //{
-
-
-            //    foreach (var item in db.taskDataTables)
-            //    {
-            //        if (item.taskId == id)
-            //        {
-            //            item.taskStatus = 2;
-            //        }
-            //    }
-            //    db.SaveChanges();
-
-            //    return RedirectToAction("Active");
-            //}
-
-
+           
             new BL_Todo().MoveToActive(Id);
 
             return RedirectToAction("Active");
@@ -126,21 +84,7 @@ namespace jiraDamy.Controllers
 
         public ActionResult MoveInToCompleted(int Id)
         {
-            //using (var db = new taskDatabaseEntities())
-            //{
-            //    foreach (var item in db.taskDataTables)
-            //    {
-            //        if (item.taskId == id)
-            //        {
-            //            item.taskStatus = 3;
-            //        }
-            //    }
-            //    db.SaveChanges();
-
-            //    return RedirectToAction("Completed");
-            //}
-
-
+           
             new BL_Todo().MoveToCompleted(Id);
 
             return RedirectToAction("Completed");
@@ -161,21 +105,3 @@ namespace jiraDamy.Controllers
 
     }
 }
-//@model jiraDamy.entits.taskDataTable
-
-
-//@Html.TextBoxFor(x => x.taskName)
-
-//List<jiraDamy.entits.taskDataTable>
-
-//@model List<jiraDamy.entits.taskDataTable>
-
-// public ActionResult taskList()
-//{
-
-
-//    var tlist = db.taskDataTables.ToList();
-
-
-//    return View(tlist);
-//}
