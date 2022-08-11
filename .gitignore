@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+/jiraDummy/Web.config
+/jiraDummy/Web.Debug.config
+/jiraDummy/Web.Release.config
