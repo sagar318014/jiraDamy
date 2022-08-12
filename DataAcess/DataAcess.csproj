@@ -90,6 +90,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DbScripts\UserAndRole.sql" />
     <Content Include="entits\taskDatabaseJira.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>taskDatabaseJira.edmx</DependentUpon>
