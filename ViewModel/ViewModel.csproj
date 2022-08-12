@@ -45,6 +45,7 @@
     <Compile Include="TaskTableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserLoginViewModel.cs" />
+    <Compile Include="UserSignupViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

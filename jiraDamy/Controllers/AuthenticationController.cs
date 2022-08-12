@@ -44,5 +44,21 @@ namespace jiraDamy.Controllers
             Session["Username"] = null;
             return RedirectToAction("Login");
         }
+
+        public ActionResult SignUp()
+        {
+            UserSignupViewModel model = new UserSignupViewModel();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult SignUp(UserSignupViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("SignUp");
+            }
+            new BL_Authentication().SaveUserData(model) ;
+            return RedirectToAction("Login");
+        }
     }
 }

@@ -10,6 +10,22 @@ namespace DataAcess.Authentication
 {
     public class DAL_Authentication : GenericEntity<User>
     {
+        public void SaveUserData(User adddata)
+        {
+            using (var db = new taskDatabaseEntities())
+            {
+
+                db.Users.Add(adddata);
+                db.SaveChanges();
+
+            }
+
+        }
 
     }
+
+   
+
+
+
 }

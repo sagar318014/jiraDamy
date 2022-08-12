@@ -23,5 +23,20 @@ namespace BusinessLogic.Authentication
             };
             return authenticated;
         }
+
+        public void SaveUserData(UserSignupViewModel model)
+        {
+            User adddata = new User();
+            adddata.Username = model.Username;
+            adddata.Password = model.Password;
+            adddata.FirstName = model.FirstName;
+            adddata.LastName = model.LastName;
+            adddata.RoleId = model.RoleId;
+
+            new DAL_Authentication().SaveUserData(adddata);
+
+
+
+        }
     }
 }
