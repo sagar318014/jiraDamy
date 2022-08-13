@@ -48,26 +48,8 @@ function loadDropdownAjax(request) {
 
 const CommonNotifier = {
     showInformation: (msg, onConfirm) => {
-
-
-        $('#common-error-message-container').remove()
-
-        var e = $(`
-        <div class="common-error-message-container" id="common-error-message-container">
-            <div class="row"><div class="col-lg-12" id="common-errom-message-heading"></div></div>
-            <div class="row"></div>
-        </div>
-        `);
-        $('li', e).attr('id', 'a1234');  // set the attribute 
-        $('body').append(e);
-
-        $(document).append(`
-        <div class="common-error-message-container" id="common-error-message-container">
-            <div class="row"><div class="col-lg-12" id="common-errom-message-heading"></div></div>
-            <div class="row"></div>
-        </div>
-        `)
-
+        alert(msg)
+        onConfirm()       
     },
     showError: (msg, onConfirm) => {
         alert(msg)

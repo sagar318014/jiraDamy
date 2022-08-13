@@ -100,18 +100,14 @@ namespace jiraDamy.Controllers
 
             return RedirectToAction("Completed");
         }
-        public ActionResult Delete(int id)
-        {
-            //using (var db = new taskDatabaseEntities())
-            //{
 
-            //    var res = db.taskDataTables.Where(x => x.taskId == id).First();
-            //    db.taskDataTables.Remove(res);
-            //    db.SaveChanges();
-            //    return RedirectToAction("AddTask");
-            //}
-            return RedirectToAction("AddTask");
-        }
+        public void Delete(int id)
+        {
+
+           new BL_Todo().Delete(id);
+
+
+        } 
 
 
     }

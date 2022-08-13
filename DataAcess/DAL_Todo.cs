@@ -82,9 +82,31 @@ namespace DataAcess
             //}
         }
 
+        
+
+        public void Delete(int id)
+        {
+
+            using (var db = new taskDatabaseEntities())
+            {
+                
+                //foreach (var item in db.taskDataTables)
+                //{
+                //    if (item.taskId == id)
+                //    {
+                //        ts = item.taskStatus;
+                //    }
+                //}
+
+                var res = db.taskDataTables.Where(x => x.taskId == id).First();
+                
+                db.taskDataTables.Remove(res);
+                db.SaveChanges();
+               
+            }
 
 
-
+        }
 
     }
 }
