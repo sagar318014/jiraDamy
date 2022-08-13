@@ -1,6 +1,6 @@
 ﻿
 using BusinessLogic;
-
+using jiraDamy.ActionFilters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,7 @@ using ViewModel;
 
 namespace jiraDamy.Controllers
 {
+    [SessionBaseAuthorize]
     public class HomeController : Controller
     {
         public ActionResult Todo()
@@ -34,7 +35,7 @@ namespace jiraDamy.Controllers
                     new {id = 1, text =  "sagar"},
                     new {id = 2, text =  "gavand"},
             }
-            },JsonRequestBehavior.AllowGet);
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Active()
