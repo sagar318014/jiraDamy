@@ -13,9 +13,12 @@ namespace ViewModel
 
         [Required(ErrorMessage = "please enter task name")]
         public string taskName { get; set; }
-        public Nullable<int> taskStatus { get; set; }
+        public int? taskStatus { get; set; }
 
         [Required(ErrorMessage = "pleas enter description")]
         public string description { get; set; }
+
+
+        public List<CommonDropdownType> taskStatusList { get; set; } = new List<CommonDropdownType>();
     }
 }

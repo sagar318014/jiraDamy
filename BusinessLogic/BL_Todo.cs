@@ -16,7 +16,7 @@ namespace BusinessLogic
             taskDataTable AddTask = new taskDataTable();
             AddTask.taskName = model.taskName;
             AddTask.description = model.description;
-            AddTask.taskStatus = 1;
+            AddTask.taskStatus = model.taskStatus;
 
             new DAL_Todo().SaveTodo(AddTask);
 
