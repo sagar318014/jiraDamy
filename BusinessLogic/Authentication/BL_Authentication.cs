@@ -9,8 +9,7 @@ namespace BusinessLogic.Authentication
         public UserLoginViewModel GetAutheticatedUser(UserLoginViewModel userLoginViewModel)
         {
             User user = new DAL_Authentication()
-                .GetSingle(x => x.Username == userLoginViewModel.Username && x.Password == userLoginViewModel.Password);
-            //UserLoginViewModel authenticated =  AutoMapper.Mapper.Map<User,UserLoginViewModel>(user);
+                .GetSingleWithUsernameAndPassword(userLoginViewModel.Username, userLoginViewModel.Password);
             if (user == null)
             {
                 return null;

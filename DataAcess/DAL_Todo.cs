@@ -11,32 +11,32 @@ namespace DataAcess
     {
         public void SaveTodo(taskDataTable AddTask)
         {
-            using (var db = new taskDatabaseEntities())
-            {
+            //using (var db = new taskDatabaseEntities())
+            //{
                
-                db.taskDataTables.Add(AddTask);
-                db.SaveChanges();
+            //    db.taskDataTables.Add(AddTask);
+            //    db.SaveChanges();
                
-            }
+            //}
         }
 
         public void SaveActive(int id)
         {
-            using (var db = new taskDatabaseEntities())
-            {
+            //using (var db = new taskDatabaseEntities())
+            //{
 
 
-                foreach (var item in db.taskDataTables)
-                {
-                    if (item.taskId == id)
-                    {
-                        item.taskStatus = 2;
-                    }
-                }
-                db.SaveChanges();
+            //    foreach (var item in db.taskDataTables)
+            //    {
+            //        if (item.taskId == id)
+            //        {
+            //            item.taskStatus = 2;
+            //        }
+            //    }
+            //    db.SaveChanges();
 
                
-            }
+            //}
 
         }
 
@@ -44,12 +44,13 @@ namespace DataAcess
 
         public List<taskDataTable> TaskList(int id)
         {
-            using (var db = new taskDatabaseEntities())
-            {
-                List<taskDataTable> TaskList = db.taskDataTables.Where(x => x.taskStatus == id).ToList();
-                return TaskList;
+            return null;
+            //using (var db = new taskDatabaseEntities())
+            //{
+            //    List<taskDataTable> TaskList = db.taskDataTables.Where(x => x.taskStatus == id).ToList();
+            //    return TaskList;
 
-            }
+            //}
         
         }
 
@@ -57,21 +58,21 @@ namespace DataAcess
         public void MoveNext(int Id,int Status )
         {
 
-            using (var db = new taskDatabaseEntities())
-            {
+            //using (var db = new taskDatabaseEntities())
+            //{
 
 
-                foreach (var item in db.taskDataTables)
-                {
-                    if (item.taskId == Id)
-                    {
-                        item.taskStatus = Status;
-                    }
-                }
-                db.SaveChanges();
+            //    foreach (var item in db.taskDataTables)
+            //    {
+            //        if (item.taskId == Id)
+            //        {
+            //            item.taskStatus = Status;
+            //        }
+            //    }
+            //    db.SaveChanges();
 
                 
-            }
+            //}
 
             //using (var db = new taskDatabaseEntities())
             //{
