@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Authentication;
 using jiraDamy.ActionFilters;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using ViewModel;
 
@@ -46,8 +47,13 @@ namespace jiraDamy.Controllers
         }
 
         public ActionResult SignUp()
+        
         {
             UserSignupViewModel model = new UserSignupViewModel();
+            //model.RoleIdList = new List<CommonDropdownType>() {
+            //        new CommonDropdownType(){id = 1, text =  "Admin"},
+            //        new CommonDropdownType(){id = 2, text =  "HR"},
+            //         new CommonDropdownType(){id = 3, text =  "User"} };
             return View(model);
         }
         [HttpPost]
@@ -60,5 +66,15 @@ namespace jiraDamy.Controllers
             new BL_Authentication().SaveUserData(model) ;
             return RedirectToAction("Login");
         }
-    }
+        public ActionResult GetRoleIdTypeList()
+        {
+            return Json(new
+            {
+                data = new List<dynamic>() {
+                    new {id = 1, text =  "Admin"},
+                    new {id = 2, text =  "HR"},
+                     new {id = 3, text =  "User"},
+            }
+            }, JsonRequestBehavior.AllowGet);
+    }   }
 }

@@ -45,16 +45,28 @@ namespace jiraDamy.Controllers
 
         }
 
-        public ActionResult getdata()
-        {
-            return Json(new
-            {
-                data = new List<dynamic>() {
-                    new {id = 1, text =  "sagar"},
-                    new {id = 2, text =  "gavand"},
-            }
-            }, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult getdata()
+        //{
+        //    return Json(new
+        //    {
+        //        data = new List<dynamic>() {
+        //            new {id = 1, text =  "sagar"},
+        //            new {id = 2, text =  "gavand"},
+        //    }
+        //    }, JsonRequestBehavior.AllowGet);
+        //}
+
+        //public ActionResult GetTaskTypeList()
+        //{
+        //    return Json(new
+        //    {
+        //        data = new List<dynamic>() {
+        //            new {id = 1, text =  "Todo"},
+        //            new {id = 2, text =  "Active"},
+        //             new {id = 3, text =  "Completed"},
+        //    }
+        //    }, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult Active()
         {
@@ -91,6 +103,11 @@ namespace jiraDamy.Controllers
 
             TaskTableViewModel model = new TaskTableViewModel();
 
+            model.taskStatusList = new List<CommonDropdownType>() {
+                    new CommonDropdownType(){id = 1, text =  "Todo"},
+                    new CommonDropdownType(){id = 2, text =  "Active"},
+                     new CommonDropdownType(){id = 3, text =  "Completed"} };
+
             return View(model);
         }
 
@@ -105,8 +122,20 @@ namespace jiraDamy.Controllers
             }
 
             new BL_Todo().SaveTodo(model);
+            if (model.taskStatus == 1)
+            {
+                return RedirectToAction("Todo");
+            }
+            else if (model.taskStatus == 2)
+            {
+                return RedirectToAction("Active");
+            }
+            else if(model.taskStatus == 3)
+            {
+                return RedirectToAction("Completed");
+            }
 
-            return RedirectToAction("Todo");
+            return RedirectToAction("AddTask");
 
         }
 
@@ -162,10 +191,9 @@ namespace jiraDamy.Controllers
             //using (var db = new taskDatabaseEntities())
             //{
 
-            //    var res = db.taskDataTables.Where(x => x.taskId == id).First();
-            //    db.taskDataTables.Remove(res);
-            //    db.SaveChanges();
-            //    return RedirectToAction("AddTask");
+            //    var res = db.taskdatatables.where(x => x.taskid == id).first();
+            //    db.taskdatatables.remove(res);
+            //    db.savechanges();
             //}
             return RedirectToAction("AddTask");
         }
