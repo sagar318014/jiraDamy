@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container body-content">
-        @RenderBody()        
+        @RenderBody()
     </div>
     <template class="common-error-message-container" id="common-error-message-container">
         <div class="row"><div class="col-lg-12" id="common-errom-message-heading"></div></div>
@@ -21,5 +21,31 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/commonjs")
     @RenderSection("scripts", required: false)
+
+
+
+
+    <div id="common-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close common-cancel" data-dismiss="modal">&times;</button>
+                    <h4 id="modalheader" class="modal-title"></h4>
+                </div>
+                <div id="modalBody" class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default common-ok" data-dismiss="modal">Ok</button>
+                    <button type="button" class="btn btn-default common-cancel" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
 </body>
 </html>
