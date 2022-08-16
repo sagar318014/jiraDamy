@@ -1,0 +1,58 @@
+USE [taskDatabase]
+GO
+/****** Object:  Table [dbo].[TeamMembers]    Script Date: 15-08-2022 18:37:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TeamMembers](
+	[TeamMemberId] [int] NOT NULL,
+	[TeamId] [int] NOT NULL,
+ CONSTRAINT [PK_TeamMembers] PRIMARY KEY CLUSTERED 
+(
+	[TeamMemberId] ASC,
+	[TeamId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Teams]    Script Date: 15-08-2022 18:37:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Teams](
+	[TeamID] [int] NOT NULL,
+	[TeamName] [nchar](10) NULL,
+	[TeamLeder] [int] NULL,
+ CONSTRAINT [PK_Teams] PRIMARY KEY CLUSTERED 
+(
+	[TeamID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 15-08-2022 18:37:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+
+GO
+ALTER TABLE [dbo].[TeamMembers]  WITH CHECK ADD  CONSTRAINT [FK_TeamMembers_Teams] FOREIGN KEY([TeamId])
+REFERENCES [dbo].[Teams] ([TeamID])
+GO
+ALTER TABLE [dbo].[TeamMembers] CHECK CONSTRAINT [FK_TeamMembers_Teams]
+GO
+ALTER TABLE [dbo].[TeamMembers]  WITH CHECK ADD  CONSTRAINT [FK_TeamMembers_User] FOREIGN KEY([TeamMemberId])
+REFERENCES [dbo].[User] ([Id])
+GO
+ALTER TABLE [dbo].[TeamMembers] CHECK CONSTRAINT [FK_TeamMembers_User]
+GO
+ALTER TABLE [dbo].[Teams]  WITH CHECK ADD  CONSTRAINT [FK_Teams_User] FOREIGN KEY([TeamLeder])
+REFERENCES [dbo].[User] ([Id])
+GO
+ALTER TABLE [dbo].[Teams] CHECK CONSTRAINT [FK_Teams_User]
+GO
+ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Role] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Role] ([Id])
+GO
+ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_Role]
+GO

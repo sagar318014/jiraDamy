@@ -145,5 +145,15 @@ namespace BusinessLogic
 
 
         }
+
+        public void Delete(int id)
+        {
+
+           new DAL_Todo().Delete(id);
+
+
+           
+        }
+
     }
 }

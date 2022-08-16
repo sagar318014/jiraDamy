@@ -16,7 +16,5 @@ namespace DataAcess.entits
         public string LastName { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-
-        public virtual Role Role { get; set; }
     }
 }

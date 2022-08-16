@@ -55,6 +55,7 @@
     <Compile Include="entits\Role.cs" />
     <Compile Include="entits\statusTable.cs" />
     <Compile Include="entits\taskDataTable.cs" />
+    <Compile Include="entits\Team.cs" />
     <Compile Include="entits\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
