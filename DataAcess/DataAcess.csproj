@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataAcess</RootNamespace>
     <AssemblyName>DataAcess</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,14 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,63 +52,14 @@
   <ItemGroup>
     <Compile Include="Authentication\DAL_Authentication.cs" />
     <Compile Include="DAL_Todo.cs" />
-    <Compile Include="entits\Role.cs">
-      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
-    </Compile>
-    <Compile Include="entits\statusTable.cs">
-      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
-    </Compile>
-    <Compile Include="entits\taskDatabaseJira.Context.cs">
-      <DependentUpon>taskDatabaseJira.Context.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="entits\taskDatabaseJira.cs">
-      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="entits\taskDatabaseJira.Designer.cs">
-      <DependentUpon>taskDatabaseJira.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="entits\taskDataTable.cs">
-      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
-    </Compile>
-    <Compile Include="entits\Team.cs">
-      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
-    </Compile>
-    <Compile Include="entits\User.cs">
-      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GenericEntity\GenericEntity.cs" />
+    <Compile Include="entits\Role.cs" />
+    <Compile Include="entits\statusTable.cs" />
+    <Compile Include="entits\taskDataTable.cs" />
+    <Compile Include="entits\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="entits\taskDatabaseJira.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>taskDatabaseJira.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DbScripts\TeamTable.sql" />
     <Content Include="DbScripts\UserAndRole.sql" />
-    <Content Include="entits\taskDatabaseJira.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>taskDatabaseJira.edmx</DependentUpon>
-      <LastGenOutput>taskDatabaseJira.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="entits\taskDatabaseJira.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>taskDatabaseJira.edmx</DependentUpon>
-      <LastGenOutput>taskDatabaseJira.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="entits\taskDatabaseJira.edmx.diagram">
-      <DependentUpon>taskDatabaseJira.edmx</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAcess.entits
+namespace ViewModel
 {
-    public class statusTable
+    public class TaskstatusViewModel
     {
         public int statusID { get; set; }
         public string statusName { get; set; }
-
     }
 }

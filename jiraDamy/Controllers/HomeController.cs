@@ -27,16 +27,28 @@ namespace jiraDamy.Controllers
 
         }
 
-        public ActionResult getdata()
-        {
-            return Json(new
-            {
-                data = new List<dynamic>() {
-                    new {id = 1, text =  "sagar"},
-                    new {id = 2, text =  "gavand"},
-            }
-            }, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult getdata()
+        //{
+        //    return Json(new
+        //    {
+        //        data = new List<dynamic>() {
+        //            new {id = 1, text =  "sagar"},
+        //            new {id = 2, text =  "gavand"},
+        //    }
+        //    }, JsonRequestBehavior.AllowGet);
+        //}
+
+        //public ActionResult GetTaskTypeList()
+        //{
+        //    return Json(new
+        //    {
+        //        data = new List<dynamic>() {
+        //            new {id = 1, text =  "Todo"},
+        //            new {id = 2, text =  "Active"},
+        //             new {id = 3, text =  "Completed"},
+        //    }
+        //    }, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult Active()
         {
@@ -97,6 +109,8 @@ namespace jiraDamy.Controllers
 
             TaskTableViewModel model = new TaskTableViewModel();
 
+            model.taskStatusList = new BL_Todo().GetStatusList();
+
             return View(model);
         }
 
@@ -111,8 +125,20 @@ namespace jiraDamy.Controllers
             }
 
             new BL_Todo().SaveTodo(model);
+            if (model.taskStatus == 1)
+            {
+                return RedirectToAction("Todo");
+            }
+            else if (model.taskStatus == 2)
+            {
+                return RedirectToAction("Active");
+            }
+            else if(model.taskStatus == 3)
+            {
+                return RedirectToAction("Completed");
+            }
 
-            return RedirectToAction("Todo");
+            return RedirectToAction("AddTask");
 
         }
 
@@ -120,7 +146,67 @@ namespace jiraDamy.Controllers
 
         public ActionResult MoveInToActive(int Id)
         {
-           
+            //{
+
+
+            //    foreach (var item in db.taskDataTables)
+            //    {
+            //        if (item.taskId == id)
+            //        {
+            //        }
+            //    }
+            //    db.SaveChanges();
+
+            //    return RedirectToAction("Active");
+            //}
+
+
+            //{
+
+
+        } 
+        }
+        }
+        }
+            //    foreach (var item in db.taskDataTables)
+            //    {
+            //        if (item.taskId == id)
+            //        {
+            //            item.taskStatus = 3;
+            //        }
+            //    }
+            //    db.SaveChanges();
+
+            //    return RedirectToAction("Completed");
+            //}
+
+
+            //            item.taskStatus = 2;
+            //        }
+            //    }
+            //    db.SaveChanges();
+
+            //    return RedirectToAction("Active");
+            //}
+
+
+            //{
+
+            //    var res = db.taskDataTables.Where(x => x.taskId == id).First();
+            //    db.taskDataTables.Remove(res);
+            //    db.SaveChanges();
+            //    return RedirectToAction("AddTask");
+            //}
+            return RedirectToAction("AddTask");
+        }
+            //        }
+            //    }
+            //    db.SaveChanges();
+
+            //    return RedirectToAction("Active");
+            //}
+
+
             new BL_Todo().MoveToActive(Id);
 
             return RedirectToAction("Active");
@@ -128,7 +214,6 @@ namespace jiraDamy.Controllers
 
         public ActionResult MoveInToCompleted(int Id)
         {
-           
             new BL_Todo().MoveToCompleted(Id);
 
             return RedirectToAction("Completed");
@@ -140,7 +225,12 @@ namespace jiraDamy.Controllers
            new BL_Todo().Delete(id);
 
 
-        } 
+            //    var res = db.taskdatatables.where(x => x.taskid == id).first();
+            //    db.taskdatatables.remove(res);
+            //    db.savechanges();
+            //}
+            return RedirectToAction("AddTask");
+        }
 
 
     }

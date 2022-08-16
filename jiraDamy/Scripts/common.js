@@ -48,16 +48,37 @@ function loadDropdownAjax(request) {
 
 const CommonNotifier = {
     showInformation: (msg, onConfirm) => {
-        alert(msg)
-        onConfirm()       
+        showModal('Information', msg, onConfirm, onConfirm)
     },
     showError: (msg, onConfirm) => {
-        alert(msg)
+        showModal('Error', msg, onConfirm, onConfirm)
     },
     showConfirmationWithCallback: (msg, onConfirm, onCancel) => {
-        confirm(msg) ? onConfirm() : onCancel()
+        showModal('Confirm', msg, onConfirm, onCancel)
     },
     showConfirmationWithPromise: (msg) => new Promise((resolve, reject) => {
-        confirm(msg) ? resolve(true) : resolve(false)
+        showModal('Confirm', msg, function () {
+            resolve(true)
+        }, function () {
+            resolve(false)
+        })
     })
+}
+
+
+function showModal(heading, body, onOk, onCancel) {
+    if (onCancel) {
+        $('#common-modal .common-cancel').click(function () {
+            onCancel();
+        })
+    }
+    if (onOk) {
+        $('#common-modal .common-ok').click(function () {
+            onOk();
+        })
+    }
+
+    $('#modalheader').text(heading);
+    $('#modalBody').text(body);
+    $('#common-modal').modal('show')
 }
