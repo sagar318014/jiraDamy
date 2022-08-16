@@ -145,67 +145,7 @@ namespace jiraDamy.Controllers
 
 
         public ActionResult MoveInToActive(int Id)
-        {
-            //{
-
-
-            //    foreach (var item in db.taskDataTables)
-            //    {
-            //        if (item.taskId == id)
-            //        {
-            //        }
-            //    }
-            //    db.SaveChanges();
-
-            //    return RedirectToAction("Active");
-            //}
-
-
-            //{
-
-
-        } 
-        }
-        }
-        }
-            //    foreach (var item in db.taskDataTables)
-            //    {
-            //        if (item.taskId == id)
-            //        {
-            //            item.taskStatus = 3;
-            //        }
-            //    }
-            //    db.SaveChanges();
-
-            //    return RedirectToAction("Completed");
-            //}
-
-
-            //            item.taskStatus = 2;
-            //        }
-            //    }
-            //    db.SaveChanges();
-
-            //    return RedirectToAction("Active");
-            //}
-
-
-            //{
-
-            //    var res = db.taskDataTables.Where(x => x.taskId == id).First();
-            //    db.taskDataTables.Remove(res);
-            //    db.SaveChanges();
-            //    return RedirectToAction("AddTask");
-            //}
-            return RedirectToAction("AddTask");
-        }
-            //        }
-            //    }
-            //    db.SaveChanges();
-
-            //    return RedirectToAction("Active");
-            //}
-
+        {           
 
             new BL_Todo().MoveToActive(Id);
 
@@ -223,13 +163,6 @@ namespace jiraDamy.Controllers
         {
 
            new BL_Todo().Delete(id);
-
-
-            //    var res = db.taskdatatables.where(x => x.taskid == id).first();
-            //    db.taskdatatables.remove(res);
-            //    db.savechanges();
-            //}
-            return RedirectToAction("AddTask");
         }
 
 
