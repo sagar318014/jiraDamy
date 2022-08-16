@@ -18,7 +18,9 @@ namespace DataAcess.entits
         public string taskName { get; set; }
         public Nullable<int> taskStatus { get; set; }
         public string description { get; set; }
+        public Nullable<int> Id { get; set; }
     
         public virtual statusTable statusTable { get; set; }
+        public virtual User User { get; set; }
     }
 }

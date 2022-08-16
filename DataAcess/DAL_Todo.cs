@@ -82,6 +82,17 @@ namespace DataAcess
             //}
         }
 
+        public List<User> GetAllUserList()
+        {
+            using (var db = new taskDatabaseEntities())
+            {
+                List<User> userlist = db.Users.ToList();
+                return userlist;
+            }
+
+
+        }
+
 
 
 

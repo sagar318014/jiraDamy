@@ -14,6 +14,12 @@ namespace DataAcess.entits
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.taskDataTables = new HashSet<taskDataTable>();
+        }
+    
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -24,5 +30,7 @@ namespace DataAcess.entits
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<taskDataTable> taskDataTables { get; set; }
     }
 }

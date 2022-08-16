@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="taskDatabaseModel.User" Width="1.5" PointX="3" PointY="4" />
         <AssociationConnector Association="taskDatabaseModel.FK_Role_Role" />
         <AssociationConnector Association="taskDatabaseModel.FK_User_Role" />
+        <AssociationConnector Association="taskDatabaseModel.FK_taskDataTable_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

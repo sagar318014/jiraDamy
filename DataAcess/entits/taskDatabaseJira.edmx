@@ -27,6 +27,7 @@
           <Property Name="taskName" Type="varchar" MaxLength="50" />
           <Property Name="taskStatus" Type="int" />
           <Property Name="description" Type="varchar" MaxLength="100" />
+          <Property Name="Id" Type="int" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -65,6 +66,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_taskDataTable_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="taskDataTable" Type="Self.taskDataTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="taskDataTable">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Role">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -88,6 +101,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_taskDataTable_statusTable" Association="Self.FK_taskDataTable_statusTable">
             <End Role="statusTable" EntitySet="statusTable" />
+            <End Role="taskDataTable" EntitySet="taskDataTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_taskDataTable_User" Association="Self.FK_taskDataTable_User">
+            <End Role="User" EntitySet="User" />
             <End Role="taskDataTable" EntitySet="taskDataTable" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
@@ -116,6 +133,10 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK_taskDataTable_User" Association="taskDatabaseModel.FK_taskDataTable_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="taskDataTable" EntitySet="taskDataTables" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="statusTable">
           <Key>
@@ -134,6 +155,8 @@
           <Property Name="taskStatus" Type="Int32" />
           <NavigationProperty Name="statusTable" Relationship="taskDatabaseModel.FK_taskDataTable_statusTable" FromRole="taskDataTable" ToRole="statusTable" />
           <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="taskDatabaseModel.FK_taskDataTable_User" FromRole="taskDataTable" ToRole="User" />
         </EntityType>
         <Association Name="FK_taskDataTable_statusTable">
           <End Type="taskDatabaseModel.statusTable" Role="statusTable" Multiplicity="0..1" />
@@ -170,6 +193,7 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Role" Relationship="taskDatabaseModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="taskDataTables" Relationship="taskDatabaseModel.FK_taskDataTable_User" FromRole="User" ToRole="taskDataTable" />
         </EntityType>
         <Association Name="FK_Role_Role">
           <End Type="taskDatabaseModel.Role" Role="Role" Multiplicity="1" />
@@ -195,6 +219,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_taskDataTable_User">
+          <End Type="taskDatabaseModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="taskDatabaseModel.taskDataTable" Role="taskDataTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="taskDataTable">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -212,6 +248,7 @@
           <EntitySetMapping Name="taskDataTables">
             <EntityTypeMapping TypeName="taskDatabaseModel.taskDataTable">
               <MappingFragment StoreEntitySet="taskDataTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="taskStatus" ColumnName="taskStatus" />
                 <ScalarProperty Name="taskName" ColumnName="taskName" />

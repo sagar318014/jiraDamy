@@ -106,7 +106,14 @@ namespace jiraDamy.Controllers
             model.taskStatusList = new List<CommonDropdownType>() {
                     new CommonDropdownType(){id = 1, text =  "Todo"},
                     new CommonDropdownType(){id = 2, text =  "Active"},
-                     new CommonDropdownType(){id = 3, text =  "Completed"} };
+                     new CommonDropdownType(){id = 3, text =  "Completed"}
+            };
+
+            model.userlist = new List<CommonDropdownType>() {
+                    new CommonDropdownType(){id = 1, text =  "Sagar"},
+                    new CommonDropdownType(){id = 2, text =  "Wrahul"},
+                     new CommonDropdownType(){id = 3, text =  "rahulw"}
+            };
 
             return View(model);
         }
@@ -198,9 +205,22 @@ namespace jiraDamy.Controllers
             return RedirectToAction("AddTask");
         }
 
-
+        //public ActionResult GetUser()
+        //{
+        //    return Json(new
+        //    {
+        //        data = new List<dynamic>() {
+        //            new {id = 1, text =  "Sagar"},
+        //            new {id = 2, text =  "Wrahul"},
+        //             new {id = 3, text =  "rahulw"},
+        //    }
+        //    }, JsonRequestBehavior.AllowGet);
+        //}
     }
+
+
 }
+
 //@model jiraDamy.entits.taskDataTable
 
 

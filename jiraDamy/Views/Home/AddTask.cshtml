@@ -15,18 +15,30 @@
         <div>@Html.TextBoxFor(x => x.description)</div>
         @Html.ValidationMessageFor(x => x.description)
 
+        <div>
+            <lebel>Select User</lebel>
+            <select id="userid" name="Id" class="select-2 col-lg-3">
+                @foreach (var item in Model.userlist)
+                {
+                    <option value="@item.id">@item.text</option>
+                }
+            </select>
 
-<div>
-    <lebel>Task Current Status</lebel>
-    <select id="sagar" name="taskStatus" class="select-2 col-lg-3">
-        @foreach (var item in Model.taskStatusList)
-        {
-            <option value="@item.id">@item.text</option>
-        }
-    </select>
+
+        </div>
 
 
-</div>
+        <div>
+            <lebel>Task Current Status</lebel>
+            <select id="sagar" name="taskStatus" class="select-2 col-lg-3">
+                @foreach (var item in Model.taskStatusList)
+                {
+                    <option value="@item.id">@item.text</option>
+                }
+            </select>
+
+
+        </div>
         <div style="margin-top:15px;">
 
             <button type="reset" style="background-color:lightcoral;float:right;">Clear All</button>
@@ -48,18 +60,19 @@
             CommonNotifier.showError("Error");
         }
 
-            //$(document).ready(() => {
-            //    commonAjaxCall({
-            //        url: '/home/GetTaskTypeList',
-            //        success: res => {
-            //            console.log(res)
-            //        }
-            //    });
+                //$(document).ready(() => {
+                //    commonAjaxCall({
+                //        url: '/home/GetTaskTypeList',
+                //        success: res => {
+                //            console.log(res)
+                //        }
+                //    });
 
-            //})
+                //})
 
 
 
         /*    loadDropdownAjax({ id: 'sagar', url: '/home/GetTaskTypeList' })*/
+       
     </script>
 }

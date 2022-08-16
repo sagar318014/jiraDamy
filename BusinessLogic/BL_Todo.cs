@@ -108,6 +108,16 @@ namespace BusinessLogic
 
 
         }
+        //public List<UserSignupViewModel> GetUserNameList()
+        //{
+        //    List<UserSignupViewModel> User = new List<UserSignupViewModel>();
+
+        //    List<UserSignupViewModel> GetUserNameList = new DAL_Todo().GetUserList();
+
+
+        //}
+
+        
 
     }
 }
