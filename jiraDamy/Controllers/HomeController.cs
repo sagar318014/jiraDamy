@@ -103,10 +103,7 @@ namespace jiraDamy.Controllers
 
             TaskTableViewModel model = new TaskTableViewModel();
 
-            model.taskStatusList = new List<CommonDropdownType>() {
-                    new CommonDropdownType(){id = 1, text =  "Todo"},
-                    new CommonDropdownType(){id = 2, text =  "Active"},
-                     new CommonDropdownType(){id = 3, text =  "Completed"} };
+            model.taskStatusList = new BL_Todo().GetStatusList();
 
             return View(model);
         }
@@ -143,23 +140,6 @@ namespace jiraDamy.Controllers
 
         public ActionResult MoveInToActive(int Id)
         {
-            //using (var db = new taskDatabaseEntities())
-            //{
-
-
-            //    foreach (var item in db.taskDataTables)
-            //    {
-            //        if (item.taskId == id)
-            //        {
-            //            item.taskStatus = 2;
-            //        }
-            //    }
-            //    db.SaveChanges();
-
-            //    return RedirectToAction("Active");
-            //}
-
-
             new BL_Todo().MoveToActive(Id);
 
             return RedirectToAction("Active");
@@ -167,21 +147,6 @@ namespace jiraDamy.Controllers
 
         public ActionResult MoveInToCompleted(int Id)
         {
-            //using (var db = new taskDatabaseEntities())
-            //{
-            //    foreach (var item in db.taskDataTables)
-            //    {
-            //        if (item.taskId == id)
-            //        {
-            //            item.taskStatus = 3;
-            //        }
-            //    }
-            //    db.SaveChanges();
-
-            //    return RedirectToAction("Completed");
-            //}
-
-
             new BL_Todo().MoveToCompleted(Id);
 
             return RedirectToAction("Completed");

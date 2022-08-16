@@ -109,5 +109,41 @@ namespace BusinessLogic
 
         }
 
+        public List<CommonDropdownType> GetStatusList()
+        {
+
+            List<CommonDropdownType> StatusList = new List<CommonDropdownType>();
+            foreach (var item in new DAL_Todo().StatusList())
+            {
+                CommonDropdownType Status = new CommonDropdownType();
+
+                Status.id = item.statusID;
+                Status.text = item.statusName;
+
+                StatusList.Add(Status);
+            }
+            return StatusList;
+
+
+
+        }
+        public List<CommonDropdownType> GetUserList()
+        {
+
+            List<CommonDropdownType> userList = new List<CommonDropdownType>();
+            foreach (var item in new DAL_Todo().UserList())
+            {
+                CommonDropdownType user = new CommonDropdownType();
+
+                user.id = item.Id;
+                user.text = item.Username;
+
+                userList.Add(user);
+            }
+            return userList;
+
+
+
+        }
     }
 }
