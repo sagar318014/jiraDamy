@@ -51,8 +51,8 @@ namespace DataAcess.Authentication
 
         public User GetSingleWithUsernameAndPassword(string username, string password)
         {
-            //string sql = "Select * from [dbo].[User] where [Username]=@username and [Password]=@password";
-            string connectionString = ConfigurationManager.ConnectionStrings["devconnection"].ConnectionString;
+            string sql = "Select * from [dbo].[User] where [Username]=@username and [Password]=@password";
+            //string connectionString = ConfigurationManager.ConnectionStrings["devconnection"].ConnectionString;
             using (var db = new SqlConnection(connectionString))
             {
                 db.Open();
