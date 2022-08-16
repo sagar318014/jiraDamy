@@ -1,6 +1,7 @@
 ﻿using DataAcess.Authentication;
 using DataAcess.entits;
 using ViewModel;
+using System.Collections.Generic;
 
 namespace BusinessLogic.Authentication
 {
@@ -34,6 +35,23 @@ namespace BusinessLogic.Authentication
 
             new DAL_Authentication().SaveUserData(adddata);
 
+
+
+        }
+        public List<CommonDropdownType> GetRoleList()
+        {
+
+            List<CommonDropdownType> roleList = new List<CommonDropdownType>();
+            foreach (var item in new DAL_Authentication().RoleList())
+            {
+                CommonDropdownType role = new CommonDropdownType();
+
+                role.id = item.Id;
+                role.text = item.Name;
+
+                roleList.Add(role);
+            }
+            return roleList;
 
 
         }

@@ -12,6 +12,7 @@ namespace DataAcess.Authentication
 {
     public class DAL_Authentication
     {
+        string connectionString = ConfigurationManager.ConnectionStrings["devconnection"].ConnectionString;
         public void SaveUserData(User adddata)
         {
             string sql = @"INSERT INTO [dbo].[User]
@@ -39,7 +40,6 @@ namespace DataAcess.Authentication
                 CreatedAt = System.DateTime.Now.ToString("yyyy-MM-dd")
             };
 
-            string connectionString = ConfigurationManager.ConnectionStrings["devconnection"].ConnectionString;
             using (var db = new SqlConnection(connectionString))
             {
                 db.Open();
@@ -51,7 +51,7 @@ namespace DataAcess.Authentication
 
         public User GetSingleWithUsernameAndPassword(string username, string password)
         {
-            string sql = "Select * from [dbo].[User] where [Username]=@username and [Password]=@password";
+            //string sql = "Select * from [dbo].[User] where [Username]=@username and [Password]=@password";
             string connectionString = ConfigurationManager.ConnectionStrings["devconnection"].ConnectionString;
             using (var db = new SqlConnection(connectionString))
             {
@@ -60,6 +60,18 @@ namespace DataAcess.Authentication
                 db.Close();
                 return users.FirstOrDefault();
             }
+        }
+        public List<Role> RoleList()
+        {
+
+            string sql = "Select * from Role";
+            using (var db = new SqlConnection(connectionString))
+            {
+                List<Role> RoleList = db.Query<Role>(sql).AsList();
+                return RoleList;
+
+            }
+
         }
     }
 
