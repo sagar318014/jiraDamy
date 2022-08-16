@@ -77,6 +77,9 @@
     <Compile Include="entits\taskDataTable.cs">
       <DependentUpon>taskDatabaseJira.tt</DependentUpon>
     </Compile>
+    <Compile Include="entits\Team.cs">
+      <DependentUpon>taskDatabaseJira.tt</DependentUpon>
+    </Compile>
     <Compile Include="entits\User.cs">
       <DependentUpon>taskDatabaseJira.tt</DependentUpon>
     </Compile>
@@ -90,6 +93,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DbScripts\TeamTable.sql" />
     <Content Include="DbScripts\UserAndRole.sql" />
     <Content Include="entits\taskDatabaseJira.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

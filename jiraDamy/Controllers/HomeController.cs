@@ -48,6 +48,8 @@ namespace jiraDamy.Controllers
 
         }
 
+       
+
         public ActionResult Completed()
         {
             List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
@@ -56,6 +58,36 @@ namespace jiraDamy.Controllers
           
 
         }
+        public ActionResult CreateTeam()
+        {
+            //List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
+
+            return View("CreateTeam");
+
+
+        }
+
+        [HttpGet]
+        public ActionResult AddTeam()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            TaskTableViewModel model = new TaskTableViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddTeam(TaskTableViewModel model)
+        {
+           
+
+            //TaskTableViewModel model = new TaskTableViewModel();
+
+            return View(model);
+        }
+
+
 
         // Form show
         [HttpGet]

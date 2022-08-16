@@ -28,6 +28,22 @@
           <Property Name="taskStatus" Type="int" />
           <Property Name="description" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="TeamMembers">
+          <Key>
+            <PropertyRef Name="TeamMemberId" />
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamMemberId" Type="int" Nullable="false" />
+          <Property Name="TeamId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="TeamName" Type="nchar" MaxLength="10" />
+          <Property Name="TeamLeder" Type="int" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -41,18 +57,6 @@
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
         </EntityType>
-        <Association Name="FK_Role_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="Role1" Type="Self.Role" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Role1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_taskDataTable_statusTable">
           <End Role="statusTable" Type="Self.statusTable" Multiplicity="0..1" />
           <End Role="taskDataTable" Type="Self.taskDataTable" Multiplicity="*" />
@@ -62,6 +66,42 @@
             </Principal>
             <Dependent Role="taskDataTable">
               <PropertyRef Name="taskStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamMembers_Teams">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="1" />
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="TeamMembers">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamMembers_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMembers">
+              <PropertyRef Name="TeamMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teams_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Teams" Type="Self.Teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teams">
+              <PropertyRef Name="TeamLeder" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -81,14 +121,24 @@
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="statusTable" EntityType="Self.statusTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="taskDataTable" EntityType="Self.taskDataTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamMembers" EntityType="Self.TeamMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Role_Role" Association="Self.FK_Role_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Role1" EntitySet="Role" />
-          </AssociationSet>
           <AssociationSet Name="FK_taskDataTable_statusTable" Association="Self.FK_taskDataTable_statusTable">
             <End Role="statusTable" EntitySet="statusTable" />
             <End Role="taskDataTable" EntitySet="taskDataTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamMembers_Teams" Association="Self.FK_TeamMembers_Teams">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamMembers_User" Association="Self.FK_TeamMembers_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teams_User" Association="Self.FK_Teams_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Teams" EntitySet="Teams" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
@@ -114,6 +164,15 @@
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="taskDatabaseModel.FK_User_Role">
             <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Teams" EntityType="taskDatabaseModel.Team" />
+          <AssociationSet Name="FK_Teams_User" Association="taskDatabaseModel.FK_Teams_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="TeamMembers" Association="taskDatabaseModel.TeamMembers">
+            <End Role="Team" EntitySet="Teams" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
@@ -170,6 +229,8 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Role" Relationship="taskDatabaseModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Teams" Relationship="taskDatabaseModel.FK_Teams_User" FromRole="User" ToRole="Team" />
+          <NavigationProperty Name="Teams1" Relationship="taskDatabaseModel.TeamMembers" FromRole="User" ToRole="Team" />
         </EntityType>
         <Association Name="FK_Role_Role">
           <End Type="taskDatabaseModel.Role" Role="Role" Multiplicity="1" />
@@ -194,6 +255,32 @@
               <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="TeamName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TeamLeder" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="taskDatabaseModel.FK_Teams_User" FromRole="Team" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="taskDatabaseModel.TeamMembers" FromRole="Team" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Teams_User">
+          <End Type="taskDatabaseModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="taskDatabaseModel.Team" Role="Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="TeamLeder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TeamMembers">
+          <End Type="taskDatabaseModel.Team" Role="Team" Multiplicity="*" />
+          <End Type="taskDatabaseModel.User" Role="User" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -241,6 +328,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="taskDatabaseModel.Team">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="TeamLeder" ColumnName="TeamLeder" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TeamMembers" TypeName="taskDatabaseModel.TeamMembers" StoreEntitySet="TeamMembers">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="TeamMemberId" />
+            </EndProperty>
+            <EndProperty Name="Team">
+              <ScalarProperty Name="TeamID" ColumnName="TeamId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
