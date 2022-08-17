@@ -110,6 +110,7 @@ namespace jiraDamy.Controllers
             TaskTableViewModel model = new TaskTableViewModel();
 
             model.taskStatusList = new BL_Todo().GetStatusList();
+            model.userList = new BL_Todo().GetUserList();
 
             return View(model);
         }
