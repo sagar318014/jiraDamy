@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Authentication;
 using jiraDamy.ActionFilters;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using ViewModel;
 
@@ -44,5 +45,27 @@ namespace jiraDamy.Controllers
             Session["Username"] = null;
             return RedirectToAction("Login");
         }
-    }
+
+        public ActionResult SignUp()
+        
+        {
+            UserSignupViewModel model = new UserSignupViewModel();
+            model.RoleIdList = new BL_Authentication().GetRoleList();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult SignUp(UserSignupViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("SignUp");
+            }
+            new BL_Authentication().SaveUserData(model) ;
+            return RedirectToAction("Login");
+        }
+    //    public ActionResult GetRoleIdTypeList()
+    //    {
+    //        return new BL_Authentication().GetRoleList();
+    //}
+   }
 }

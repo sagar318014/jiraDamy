@@ -1,0 +1,32 @@
+﻿@model ViewModel.CreateTeamViewModel
+
+@{
+    ViewBag.Title = "Create Team";
+    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+}
+@section Grid{
+
+    @{Html.RenderPartial("PartialLinksView", "CreateTeam");}
+
+    @using (Html.BeginForm("CreateTeam", "Home", FormMethod.Post))
+    {
+        <lebel>Team Name</lebel>
+        <div>@Html.TextBoxFor(x => x.TeamName)</div>
+
+
+        <lebel>Team Leader Name</lebel>
+        <div>@Html.TextBoxFor(x => x.TeamLeader)</div>
+
+        <lebel>Team Member Name</lebel>
+        <div>@Html.TextBoxFor(x => x.TeamMember)</div>
+
+        <div style="margin-top:15px;">
+
+           
+            <button type="submit" style="background-color: lightgreen; float: right;">Add</button>
+
+        </div>
+
+    }
+
+}

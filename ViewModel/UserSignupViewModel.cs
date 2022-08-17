@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAcess.entits
+namespace ViewModel
 {
-    public class User
+    public class UserSignupViewModel
     {
         public int Id { get; set; }
         public string Username { get; set; }
@@ -14,7 +14,9 @@ namespace DataAcess.entits
         public int RoleId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
+
+        public List<CommonDropdownType> RoleIdList { get; set; } = new List<CommonDropdownType>();
     }
+
+    
 }

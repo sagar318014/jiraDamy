@@ -10,19 +10,20 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>My Completed Task List</th>
+                    <th>Task Name</th>
+                    <th>Description</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr id="@item.taskId">
                         <td>@item.taskName</td>
                         <td>@item.description</td>
                         <td>
-
-                            <a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>
+                            <button type="button" onclick="DeleteTask(@item.taskId)">Delete</button>
+                            @*<a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>*@
                         </td>
                     </tr>
 
@@ -32,4 +33,28 @@
         </table>
 
     </div>
+  
+
+}
+
+@section scripts{
+
+    <script>
+        function DeleteTask(id) {
+            CommonNotifier.showInformation("task deleted", function () {
+                Delete(id)
+            })
+        }
+        function Delete(id) {
+            commonAjaxCall({
+                /* window.location.replace("/Home/Delete?id="+id);*/
+                url: "/Home/Delete?id=" + id,
+                success: (response) => {
+                    $('#' + id).remove();
+                }
+            })
+
+        }
+
+    </script>
 }
