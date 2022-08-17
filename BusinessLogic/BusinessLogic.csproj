@@ -54,17 +54,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\DataAcess\DataAcess.csproj">
-      <Project>{B2470CA4-A8C5-4841-AF5B-BDFE9CCC7E6B}</Project>
+      <Project>{b2470ca4-a8c5-4841-af5b-bdfe9ccc7e6b}</Project>
       <Name>DataAcess</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
-      <Project>{44279A37-BC5E-47DF-BF61-9E3A0DE275FE}</Project>
+      <Project>{44279a37-bc5e-47df-bf61-9e3a0de275fe}</Project>
       <Name>ViewModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
