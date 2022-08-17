@@ -13,10 +13,12 @@ namespace BusinessLogic
     {
         public void SaveTodo(TaskTableViewModel model)
         {
-            taskDataTable AddTask = new taskDataTable();
+            TaskDataTable AddTask = new TaskDataTable();
             AddTask.taskName = model.taskName;
             AddTask.description = model.description;
             AddTask.taskStatus = model.taskStatus;
+            AddTask.assigneeId = model.assigneeId;
+           
 
             new DAL_Todo().SaveTodo(AddTask);
 
@@ -27,18 +29,21 @@ namespace BusinessLogic
 
             List<TaskTableViewModel> Todo = new List<TaskTableViewModel>();
 
-            List<taskDataTable> TodoList = new DAL_Todo().TaskList(id);
-
+            List<TaskDataTable> TodoList = new DAL_Todo().TaskList(id);
+            
 
 
             foreach (var item in TodoList)
             {
                 TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
+               
 
                 taskTableViewModel.description = item.description;
                 taskTableViewModel.taskId = item.taskId;
                 taskTableViewModel.taskName = item.taskName;
                 taskTableViewModel.taskStatus = item.taskStatus;
+                taskTableViewModel.assigneeId = item.assigneeId;
+                taskTableViewModel.userName = item.userName;
 
                 Todo.Add(taskTableViewModel);
             }
@@ -53,7 +58,7 @@ namespace BusinessLogic
 
             List<TaskTableViewModel> Active = new List<TaskTableViewModel>();
 
-            List<taskDataTable> ActiveList = new DAL_Todo().TaskList(id);
+            List<TaskDataTable> ActiveList = new DAL_Todo().TaskList(id);
 
             foreach (var item in ActiveList)
             {
@@ -63,6 +68,8 @@ namespace BusinessLogic
                 taskTableViewModel.taskId = item.taskId;
                 taskTableViewModel.taskName = item.taskName;
                 taskTableViewModel.taskStatus = item.taskStatus;
+                taskTableViewModel.assigneeId = item.assigneeId;
+                taskTableViewModel.userName= item.userName;
 
                 Active.Add(taskTableViewModel);
             }
@@ -74,7 +81,7 @@ namespace BusinessLogic
 
             List<TaskTableViewModel> Completed = new List<TaskTableViewModel>();
 
-            List<taskDataTable> CompletedList = new DAL_Todo().TaskList(id);
+            List<TaskDataTable> CompletedList = new DAL_Todo().TaskList(id);
             foreach (var item in CompletedList)
             {
                 TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
@@ -83,6 +90,9 @@ namespace BusinessLogic
                 taskTableViewModel.taskId = item.taskId;
                 taskTableViewModel.taskName = item.taskName;
                 taskTableViewModel.taskStatus = item.taskStatus;
+                taskTableViewModel.assigneeId = item.assigneeId;
+                taskTableViewModel.userName = item.userName;
+
 
                 Completed.Add(taskTableViewModel);
             }

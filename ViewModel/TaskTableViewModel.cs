@@ -18,7 +18,11 @@ namespace ViewModel
         [Required(ErrorMessage = "pleas enter description")]
         public string description { get; set; }
 
+        public int? assigneeId { get; set; }
+        public string userName { get; set; }
+
 
         public List<CommonDropdownType> taskStatusList { get; set; } = new List<CommonDropdownType>();
+        public List<CommonDropdownType> userList { get; set; } = new List<CommonDropdownType>();
     }
 }
