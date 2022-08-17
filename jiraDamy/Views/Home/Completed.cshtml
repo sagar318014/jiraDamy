@@ -10,7 +10,9 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>My Completed Task List</th>
+                    <th>Task Name</th>
+                    <th>Description</th>
+                    <th>UserName</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -20,6 +22,7 @@
                     <tr>
                         <td>@item.taskName</td>
                         <td>@item.description</td>
+                        <td>@item.userName</td>
                         <td>
 
                             <a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>
