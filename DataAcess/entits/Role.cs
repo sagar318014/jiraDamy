@@ -11,5 +11,12 @@ namespace DataAcess.entits
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public bool AllowUserCreation { get; set; }
+
+        public bool AllowTeamCreation { get; set; }
+
+
+
+
     }
 }

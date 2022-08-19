@@ -68,7 +68,7 @@ namespace DataAcess
         {
 
             //string sql = "Select * from taskDataTable where [taskStatus]=@taskStatus";
-            string sql = "select t.taskId,t.taskName,t.taskStatus,t.description,u.userName from taskDataTable t left join [user] u on t.assigneeId = u.Id  where [taskStatus]=@taskStatus";
+            string sql = "select t.taskId,t.taskName,t.taskStatus,t.description,u.userName,t.assigneeId from taskDataTable t left join [user] u on t.assigneeId = u.Id  where [taskStatus]=@taskStatus";
             using(var db = new SqlConnection(connectionString))
             {
                 List<TaskDataTable> TaskList = db.Query<TaskDataTable>(sql, new { taskStatus = id }).AsList();
@@ -170,6 +170,23 @@ namespace DataAcess
                
             //}
 
+
+        }
+
+        public void UpdateTask(TaskDataTable updateTable)
+        {
+            string sql = "update TaskDataTable set assigneeId=@assigneeId where taskId=@taskId ";
+            object ts = new
+            {
+                taskId = updateTable.taskId,
+                assigneeId = updateTable.assigneeId
+            };
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                db.Query(sql, ts);
+                db.Close();
+            }
 
         }
 

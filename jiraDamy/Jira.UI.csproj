@@ -191,6 +191,7 @@
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Authentication\SignUp.cshtml" />
     <Content Include="Views\Home\CreateTeam.cshtml" />
+    <Content Include="Views\Shared\PartialViewForAddTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
