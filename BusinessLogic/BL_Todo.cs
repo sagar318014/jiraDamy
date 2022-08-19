@@ -44,10 +44,13 @@ namespace BusinessLogic
                 taskTableViewModel.taskStatus = item.taskStatus;
                 taskTableViewModel.assigneeId = item.assigneeId;
                 taskTableViewModel.userName = item.userName;
+               
+
+
 
                 Todo.Add(taskTableViewModel);
             }
-            return Todo;
+            return Todo; 
 
 
         }
@@ -163,6 +166,19 @@ namespace BusinessLogic
 
 
            
+        }
+
+        public void UpdateTask(TaskTableViewModel model)
+        { 
+            TaskDataTable updateTable = new TaskDataTable();
+            
+
+            updateTable.taskId = model.taskId;
+            updateTable.assigneeId = model.assigneeId;
+
+            new DAL_Todo().UpdateTask(updateTable);
+
+
         }
 
     }

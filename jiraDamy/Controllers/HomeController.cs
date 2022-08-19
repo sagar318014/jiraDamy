@@ -19,8 +19,15 @@ namespace jiraDamy.Controllers
             
 
             List<TaskTableViewModel> Todo = new BL_Todo().TodoList(1);
-
-            return View("Todo", Todo);
+            foreach (var item in Todo)
+	        {
+             item.taskStatusList = new BL_Todo().GetStatusList();
+            item.userList = new BL_Todo().GetUserList();
+	        }
+            
+            
+                return View("Todo", Todo);
+           
 
            
 
@@ -53,12 +60,18 @@ namespace jiraDamy.Controllers
         public ActionResult Active()
         {
             List<TaskTableViewModel> Active = new BL_Todo().ActiveList(2);
+            foreach (var item in Active)
+            {
+                item.taskStatusList = new BL_Todo().GetStatusList();
+                item.userList = new BL_Todo().GetUserList();
+            }
 
             return View("Active", Active);
            
 
 
         }
+
 
        
 
@@ -99,7 +112,7 @@ namespace jiraDamy.Controllers
             return View(model);
         }
 
-
+       
 
         // Form show
         [HttpGet]
@@ -166,6 +179,19 @@ namespace jiraDamy.Controllers
            new BL_Todo().Delete(id);
         }
 
+        public ActionResult UpdateTask(TaskTableViewModel model)
+        {
+            new BL_Todo().UpdateTask(model);
+            if (model.taskStatus == 1)
+            {
+                return RedirectToAction("Todo");
+            }
+            else if (model.taskStatus == 2)
+            {
+                return RedirectToAction("Active");
+            }
+            return RedirectToAction("AddTask");
+        }
 
     }
 }

@@ -4,8 +4,9 @@
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
 
-@section AddTaskForm{
-    @using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
+@section AddTaskForm{       
+
+ @using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
     {
         <div style="font-weight:600;">Add new task</div>
         <lebel>Task Name</lebel>
@@ -21,7 +22,7 @@
             <select id="sagar" name="taskStatus" class="select-2 col-lg-3">
                 @foreach (var item in Model.taskStatusList)
                 {
-                    <option value="@item.id">@item.text</option>
+                    <option value="@item.id" >@item.text</option>
                 }
             </select>
 
@@ -33,7 +34,7 @@
             <select name="assigneeId" class="select-2 col-lg-3">
                 @foreach (var item in Model.userList)
                 {
-                    <option value="@item.id">@item.text</option>
+                    <option value="@item.id" selected>@item.text</option>
                 }
             </select>
 
@@ -43,14 +44,15 @@
         <div style="margin-top:15px;">
 
             <button type="reset" style="background-color:lightcoral;float:right;">Clear All</button>
-            <button type="submit" style="background-color: lightgreen; float: right;">Add</button>
+            <button type="submit"  style="background-color: lightgreen; float: right;">Add</button>
 
         </div>
 
+        }
     }
-}
 
 @section Grid{
+
     @{Html.RenderPartial("PartialLinksView", "AddTask");}
 }
 
@@ -61,15 +63,15 @@
             CommonNotifier.showError("Error");
         }
 
-                //$(document).ready(() => {
-                //    commonAjaxCall({
-                //        url: '/home/GetTaskTypeList',
-                //        success: res => {
-                //            console.log(res)
-                //        }
-                //    });
+                                    //$(document).ready(() => {
+                                    //    commonAjaxCall({
+                                    //        url: '/home/GetTaskTypeList',
+                                    //        success: res => {
+                                    //            console.log(res)
+                                    //        }
+                                    //    });
 
-                //})
+                                    //})
 
 
 
