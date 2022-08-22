@@ -14,7 +14,7 @@ function initializeSelect2ForDropdown(source) {
 
 async function commonAjaxCall(request) {
     $.ajax({
-        url: request.url,
+        ...request,
         success: (response) => {
             request.success(response)
         },
