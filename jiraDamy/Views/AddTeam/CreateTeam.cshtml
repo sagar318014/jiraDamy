@@ -1,0 +1,42 @@
+﻿@model ViewModel.TeamsViewModel
+
+@{
+    ViewBag.Title = "Create Team";
+    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+}
+@section Grid{
+
+    @{Html.RenderPartial("PartialLinksView", "CreateTeam");}
+
+    @using (Html.BeginForm("AddTeam", "AddTeam", FormMethod.Post))
+    {
+        <lebel>Team Name</lebel>
+        <div>@Html.TextBoxFor(x => x.TeamName)</div>
+
+
+        <lebel style="display:block">Team Leader Name</lebel>
+        <select id="TeamLeder" name="TeamLeder" class="select-2 col-lg-3">
+            @foreach (var item in Model.TeamLeders)
+            {
+                <option value="@item.id">@item.text</option>
+            }
+        </select>
+
+        <lebel>Team Member Name</lebel>
+        <select id="TeamMember" name="TeamMember1" class="select-2 col-lg-3" multiple>
+            @foreach (var item in Model.TeamLeders)
+            {
+                <option value="@item.id">@item.text</option>
+            }
+        </select>
+
+        <div style="margin-top:15px;">
+
+
+            <button type="submit" style="background-color: lightgreen; float: right;">Add</button>
+
+        </div>
+
+    }
+
+}

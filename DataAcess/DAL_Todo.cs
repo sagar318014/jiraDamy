@@ -134,7 +134,7 @@ namespace DataAcess
         public List<User> UserList()
         {
 
-            string sql = "Select * from User";
+            string sql = "Select * from [dbo].[User]";
             using (var db = new SqlConnection(connectionString))
             {
                 List<User> UserList = db.Query<User>(sql).AsList();
