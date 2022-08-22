@@ -6,6 +6,9 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
+@section SideBar{
+    @{Html.RenderPartial("PartialSideBar");}
+}
 @section Grid{
     @{Html.RenderPartial("PartialLinksView", "Todo");}
 
@@ -53,7 +56,7 @@
         function Delete(id) {
             commonAjaxCall({
                 /* window.location.replace("/Home/Delete?id="+id);*/
-                url: "/Home/Delete?id=" + id, 
+                url: "/Home/Delete?id=" + id,
                 success: (response) => {
                     $('#' + id).remove();
                 }

@@ -11,4 +11,10 @@ namespace ViewModel
         public int id { get; set; }
         public string text { get; set; }
     }
+    public class Actions
+    {
+        public Boolean taskCreation { get; set; }
+        public Boolean userCreation { get; set; }
+        public Boolean teamCreation { get; set; }
+    }
 }

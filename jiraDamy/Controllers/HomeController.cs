@@ -14,10 +14,13 @@ namespace jiraDamy.Controllers
     [SessionBaseAuthorize]
     public class HomeController : Controller
     {
+        
         public ActionResult Todo()
         {
-            
 
+           
+
+            String UserName = Session["Username"].ToString();
             List<TaskTableViewModel> Todo = new BL_Todo().TodoList(1);
 
             return View("Todo", Todo);
