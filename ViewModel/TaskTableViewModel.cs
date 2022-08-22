@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-
 namespace ViewModel
 {
     public class TaskTableViewModel
@@ -18,7 +17,8 @@ namespace ViewModel
         [Required(ErrorMessage = "pleas enter description")]
         public string description { get; set; }
 
-
+        public Actions actions { get; set; } = new Actions();
         public List<CommonDropdownType> taskStatusList { get; set; } = new List<CommonDropdownType>();
+
     }
 }

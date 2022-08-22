@@ -5,59 +5,61 @@
     ViewBag.Title = "Active";
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
-@section Grid{
+    @section SideBar{
+        @{Html.RenderPartial("PartialSideBar");}
+    }
+    @section Grid{
+        @{Html.RenderPartial("PartialLinksView", "Active");}
 
-    @{Html.RenderPartial("PartialLinksView", "Active");}
-
-    <div class="text-center">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Task Name</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr id="@item.taskId">
-                        <td>@item.taskName</td>
-                        <td>@item.description</td>
-                        <td>
-                            <a href="@Url.Action("MoveInToCompleted",new {id = item.taskId })" class="btn btn-success">Move</a>
-                            @*<a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>*@
-                            <button type="button" onclick="DeleteTask(@item.taskId)">Delete</button>
-                        </td>
+        <div class="text-center">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
                     </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="@item.taskId">
+                            <td>@item.taskName</td>
+                            <td>@item.description</td>
+                            <td>
+                                <a href="@Url.Action("MoveInToCompleted",new {id = item.taskId })" class="btn btn-success">Move</a>
+                                @*<a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>*@
+                                <button type="button" onclick="DeleteTask(@item.taskId)">Delete</button>
+                            </td>
+                        </tr>
 
-                }
-            </tbody>
+                    }
+                </tbody>
 
-        </table>
+            </table>
 
-    </div>
-    
-}
+        </div>
 
-@section scripts{
+    }
 
-    <script>
-        function DeleteTask(id) {
-            CommonNotifier.showInformation("task deleted", function () {
-                Delete(id)
-            })
-        }
-        function Delete(id) {
-            commonAjaxCall({
-                /* window.location.replace("/Home/Delete?id="+id);*/
-                url: "/Home/Delete?id=" + id,
-                success: (response) => {
-                    $('#' + id).remove();
-                }
-            })
+    @section scripts{
 
-        }
+        <script>
+            function DeleteTask(id) {
+                CommonNotifier.showInformation("task deleted", function () {
+                    Delete(id)
+                })
+            }
+            function Delete(id) {
+                commonAjaxCall({
+                    /* window.location.replace("/Home/Delete?id="+id);*/
+                    url: "/Home/Delete?id=" + id,
+                    success: (response) => {
+                        $('#' + id).remove();
+                    }
+                })
 
-    </script>
-}
+            }
+
+        </script>
+    }

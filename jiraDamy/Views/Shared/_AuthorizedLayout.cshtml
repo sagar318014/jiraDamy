@@ -3,13 +3,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
+    <div class="col-lg-2">
+        @RenderSection("SideBar", false)
+    </div>
     <div class="col-lg-4">
         @RenderSection("AddTaskForm", false)
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-6">
         @RenderSection("Grid", false)
     </div>
-</div>
-@section scripts{
-    @RenderSection("scripts", false)
-}
+    </div>
+    @section scripts{
+        @RenderSection("scripts", false)
+    }

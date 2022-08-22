@@ -1,16 +1,22 @@
 ﻿using DataAcess.Authentication;
+using System.Collections.Generic;
 using DataAcess.entits;
 using ViewModel;
-using System.Collections.Generic;
 
 namespace BusinessLogic.Authentication
 {
     public class BL_Authentication
     {
+
+        public void SaveUserData(User adddata)
+        {
+            new DAL_Authentication().SaveUserData(adddata);
+        }
         public UserLoginViewModel GetAutheticatedUser(UserLoginViewModel userLoginViewModel)
         {
             User user = new DAL_Authentication()
-                .GetSingleWithUsernameAndPassword(userLoginViewModel.Username, userLoginViewModel.Password);
+                .GetSingleWithUsernameAndPassword(userLoginViewModel.Username ,userLoginViewModel.Password);
+            //UserLoginViewModel authenticated =  AutoMapper.Mapper.Map<User,UserLoginViewModel>(user);
             if (user == null)
             {
                 return null;
@@ -20,40 +26,17 @@ namespace BusinessLogic.Authentication
                 Id = user.Id,
                 Username = user.Username,
                 Password = user.Password,
+                RoleId = user.RoleId
             };
             return authenticated;
         }
-
-        public void SaveUserData(UserSignupViewModel model)
+        public List<Role> GetRoleList()
         {
-            User adddata = new User();
-            adddata.Username = model.Username;
-            adddata.Password = model.Password;
-            adddata.FirstName = model.FirstName;
-            adddata.LastName = model.LastName;
-            adddata.RoleId = model.RoleId;
-
-            new DAL_Authentication().SaveUserData(adddata);
-
-
-
+            return new DAL_Authentication().RoleList();
         }
-        public List<CommonDropdownType> GetRoleList()
+        public List<int> GetActionList(int RoleId)
         {
-
-            List<CommonDropdownType> roleList = new List<CommonDropdownType>();
-            foreach (var item in new DAL_Authentication().RoleList())
-            {
-                CommonDropdownType role = new CommonDropdownType();
-
-                role.id = item.Id;
-                role.text = item.Name;
-
-                roleList.Add(role);
-            }
-            return roleList;
-
-
+            return new DAL_Authentication().GetActionList(RoleId);
         }
     }
 }
