@@ -57,7 +57,15 @@ namespace jiraDamy.Controllers
         //    }, JsonRequestBehavior.AllowGet);
         //}
 
-        public ActionResult Active()
+        //public ActionResult GetResult()
+        //{
+        //    return Json(new
+        //    {
+        //        data = false
+
+        //    }, JsonRequestBehavior.AllowGet) ;
+        //}
+            public ActionResult Active()
         {
             List<TaskTableViewModel> Active = new BL_Todo().ActiveList(2);
             foreach (var item in Active)
@@ -173,24 +181,74 @@ namespace jiraDamy.Controllers
             return RedirectToAction("Completed");
         }
 
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
 
-           new BL_Todo().Delete(id);
+           
+            try
+            {
+                new BL_Todo().Delete(id);
+                return Json(new
+                {
+                    data = true
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+
         }
 
+
+        [HttpPost]
         public ActionResult UpdateTask(TaskTableViewModel model)
         {
-            new BL_Todo().UpdateTask(model);
-            if (model.taskStatus == 1)
+            try
             {
-                return RedirectToAction("Todo");
+                if (model.assigneeId != null)
+                {
+                    new BL_Todo().UpdateTask(model);
+                    return Json(new
+                    {
+                        data = true
+
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        data = false
+
+                    }, JsonRequestBehavior.AllowGet);
+                }
+               
+
+               
+
             }
-            else if (model.taskStatus == 2)
+            catch (Exception)
             {
-                return RedirectToAction("Active");
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
             }
-            return RedirectToAction("AddTask");
+           
+
         }
 
     }
