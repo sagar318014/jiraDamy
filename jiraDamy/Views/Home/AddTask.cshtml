@@ -4,8 +4,9 @@
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
 
-@section AddTaskForm{
-    @using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
+@section AddTaskForm{       
+
+ @using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
     {
         <div style="font-weight:600;">Add new task</div>
         <lebel>Task Name</lebel>
@@ -16,50 +17,70 @@
         @Html.ValidationMessageFor(x => x.description)
 
 
-<div>
-    <lebel>Task Current Status</lebel>
-    <select id="sagar" name="taskStatus" class="select-2 col-lg-3">
-        @foreach (var item in Model.taskStatusList)
-        {
-            <option value="@item.id">@item.text</option>
-        }
-    </select>
+        <div>
+            <lebel>Task Current Status</lebel>
+            <select id="sagar" name="taskStatus" class="select-2 col-lg-3">
+                @foreach (var item in Model.taskStatusList)
+                {
+                    <option value="@item.id" >@item.text</option>
+                }
+            </select>
 
-
-</div>
-        <div style="margin-top:15px;">
-
-            <button type="reset" style="background-color:lightcoral;float:right;">Clear All</button>
-            <button type="submit" style="background-color: lightgreen; float: right;">Add</button>
 
         </div>
 
+        <div>
+            <lebel>Assigneee</lebel>
+            <select name="assigneeId" class="select-2 col-lg-3">
+                @foreach (var item in Model.userList)
+                {
+                    <option value="@item.id" selected>@item.text</option>
+                }
+            </select>
+
+
+        </div>
+
+        <div style="margin-top:15px;">
+
+            <button type="reset" style="background-color:lightcoral;float:right;">Clear All</button>
+            <button type="submit"  style="background-color: lightgreen; float: right;">Add</button>
+
+        </div>
+
+        }
     }
-}
 
 @section Grid{
+
     @{Html.RenderPartial("PartialLinksView", "AddTask");}
 }
 
 @section scripts{
     <script>
+        $("document").ready(function () {
+            alert("button click");
+        });
         function Test() {
             CommonNotifier.showInformation("hiee");
             CommonNotifier.showError("Error");
         }
 
-            //$(document).ready(() => {
-            //    commonAjaxCall({
-            //        url: '/home/GetTaskTypeList',
-            //        success: res => {
-            //            console.log(res)
-            //        }
-            //    });
+        
 
-            //})
+                                    //$(document).ready(() => {
+                                    //    commonAjaxCall({
+                                    //        url: '/home/GetTaskTypeList',
+                                    //        success: res => {
+                                    //            console.log(res)
+                                    //        }
+                                    //    });
+
+                                    //})
 
 
 
         /*    loadDropdownAjax({ id: 'sagar', url: '/home/GetTaskTypeList' })*/
+
     </script>
 }

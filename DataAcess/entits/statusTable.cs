@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAcess.entits
 {
-    public class statusTable
+    public class StatusTable
     {
         public int statusID { get; set; }
         public string statusName { get; set; }

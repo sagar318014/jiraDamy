@@ -19,8 +19,15 @@ namespace jiraDamy.Controllers
             
 
             List<TaskTableViewModel> Todo = new BL_Todo().TodoList(1);
-
-            return View("Todo", Todo);
+            foreach (var item in Todo)
+	        {
+             item.taskStatusList = new BL_Todo().GetStatusList();
+            item.userList = new BL_Todo().GetUserList();
+	        }
+            
+            
+                return View("Todo", Todo);
+           
 
            
 
@@ -50,15 +57,29 @@ namespace jiraDamy.Controllers
         //    }, JsonRequestBehavior.AllowGet);
         //}
 
-        public ActionResult Active()
+        //public ActionResult GetResult()
+        //{
+        //    return Json(new
+        //    {
+        //        data = false
+
+        //    }, JsonRequestBehavior.AllowGet) ;
+        //}
+            public ActionResult Active()
         {
             List<TaskTableViewModel> Active = new BL_Todo().ActiveList(2);
+            foreach (var item in Active)
+            {
+                item.taskStatusList = new BL_Todo().GetStatusList();
+                item.userList = new BL_Todo().GetUserList();
+            }
 
             return View("Active", Active);
            
 
 
         }
+
 
        
 
@@ -84,6 +105,7 @@ namespace jiraDamy.Controllers
             TaskTableViewModel model = new TaskTableViewModel();
 
             model.taskStatusList = new BL_Todo().GetStatusList();
+            model.userList = new BL_Todo().GetUserList();
 
             return View(model);
         }
@@ -133,12 +155,75 @@ namespace jiraDamy.Controllers
             return RedirectToAction("Completed");
         }
 
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
 
-           new BL_Todo().Delete(id);
+           
+            try
+            {
+                new BL_Todo().Delete(id);
+                return Json(new
+                {
+                    data = true
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+
         }
 
+
+        [HttpPost]
+        public ActionResult UpdateTask(TaskTableViewModel model)
+        {
+            try
+            {
+                if (model.assigneeId != null)
+                {
+                    new BL_Todo().UpdateTask(model);
+                    return Json(new
+                    {
+                        data = true
+
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        data = false
+
+                    }, JsonRequestBehavior.AllowGet);
+                }
+               
+
+               
+
+            }
+            catch (Exception)
+            {
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+           
+
+        }
 
     }
 }
