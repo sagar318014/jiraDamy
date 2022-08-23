@@ -140,6 +140,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddTeamController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -190,8 +191,8 @@
     <Content Include="Views\Shared\_AuthorizedLayout.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Authentication\SignUp.cshtml" />
-    <Content Include="Views\Home\CreateTeam.cshtml" />
     <Content Include="Views\Shared\PartialViewForAddTask.cshtml" />
+    <Content Include="Views\AddTeam\CreateTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
