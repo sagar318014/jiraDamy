@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ViewModel;
 namespace jiraDamy.Controllers
 {
+    [SessionBaseAuthorize]
     public class AddTeamController : BaseController
     {
         [HttpGet]
@@ -23,6 +24,7 @@ namespace jiraDamy.Controllers
             return View(model);
         }
         [HttpPost]
+       
         public ActionResult AddTeam(TeamsViewModel model)
         {
 
@@ -31,6 +33,7 @@ namespace jiraDamy.Controllers
 
             return RedirectToAction("CreateTeam",model);
         }
+        [ActionAccessValidation(actionId = 7)]
         public ActionResult CreateTeam()
         {
             //List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
@@ -41,7 +44,7 @@ namespace jiraDamy.Controllers
 
 
         }
-
+      
         public ActionResult TeamManagement()
         {
             List<TeamsViewModel> TeamManagement = new BL_AddTeam().TeamsList();
