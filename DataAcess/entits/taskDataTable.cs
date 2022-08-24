@@ -17,5 +17,7 @@ namespace DataAcess.entits
 
         public string userName { get; set; }
 
+        public string statusName { get; set; }
+
     }
 }

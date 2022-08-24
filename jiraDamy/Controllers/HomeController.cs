@@ -248,5 +248,126 @@ namespace jiraDamy.Controllers
 
         }
 
+        public ActionResult UserManagement()
+        {
+            List<UserSignupViewModel> users = new BL_Todo().GetAllUserList();
+            return View("UserManagement", users);
+        }
+
+        public ActionResult EditUser(int Id)
+        {
+            UserSignupViewModel model = new UserSignupViewModel();
+            List<UserSignupViewModel> user = new BL_Todo().GetEditUserList(Id);
+            foreach (var item in user)
+            {
+                
+                model.Id=item.Id; 
+                model.RoleId=item.RoleId;
+                model.Username = item.Username;
+                model.FirstName = item.FirstName;
+                model.LastName = item.LastName;
+                model.Password = item.Password;
+                model.RoleIdList = new BL_Todo().GetRoleList();
+            }
+            //UserSignupViewModel model = new UserSignupViewModel();
+            //
+
+            return View(model);
+        }
+        [HttpPost]
+
+        public ActionResult EditUser(UserSignupViewModel model)
+        {
+            try
+            {
+                new BL_Todo().UpdateUser(model);
+                return Json(new
+                {
+                    data = true
+
+                }, JsonRequestBehavior.AllowGet);
+               
+            }
+
+
+            catch (Exception)
+            {
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            
+
+        }
+
+        public ActionResult GetUserCount(int id)
+        {
+            try
+            {
+                int count = new BL_Todo().TaskList(id);
+                return Json(new
+                {
+                    data = true,
+                    count = count
+
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+            }
+           
+            
+        }
+
+        public ActionResult DeleteUser(int id)
+        {
+            try
+            {
+                new BL_Todo().DeleteUser(id);
+                return Json(new
+                {
+                    data = true
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+        }
+
+        public ActionResult ViewTask(int id)
+        {
+            List<TaskTableViewModel> model = new BL_Todo().UserTaskList(id);
+
+
+            return View("ViewTask", model);
+
+        }
+
+        public ActionResult UnassigneeUser(int id)
+        {
+            new BL_Todo().UnassigneeUser(id);
+            return RedirectToAction("ViewTas");
+        }
     }
 }

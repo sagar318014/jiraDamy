@@ -1,0 +1,154 @@
+﻿@model List<ViewModel.UserSignupViewModel>
+
+@{
+    ViewBag.Title = "UserManagement";
+    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+}
+@section Grid{
+
+
+
+    <div class="text-center">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.Id">
+
+                        <td id="usernameId">@item.Username</td>
+                        <td id="nameId">@item.Name</td>
+                        <td id="firstNameId">@item.FirstName</td>
+                        <td id="lastNameId">@item.LastName</td>
+                        <td>
+
+                            <a href="@Url.Action("EditUser",new {id = item.Id })" class="btn btn-success">Edit</a>
+                            <button type="button" onclick="DeleteUserWithConfirm(@item.Id)" class="btn btn-success">Delete </button>
+                            <button type="button"  class="btn btn-success" data-toggle="modal" data-target="#edit_modal">View Task</button>
+
+                            @*<a href="@Url.Action("ViewTask",new {id = item.Id })" class="btn btn-success" data-toggle="modal" data-target="#edit_modal">View Task</a>*@
+                        </td>
+                        <td style="visibility:hidden" id="userId">@item.Id</td>
+
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+        <div>
+            <a href="@Url.Action("Todo")" class="btn btn-default" style="float: left" >  Back </a>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body-id">
+
+                    <div class="text-center">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>TaskName</th>
+                                    <th>Role</th>
+                                    <th>Description</th>
+                                    <th>UserName</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="@item.taskId">
+
+                                        <td id="taskname">@item.taskName </td>
+                                        <td id="roleId">@item.statusName</td>
+                                        <td id="descriptionid">@item.description</td>
+                                        <td id="userId">@item.userName</td>
+                                        <td>
+
+
+                                            <a href="@Url.Action("UnassigneeUser",new {id = item.taskId })" class="btn btn-success">Unassignee</a>
+                                        </td>
+
+
+                                    </tr>
+
+                                }
+                            </tbody>
+
+                        </table>
+                        
+
+                    </div>
+                </div>
+    </div>
+
+}
+
+@section scripts{
+
+    <script>
+        function DeleteUserWithConfirm(id) {
+            commonAjaxCall({
+                /* window.location.replace("/Home/Delete?id="+id);*/
+                url: "/Home/GetUserCount?id=" + id,
+                success: (response) => {
+
+                    if (response.count == 0) {
+                        CommonNotifier.showConfirmationWithCallback("Do you want to Delete", function () {
+                            DeleteUser(id);
+                        }, function () {
+
+                        })
+                    }
+                    else {
+
+                        CommonNotifier.showInformation("already have a task is present in active or todo please assignee a task to another user")
+                    }
+
+
+                }
+            })
+        }
+
+        function DeleteUser(id) {
+            commonAjaxCall({
+
+                url: "/Home/DeleteUser?id=" + id,
+                success: (response) => {
+                    if (response.data == true) {
+
+                        $('#' + id).remove();
+                    }
+                    else {
+                        CommonNotifier.showInformation("Somthing wrong")
+
+                    }
+
+                }
+            })
+        }
+
+
+    </script>
+}

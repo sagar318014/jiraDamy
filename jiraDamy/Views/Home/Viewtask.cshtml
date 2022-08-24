@@ -1,0 +1,62 @@
+﻿@model List<ViewModel.TaskTableViewModel>
+@{
+    ViewBag.Title = "UserManagement";
+    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+}
+@section Grid{
+
+
+
+    <div class="text-center">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th>TaskName</th>
+                    <th>Role</th>
+                    <th>Description</th>
+                    <th>UserName</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.taskId">
+
+                        <td id="taskname">@item.taskName </td>
+                        <td id="roleId">@item.statusName</td>
+                        <td id="descriptionid">@item.description</td>
+                        <td id="userId">@item.userName</td>
+                        <td>
+
+
+                            <a href="@Url.Action("UnassigneeUser",new {id = item.taskId })" class="btn btn-success">Unassignee</a>
+                        </td>
+
+
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+        <div>
+            <a href="@Url.Action("UserManagement")" class="btn btn-default" style="float: left">  Back </a>
+
+        </div>
+
+    </div>
+
+    
+
+}
+
+@section scripts{
+
+    <script>
+       
+
+
+    </script>
+}
