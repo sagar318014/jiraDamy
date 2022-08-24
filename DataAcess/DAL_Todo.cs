@@ -14,22 +14,25 @@ namespace DataAcess
     public class DAL_Todo
     {
         string connectionString = ConfigurationManager.ConnectionStrings["devconnection"].ConnectionString;
-        public void SaveTodo(taskDataTable AddTask)
+        public void SaveTodo(TaskDataTable AddTask)
         {
             string sql = @"INSERT INTO [dbo].[taskDataTable]
                             ([taskName]
                             ,[description]
-                            ,[taskStatus])
+                            ,[taskStatus]
+                             ,[assigneeId])
                         VALUES
                             (@taskName
                             ,@description
-                            ,@taskStatus)";
+                            ,@taskStatus
+                             ,@assigneeId)";
 
             object ts = new
             {
                 taskName = AddTask.taskName,
                 description = AddTask.description,
-                taskStatus = AddTask.taskStatus
+                taskStatus = AddTask.taskStatus,
+                assigneeId = AddTask.assigneeId
             };
             using (var db = new SqlConnection(connectionString))
             {
@@ -61,13 +64,14 @@ namespace DataAcess
 
 
 
-        public List<taskDataTable> TaskList(int id)
+        public List<TaskDataTable> TaskList(int id)
         {
 
-            string sql = "Select * from taskDataTable where [taskStatus]=@taskStatus";
+            //string sql = "Select * from taskDataTable where [taskStatus]=@taskStatus";
+            string sql = "select t.taskId,t.taskName,t.taskStatus,t.description,u.userName,t.assigneeId from taskDataTable t left join [user] u on t.assigneeId = u.Id  where [taskStatus]=@taskStatus";
             using(var db = new SqlConnection(connectionString))
             {
-                List<taskDataTable> TaskList = db.Query<taskDataTable>(sql, new { taskStatus = id }).AsList();
+                List<TaskDataTable> TaskList = db.Query<TaskDataTable>(sql, new { taskStatus = id }).AsList();
                 return TaskList;
 
             }
@@ -118,13 +122,13 @@ namespace DataAcess
                 db.Close();
             }
         }
-        public List<statusTable> StatusList()
+        public List<StatusTable> StatusList()
         {
 
             string sql = "Select * from statusTable";
             using (var db = new SqlConnection(connectionString))
             {
-                List<statusTable> StatusList = db.Query<statusTable>(sql).AsList();
+                List<StatusTable> StatusList = db.Query<StatusTable>(sql).AsList();
                 return StatusList;
 
             }
@@ -134,7 +138,7 @@ namespace DataAcess
         public List<User> UserList()
         {
 
-            string sql = "Select * from User";
+            string sql = "Select * from [dbo].[User]";
             using (var db = new SqlConnection(connectionString))
             {
                 List<User> UserList = db.Query<User>(sql).AsList();
@@ -146,6 +150,23 @@ namespace DataAcess
 
 
 
+
+        public void UpdateTask(TaskDataTable updateTable)
+        {
+            string sql = "update TaskDataTable set assigneeId=@assigneeId where taskId=@taskId ";
+            object ts = new
+            {
+                taskId = updateTable.taskId,
+                assigneeId = updateTable.assigneeId
+            };
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                db.Query(sql, ts);
+                db.Close();
+            }
+
+        }
 
     }
 }

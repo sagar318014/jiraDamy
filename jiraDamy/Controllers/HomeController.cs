@@ -17,7 +17,8 @@ namespace jiraDamy.Controllers
         [ActionAccessValidation(actionId = 4)]
         public ActionResult Todo()
         {
-            //this.UpdateActions();
+            
+
             List<TaskTableViewModel> Todo = new BL_Todo().TodoList(1);
             ViewData["UserActions"] = (List<UserActions>)Session["Actions"];
             return View("Todo",Todo);
@@ -26,34 +27,21 @@ namespace jiraDamy.Controllers
 
         }
 
+            foreach (var item in Todo)
+	        {
+             item.taskStatusList = new BL_Todo().GetStatusList();
+            item.userList = new BL_Todo().GetUserList();
+	        }
+            
+            
+                return View("Todo", Todo);
+           
 
-        //public void UpdateActions()
-        //{
-        //    List<int> Actions = (List<int>)Session["Actions"];
-        //    this.actions.userCreation = false;
-        //    this.actions.taskCreation = false;
-        //    this.actions.teamCreation = false;
-        //    this.actions.showTaskTable = false;
-        //    foreach (var Action in Actions)
-        //    {
-        //        if (Action == 1)
-        //        {
-        //            this.actions.userCreation = true;
-        //        }
-        //        if (Action == 3)
-        //        {
-        //            this.actions.taskCreation = true;
-        //        }
-        //        if (Action == 7)
-        //        {
-        //            this.actions.teamCreation = true;
-        //        }
-        //        if (Action == 4|| Action == 5|| Action == 6)
-        //        {
-        //            this.actions.showTaskTable = true;
-        //        }
-        //    }
-        //}
+           
+
+
+        }
+
         //public ActionResult getdata()
         //{
         //    return Json(new
@@ -80,8 +68,12 @@ namespace jiraDamy.Controllers
         [ActionAccessValidation(actionId = 5)]
         public ActionResult Active()
         {
-            //this.UpdateActions();
             List<TaskTableViewModel> Active = new BL_Todo().ActiveList(2);
+            foreach (var item in Active)
+            {
+                item.taskStatusList = new BL_Todo().GetStatusList();
+                item.userList = new BL_Todo().GetUserList();
+            }
 
             return View("Active", Active);
            
@@ -94,7 +86,6 @@ namespace jiraDamy.Controllers
         [ActionAccessValidation(actionId = 6)]
         public ActionResult Completed()
         {
-            //this.UpdateActions();
             List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
 
             return View("Completed", Completed);
@@ -124,8 +115,6 @@ namespace jiraDamy.Controllers
 
             TaskTableViewModel model = new TaskTableViewModel();
 
-            //this.UpdateActions();
-            //model.actions = this.actions;
             return View(model);
         }
 
@@ -138,16 +127,13 @@ namespace jiraDamy.Controllers
             return View("Home",model);
         }
 
-
         [HttpPost]
         public ActionResult AddTeam(TaskTableViewModel model)
         {
-
+           
 
             //TaskTableViewModel model = new TaskTableViewModel();
 
-            //this.UpdateActions();
-            //model.actions = this.actions;
             return View(model);
         }
 
@@ -162,8 +148,7 @@ namespace jiraDamy.Controllers
             TaskTableViewModel model = new TaskTableViewModel();
 
             model.taskStatusList = new BL_Todo().GetStatusList();
-            //this.UpdateActions();
-            //model.actions = this.actions;
+            model.userList = new BL_Todo().GetUserList();
 
             return View(model);
         }
@@ -174,8 +159,6 @@ namespace jiraDamy.Controllers
         public ActionResult AddTask(TaskTableViewModel model)
         {
             //create one
-            //this.UpdateActions();
-            //model.actions = this.actions;
             if (!ModelState.IsValid)
             {
 
@@ -223,6 +206,19 @@ namespace jiraDamy.Controllers
            new BL_Todo().Delete(id);
         }
 
+        public ActionResult UpdateTask(TaskTableViewModel model)
+        {
+            new BL_Todo().UpdateTask(model);
+            if (model.taskStatus == 1)
+            {
+                return RedirectToAction("Todo");
+            }
+            else if (model.taskStatus == 2)
+            {
+                return RedirectToAction("Active");
+            }
+            return RedirectToAction("AddTask");
+        }
 
     }
 }

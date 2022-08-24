@@ -11,6 +11,7 @@
                 <tr>
                     <th>Task Name</th>
                     <th>Description</th>
+                    <th>UserName</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -20,6 +21,7 @@
                     <tr id="@item.taskId">
                         <td>@item.taskName</td>
                         <td>@item.description</td>
+                        <td>@item.userName</td>
                         <td>
                             <button type="button" onclick="DeleteTask(@item.taskId)">Delete</button>
                             @*<a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>*@

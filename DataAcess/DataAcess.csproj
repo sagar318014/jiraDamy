@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataAcess</RootNamespace>
     <AssemblyName>DataAcess</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
@@ -55,8 +55,8 @@
     <Compile Include="entits\ActionAccess.cs" />
     <Compile Include="entits\Actions.cs" />
     <Compile Include="entits\Role.cs" />
-    <Compile Include="entits\statusTable.cs" />
-    <Compile Include="entits\taskDataTable.cs" />
+    <Compile Include="entits\StatusTable.cs" />
+    <Compile Include="entits\TaskDataTable.cs" />
     <Compile Include="entits\Team.cs" />
     <Compile Include="entits\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
