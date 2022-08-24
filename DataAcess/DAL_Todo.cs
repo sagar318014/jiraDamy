@@ -78,7 +78,7 @@ namespace DataAcess
 
         }
 
-
+       
         public void MoveNext(int Id,int Status )
         {
             string sql = "update taskDataTable set taskStatus = @Status Where taskId = @Id";
@@ -135,6 +135,7 @@ namespace DataAcess
 
         }
 
+      
         public List<User> UserList()
         {
 

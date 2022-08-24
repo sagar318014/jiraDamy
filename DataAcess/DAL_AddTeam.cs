@@ -85,5 +85,15 @@ namespace DataAcess
 
         }
 
+        public List<Team> TeamsList()
+        {
+            string sql = @"EXEC [dbo].[Usp_TeamListWithLeaderName] ";
+            using (var db = new SqlConnection(connectionString))
+            {
+                List<Team> TeamsList = db.Query<Team>(sql).AsList();
+                return TeamsList;
+            }
+        }
+
     }
 }
