@@ -112,7 +112,7 @@ namespace BusinessLogic
         }
         public List<CommonDropdownType> GetStatusList()
         {
-            List<statusTable> StatusList = new DAL_Todo().StatusList();
+            List<StatusTable> StatusList = new DAL_Todo().StatusList();
             List<CommonDropdownType> statusDropdownList = new List<CommonDropdownType>();
             foreach (var item in StatusList)
             {
@@ -142,6 +142,25 @@ namespace BusinessLogic
 
 
            
+        }
+
+        public List<CommonDropdownType> GetUserList()
+        {
+
+            List<CommonDropdownType> userList = new List<CommonDropdownType>();
+            foreach (var item in new DAL_Todo().UserList())
+            {
+                CommonDropdownType user = new CommonDropdownType();
+
+                user.id = item.Id;
+                user.text = item.Username;
+
+                userList.Add(user);
+            }
+            return userList;
+
+
+
         }
 
         public void UpdateTask(TaskTableViewModel model)

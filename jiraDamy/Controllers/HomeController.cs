@@ -12,7 +12,7 @@ using ViewModel;
 namespace jiraDamy.Controllers
 {
     [SessionBaseAuthorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         [ActionAccessValidation(actionId = 4)]
         public ActionResult Todo()
@@ -20,17 +20,11 @@ namespace jiraDamy.Controllers
             
 
             List<TaskTableViewModel> Todo = new BL_Todo().TodoList(1);
-            ViewData["UserActions"] = (List<UserActions>)Session["Actions"];
-            return View("Todo",Todo);
-
-
-
-        }
 
             foreach (var item in Todo)
 	        {
              item.taskStatusList = new BL_Todo().GetStatusList();
-            item.userList = new BL_Todo().GetUserList();
+               item.userList = new BL_Todo().GetUserList();
 	        }
             
             
@@ -101,15 +95,7 @@ namespace jiraDamy.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult AddTeam()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            TaskTableViewModel model = new TaskTableViewModel();
-
-        }
-
+        
         public ActionResult ShowHomePage()
         {
             TaskTableViewModel model = new TaskTableViewModel();
