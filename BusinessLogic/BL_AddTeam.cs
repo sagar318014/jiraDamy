@@ -49,5 +49,30 @@ namespace BusinessLogic
 
         }
 
+        public List<TeamsViewModel> TeamsList()
+        {
+            List<TeamsViewModel> TeamList = new List<TeamsViewModel>();
+            List<Team> TeamsList = new DAL_AddTeam().TeamsList();
+
+
+            foreach (var item in TeamsList)
+            {
+                TeamsViewModel TeamsViewModel = new TeamsViewModel();
+
+
+                TeamsViewModel.TeamID = item.TeamID;
+                TeamsViewModel.TeamName = item.TeamName;
+                TeamsViewModel.LeaderName = item.LeaderName;
+                TeamsViewModel.MemberCount = item.MemberCount + 1;
+
+
+                TeamList.Add(TeamsViewModel);
+            }
+
+
+
+            return TeamList;
+        }
+
     }
 }

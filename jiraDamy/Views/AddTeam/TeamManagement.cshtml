@@ -1,0 +1,58 @@
+﻿@model List<ViewModel.TeamsViewModel>
+@{
+    ViewBag.Title = "TeamManagement";
+}
+
+<h1 style="text-align:center">Team Management</h1>
+@*<a href="@Url.Action("CreateTeam")" class="btn btn-success">Create Team</a>*@
+<button style="float:right;margin-right:100px;">@Html.ActionLink("Create Team", "CreateTeam", "AddTeam")</button>
+<table class="table table-striped">
+    <thead>
+        <tr>
+
+            <th>Team Name</th>
+            <th>Team Leder</th>
+            <th>Team Member Count (includding leder)</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="text-align:center">
+
+                <td>@item.TeamName</td>
+                <td>@item.LeaderName</td>
+                <td>@item.MemberCount</td>
+                <td><button type="button" onclick="ViewTeamMember()">View</button></td>
+            </tr>
+        }
+
+
+
+    </tbody>
+
+</table>
+
+@section scripts{
+
+    <script>
+
+
+        function ViewTeamMember() {
+            commonAjaxCall({
+                /* window.location.replace("/Home/Delete?id="+id);*/
+                url: "/AddTeam/TeamMemberList?TeamID=" + id,
+                success: (response) => {
+                   
+
+                }
+            })
+
+        }
+
+        
+
+       
+    </script>
+}
