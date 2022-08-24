@@ -73,6 +73,20 @@ namespace DataAcess.Authentication
             }
 
         }
+
+        public List<Actions> GetActionList(int RoleId)
+        {
+
+            string sql = "Select A.* From [dbo].[ActionAccess] AS AA JOIN [dbo].[Actions] AS A ON AA.ActionId = A.ActionId  Where AA.RoleId = @RoleId";
+            //"Select R.* from [Role] AS R JOIN [User] AS U On U.RoleId = R.Id Where U.[Username] = @Username";
+            using (var db = new SqlConnection(connectionString))
+            {
+                List<Actions> Actions = db.Query<Actions>(sql, new { RoleId = RoleId }).AsList();
+                return Actions;
+
+            }
+
+        }
     }
 
 

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using ViewModel;
 namespace jiraDamy.Controllers
 {
-    public class AddTeamController : Controller
+    public class AddTeamController : BaseController
     {
         [HttpGet]
         public ActionResult AddTeam()

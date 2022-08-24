@@ -8,6 +8,8 @@ namespace jiraDamy.Controllers
 {
     public class AuthenticationController : Controller
     {
+
+        /*Actions actions = new Actions()*/
         #region constructor
         private BL_Authentication AuthenticationBL;
         public AuthenticationController()
@@ -37,7 +39,27 @@ namespace jiraDamy.Controllers
                 return View(authenticatedUserModel);
             }
             Session["Username"] = authenticatedUserModel.Username;
-            return RedirectToAction("todo", "Home");
+            List<UserActions> Actions = new BL_Authentication().GetActionList(authenticatedUserModel.RoleId);
+            Session["Actions"] = Actions;
+
+            //this.actions.userCreation = false;
+            //this.actions.taskCreation = false;
+            //this.actions.teamCreation = false;
+            //foreach (var Action in Actions.ActionId)
+            //{
+            //    if (Action == 1) {
+            //        this.actions.userCreation = true;
+            //    }
+            //    if (Action == 3)
+            //    {
+            //        this.actions.taskCreation = true;
+            //    }
+            //    if (Action == 7)
+            //    {
+            //        this.actions.teamCreation = true;
+            //    }
+            //}
+                return RedirectToAction("ShowHomePage", "Home");
         }
 
         public ActionResult Logout()
@@ -45,7 +67,12 @@ namespace jiraDamy.Controllers
             Session["Username"] = null;
             return RedirectToAction("Login");
         }
-
+        public ActionResult Unathorized()
+        {
+            return View("Unathorized");
+        }
+        [SessionBaseAuthorize]
+        [ActionAccessValidation(actionId = 1)]
         public ActionResult SignUp()
         
         {
@@ -63,9 +90,10 @@ namespace jiraDamy.Controllers
             new BL_Authentication().SaveUserData(model) ;
             return RedirectToAction("Login");
         }
-    //    public ActionResult GetRoleIdTypeList()
-    //    {
-    //        return new BL_Authentication().GetRoleList();
-    //}
-   }
+
+        //    public ActionResult GetRoleIdTypeList()
+        //    {
+        //        return new BL_Authentication().GetRoleList();
+        //}
+    }
 }
