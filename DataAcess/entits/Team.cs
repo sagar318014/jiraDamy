@@ -9,13 +9,18 @@
 
 namespace DataAcess.entits
 {
+    
     using System;
     using System.Collections.Generic;
-    
+    using System.Data;
+    using ViewModel;
+
     public class Team
     {
         public int TeamID { get; set; }
         public string TeamName { get; set; }
         public Nullable<int> TeamLeder { get; set; }
+
+        public DataTable TeamMember { get; set; }
     }
 }

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\BL_Authentication.cs" />
+    <Compile Include="BL_AddTeam.cs" />
     <Compile Include="BL_Todo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

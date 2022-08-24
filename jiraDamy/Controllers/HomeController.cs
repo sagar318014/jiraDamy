@@ -92,18 +92,11 @@ namespace jiraDamy.Controllers
           
 
         }
-
-        [ActionAccessValidation(actionId = 7)]
         public ActionResult CreateTeam()
         {
             //List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
 
-            CreateTeamViewModel model = new CreateTeamViewModel();
-
-            //this.UpdateActions();
-            //model.actions = this.actions;
-
-            return View("CreateTeam", model);
+            return View("CreateTeam");
 
 
         }
@@ -115,7 +108,6 @@ namespace jiraDamy.Controllers
 
             TaskTableViewModel model = new TaskTableViewModel();
 
-            return View(model);
         }
 
         public ActionResult ShowHomePage()
@@ -200,24 +192,74 @@ namespace jiraDamy.Controllers
             return RedirectToAction("Completed");
         }
 
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
 
-           new BL_Todo().Delete(id);
+           
+            try
+            {
+                new BL_Todo().Delete(id);
+                return Json(new
+                {
+                    data = true
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+
         }
 
+
+        [HttpPost]
         public ActionResult UpdateTask(TaskTableViewModel model)
         {
-            new BL_Todo().UpdateTask(model);
-            if (model.taskStatus == 1)
+            try
             {
-                return RedirectToAction("Todo");
+                if (model.assigneeId != null)
+                {
+                    new BL_Todo().UpdateTask(model);
+                    return Json(new
+                    {
+                        data = true
+
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        data = false
+
+                    }, JsonRequestBehavior.AllowGet);
+                }
+               
+
+               
+
             }
-            else if (model.taskStatus == 2)
+            catch (Exception)
             {
-                return RedirectToAction("Active");
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
             }
-            return RedirectToAction("AddTask");
+           
+
         }
 
     }
