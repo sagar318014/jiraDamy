@@ -33,6 +33,7 @@ namespace BusinessLogic
             
 
 
+
             foreach (var item in TodoList)
             {
                 TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
@@ -104,6 +105,27 @@ namespace BusinessLogic
 
         }
 
+        public void Delete(int id)
+        {
+
+            new DAL_Todo().DeleteRecord(id);
+        }
+        public List<CommonDropdownType> GetStatusList()
+        {
+            List<StatusTable> StatusList = new DAL_Todo().StatusList();
+            List<CommonDropdownType> statusDropdownList = new List<CommonDropdownType>();
+            foreach (var item in StatusList)
+            {
+                CommonDropdownType status = new CommonDropdownType();
+
+                status.id = item.statusID;
+                status.text = item.statusName;
+
+                statusDropdownList.Add(status);
+            }
+
+            return statusDropdownList;
+        }
         public void MoveToActive(int Id)
         {
 
@@ -119,27 +141,9 @@ namespace BusinessLogic
             new DAL_Todo().MoveNext(Id, 3);
 
 
-
+           
         }
 
-        public List<CommonDropdownType> GetStatusList()
-        {
-
-            List<CommonDropdownType> StatusList = new List<CommonDropdownType>();
-            foreach (var item in new DAL_Todo().StatusList())
-            {
-                CommonDropdownType Status = new CommonDropdownType();
-
-                Status.id = item.statusID;
-                Status.text = item.statusName;
-
-                StatusList.Add(Status);
-            }
-            return StatusList;
-
-
-
-        }
         public List<CommonDropdownType> GetUserList()
         {
 
@@ -157,15 +161,6 @@ namespace BusinessLogic
 
 
 
-        }
-
-        public void Delete(int id)
-        {
-
-           new DAL_Todo().Delete(id);
-
-
-           
         }
 
         public void UpdateTask(TaskTableViewModel model)

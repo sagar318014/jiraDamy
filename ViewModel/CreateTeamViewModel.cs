@@ -13,9 +13,14 @@ namespace ViewModel
 
         
         public string TeamName { get; set; }
-        
-        public string TeamLeader { get; set; }
 
-        public string TeamMember { get; set; }
+        public Nullable<int> TeamLeder
+        {
+            get; set;
+
+
+        }
+
+        public List<MemberType> TeamMember { get; set; } = new List<MemberType>();
     }
 }

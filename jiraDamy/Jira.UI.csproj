@@ -135,12 +135,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\ActionAccessValidation.cs" />
     <Compile Include="ActionFilters\SessionBaseAuthorize.cs" />
     <Compile Include="ActionFilters\WithModelValidation.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddTeamController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -191,14 +194,19 @@
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Authentication\SignUp.cshtml" />
     <Content Include="Views\Home\CreateTeam.cshtml" />
+    <Content Include="Views\Shared\PartialSideBar.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\Authentication\Unathorized.cshtml" />
     <Content Include="Views\Shared\PartialViewForAddTask.cshtml" />
     <Content Include="Views\Home\UserManagement.cshtml" />
     <Content Include="Views\Home\EditUser.cshtml" />
     <Content Include="Views\Home\Viewtask.cshtml" />
+    <Content Include="Views\AddTeam\CreateTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Dashboard\" />
   </ItemGroup>
   <ItemGroup>

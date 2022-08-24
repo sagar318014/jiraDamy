@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataAcess</RootNamespace>
     <AssemblyName>DataAcess</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
@@ -51,7 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\DAL_Authentication.cs" />
+    <Compile Include="DAL_AddTeam.cs" />
     <Compile Include="DAL_Todo.cs" />
+    <Compile Include="entits\ActionAccess.cs" />
+    <Compile Include="entits\Actions.cs" />
     <Compile Include="entits\Role.cs" />
     <Compile Include="entits\StatusTable.cs" />
     <Compile Include="entits\TaskDataTable.cs" />
@@ -68,6 +71,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{44279A37-BC5E-47DF-BF61-9E3A0DE275FE}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

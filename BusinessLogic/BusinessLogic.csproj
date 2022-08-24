@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BusinessLogic</RootNamespace>
     <AssemblyName>BusinessLogic</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\BL_Authentication.cs" />
+    <Compile Include="BL_AddTeam.cs" />
     <Compile Include="BL_Todo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
