@@ -4,9 +4,8 @@
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
 
-@section AddTaskForm{       
-
- @using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
+@section Grid{
+    @using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
     {
         <div style="font-weight:600;">Add new task</div>
         <lebel>Task Name</lebel>
@@ -40,7 +39,6 @@
 
 
         </div>
-
         <div style="margin-top:15px;">
 
             <button type="reset" style="background-color:lightcoral;float:right;">Clear All</button>
@@ -52,7 +50,6 @@
     }
 
 @section Grid{
-
     @{Html.RenderPartial("PartialLinksView", "AddTask");}
 }
 
@@ -66,17 +63,15 @@
             CommonNotifier.showError("Error");
         }
 
-        
+            //$(document).ready(() => {
+            //    commonAjaxCall({
+            //        url: '/home/GetTaskTypeList',
+            //        success: res => {
+            //            console.log(res)
+            //        }
+            //    });
 
-                                    //$(document).ready(() => {
-                                    //    commonAjaxCall({
-                                    //        url: '/home/GetTaskTypeList',
-                                    //        success: res => {
-                                    //            console.log(res)
-                                    //        }
-                                    //    });
-
-                                    //})
+            //})
 
 
 

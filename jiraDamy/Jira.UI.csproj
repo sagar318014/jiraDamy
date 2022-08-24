@@ -135,6 +135,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\ActionAccessValidation.cs" />
     <Compile Include="ActionFilters\SessionBaseAuthorize.cs" />
     <Compile Include="ActionFilters\WithModelValidation.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -191,6 +192,10 @@
     <Content Include="Views\Shared\_AuthorizedLayout.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Authentication\SignUp.cshtml" />
+    <Content Include="Views\Home\CreateTeam.cshtml" />
+    <Content Include="Views\Shared\PartialSideBar.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\Authentication\Unathorized.cshtml" />
     <Content Include="Views\Shared\PartialViewForAddTask.cshtml" />
     <Content Include="Views\AddTeam\CreateTeam.cshtml" />
   </ItemGroup>

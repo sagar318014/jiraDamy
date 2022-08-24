@@ -14,11 +14,19 @@ namespace jiraDamy.Controllers
     [SessionBaseAuthorize]
     public class HomeController : Controller
     {
+        [ActionAccessValidation(actionId = 4)]
         public ActionResult Todo()
         {
             
 
             List<TaskTableViewModel> Todo = new BL_Todo().TodoList(1);
+            ViewData["UserActions"] = (List<UserActions>)Session["Actions"];
+            return View("Todo",Todo);
+
+
+
+        }
+
             foreach (var item in Todo)
 	        {
              item.taskStatusList = new BL_Todo().GetStatusList();
@@ -57,15 +65,8 @@ namespace jiraDamy.Controllers
         //    }, JsonRequestBehavior.AllowGet);
         //}
 
-        //public ActionResult GetResult()
-        //{
-        //    return Json(new
-        //    {
-        //        data = false
-
-        //    }, JsonRequestBehavior.AllowGet) ;
-        //}
-            public ActionResult Active()
+        [ActionAccessValidation(actionId = 5)]
+        public ActionResult Active()
         {
             List<TaskTableViewModel> Active = new BL_Todo().ActiveList(2);
             foreach (var item in Active)
@@ -81,8 +82,8 @@ namespace jiraDamy.Controllers
         }
 
 
-       
 
+        [ActionAccessValidation(actionId = 6)]
         public ActionResult Completed()
         {
             List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
@@ -91,9 +92,43 @@ namespace jiraDamy.Controllers
           
 
         }
-        
+        public ActionResult CreateTeam()
+        {
+            //List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
 
-        
+            return View("CreateTeam");
+
+
+        }
+
+        [HttpGet]
+        public ActionResult AddTeam()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            TaskTableViewModel model = new TaskTableViewModel();
+
+        }
+
+        public ActionResult ShowHomePage()
+        {
+            TaskTableViewModel model = new TaskTableViewModel();
+
+            //this.UpdateActions();
+            //model.actions = this.actions;
+            return View("Home",model);
+        }
+
+        [HttpPost]
+        public ActionResult AddTeam(TaskTableViewModel model)
+        {
+           
+
+            //TaskTableViewModel model = new TaskTableViewModel();
+
+            return View(model);
+        }
+
 
 
         // Form show
@@ -111,6 +146,8 @@ namespace jiraDamy.Controllers
         }
 
         [HttpPost]
+
+        [ActionAccessValidation(actionId = 3)]
         public ActionResult AddTask(TaskTableViewModel model)
         {
             //create one
