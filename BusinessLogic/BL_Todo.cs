@@ -181,5 +181,136 @@ namespace BusinessLogic
 
         }
 
+        public List<UserSignupViewModel> GetAllUserList()
+        { 
+            List<UserSignupViewModel> user = new List<UserSignupViewModel>();
+            List<User> userList = new DAL_Todo().GetAllUserList();
+
+            foreach (var item in userList)
+            {
+                UserSignupViewModel userViewModel = new UserSignupViewModel();
+
+                userViewModel.Id = item.Id;
+                userViewModel.Username= item.Username;
+                userViewModel.Name = item.Name;
+                userViewModel.FirstName = item.FirstName;
+                userViewModel.LastName = item.LastName;
+
+                user.Add(userViewModel);
+
+            }
+            return user;
+
+
+        }
+
+        public List<CommonDropdownType> GetRoleList()
+        {
+
+            List<CommonDropdownType> roleList = new List<CommonDropdownType>();
+            foreach (var item in new DAL_Todo().RoleList())
+            {
+                CommonDropdownType role = new CommonDropdownType();
+
+                role.id = item.Id;
+                role.text = item.Name;
+
+                roleList.Add(role);
+            }
+            return roleList;
+
+        }
+
+        public List<UserSignupViewModel> GetEditUserList(int id)
+        {
+            List<UserSignupViewModel> user = new List<UserSignupViewModel>();
+            List<User> userList = new DAL_Todo().GetEditUserList(id);
+
+            foreach (var item in userList)
+            {
+                UserSignupViewModel userViewModel = new UserSignupViewModel();
+
+                userViewModel.Id = item.Id;
+                userViewModel.Username = item.Username;
+                userViewModel.RoleId = item.RoleId;
+                userViewModel.FirstName = item.FirstName;
+                userViewModel.LastName = item.LastName;
+                userViewModel.Password= item.Password;
+
+                user.Add(userViewModel);
+
+            }
+            return user;
+
+
+        }
+
+        public void UpdateUser(UserSignupViewModel model)
+        {
+            User update = new User();
+
+            update.Username = model.Username;
+            update.RoleId = model.RoleId;
+            update.FirstName = model.FirstName; 
+            update.LastName = model.LastName;   
+            update.Password = model.Password;
+            update.Id = model.Id;
+
+            new DAL_Todo().UpdateUser(update);
+        }
+
+        public int TaskList(int id)
+        {
+            List<TaskDataTable> taskList = new DAL_Todo().GetTaskList(id);
+            List<TaskDataTable> tempTasklist = new List<TaskDataTable>();
+            foreach(var task in taskList)
+            {
+                if(task.taskStatus == 1 || task.taskStatus == 2)
+                {
+                    tempTasklist.Add(task);
+                }
+            }
+            int count = tempTasklist.Count();
+
+            return count;
+
+        }
+
+        public void DeleteUser(int id)
+        {
+            new DAL_Todo().DeleteUser(id);
+        }
+
+        public List<TaskTableViewModel> UserTaskList(int id)
+        {
+            List<TaskTableViewModel> users = new List<TaskTableViewModel>();
+            List<TaskDataTable> taskList = new DAL_Todo().GetUserTaskList(id);
+            foreach (var item in taskList)
+            {
+                TaskTableViewModel model = new TaskTableViewModel();
+
+                model.taskName=item.taskName;
+                model.userName = item.userName;
+                model.description = item.description;
+                model.taskStatus= item.taskStatus;
+                model.assigneeId = item.assigneeId;
+                model.statusName = item.statusName;
+                model.taskId = item.taskId;
+               
+                users.Add(model);   
+                
+
+            }
+            return users;
+
+
+        }
+
+        public void UnassigneeUser(int id)
+        {
+            new DAL_Todo().UnassigneeUser(id);
+        }
+
+
     }
 }

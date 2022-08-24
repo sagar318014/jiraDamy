@@ -190,5 +190,124 @@ namespace DataAcess
 
         }
 
+        public List<User> GetAllUserList()
+        {
+            string sql = "select u.Id,u.Username,u.FirstName,u.LastName, r.Name from [user] u join [Role] r on u.RoleId = r.Id";
+            using (var db = new SqlConnection(connectionString))
+            {
+                List<User> userList = db.Query<User>(sql).AsList();
+                return userList;
+
+            }
+
+        }
+
+        public List<Role> RoleList()
+        {
+
+            string sql = "Select * from Role";
+            using (var db = new SqlConnection(connectionString))
+            {
+                List<Role> RoleList = db.Query<Role>(sql).AsList();
+                return RoleList;
+
+
+            }
+        }
+
+        public List<User> GetEditUserList(int id)
+        {
+            string sql = "select  u.RoleId, u.Id,u.Username,u.FirstName,u.LastName,u.[Password], r.Name from [user] u join [Role] r on u.RoleId = r.Id where u.Id= @Id";
+            using (var db = new SqlConnection(connectionString))
+            {
+                List<User> userList = db.Query<User>(sql, new { Id = id }).AsList();
+                return userList;
+
+            }
+
+        }
+
+        public void UpdateUser(User user)
+        {
+            string sql = @"update [User]
+                            set Username = @Username,
+                            [Password]= @Password,
+                            RoleId=@RoleId,
+                            FirstName=@FirstName, 
+                            LastName=@LastName 
+                        from TaskDataTable 
+                        where Id=@Id";
+            object ts = new
+            {
+                Username = user.Username,
+                Password = user.Password,
+                RoleId =  user.RoleId,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Id= user.Id,
+            };
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                db.Query(sql, ts);
+                db.Close();
+            }
+
+        }
+
+        public List<TaskDataTable> GetTaskList(int id)
+        {
+            string sql = "exec  GetUserCount @id ";
+            using (var db = new SqlConnection(connectionString))
+            {
+                List<TaskDataTable> taskList = db.Query<TaskDataTable>(sql, new { Id = id }).AsList();
+              
+                return taskList;
+
+            }
+
+        }
+
+        public void DeleteUser(int id)
+        {
+            string sql = "exec DeleteUser @Id";
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                db.Query(sql, new { Id = id });
+                db.Close();
+            }
+
+        }
+
+        public List<TaskDataTable> GetUserTaskList(int id)
+        {
+            string sql = "exec ViewTask @id ";
+            using (var db = new SqlConnection(connectionString))
+            {
+                List<TaskDataTable> taskList = db.Query<TaskDataTable>(sql, new { Id = id }).AsList();
+
+                return taskList;
+
+            }
+
+        }
+
+        public void UnassigneeUser(int id)
+        {
+            string sql = "Update [TaskDataTable] set assigneeId=null where taskId= @id";
+           
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                db.Query(sql, new { Id=id});
+                db.Close();
+            }
+
+        }
+
+
+
     }
+
 }

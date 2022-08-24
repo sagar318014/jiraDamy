@@ -192,6 +192,9 @@
     <Content Include="Views\Authentication\SignUp.cshtml" />
     <Content Include="Views\Home\CreateTeam.cshtml" />
     <Content Include="Views\Shared\PartialViewForAddTask.cshtml" />
+    <Content Include="Views\Home\UserManagement.cshtml" />
+    <Content Include="Views\Home\EditUser.cshtml" />
+    <Content Include="Views\Home\Viewtask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
