@@ -20,6 +20,8 @@ namespace ViewModel
 
 
         }
+        public string LeaderName { get; set; }
+        public int MemberCount { get; set; }
         public List<int> TeamMember1 { get; set; } = new List<int>();
         public List<MemberType> TeamMember { get; set; } = new List<MemberType>();
         public List<CommonDropdownType> TeamLeders { get; set; } = new List<CommonDropdownType>();

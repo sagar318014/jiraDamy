@@ -42,5 +42,27 @@ namespace jiraDamy.Controllers
 
         }
 
+        public ActionResult TeamManagement()
+        {
+            List<TeamsViewModel> TeamManagement = new BL_AddTeam().TeamsList();
+            
+
+            return View("TeamManagement", TeamManagement);
+
+
+        }
+
+        public ActionResult TeamMemberList()
+        {
+            int TeamID;
+            //List<TeamsViewModel> TeamManagement = new BL_AddTeam().TeamsList();
+
+
+            return View();
+
+
+        }
+
+
     }
 }
