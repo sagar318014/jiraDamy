@@ -16,7 +16,7 @@ namespace BusinessLogic
             taskDataTable AddTask = new taskDataTable();
             AddTask.taskName = model.taskName;
             AddTask.description = model.description;
-            AddTask.taskStatus = model.taskStatus;
+            AddTask.taskStatus = 1;
 
             new DAL_Todo().SaveTodo(AddTask);
 
@@ -29,6 +29,7 @@ namespace BusinessLogic
 
             List<taskDataTable> TodoList = new DAL_Todo().TaskList(id);
 
+ 
 
 
             foreach (var item in TodoList)
@@ -91,6 +92,27 @@ namespace BusinessLogic
 
         }
 
+        public void Delete(int id)
+        {
+
+            new DAL_Todo().DeleteRecord(id);
+        }
+        public List<CommonDropdownType> GetStatusList()
+        {
+            List<statusTable> StatusList = new DAL_Todo().StatusList();
+            List<CommonDropdownType> statusDropdownList = new List<CommonDropdownType>();
+            foreach (var item in StatusList)
+            {
+                CommonDropdownType status = new CommonDropdownType();
+
+                status.id = item.statusID;
+                status.text = item.statusName;
+
+                statusDropdownList.Add(status);
+            }
+
+            return statusDropdownList;
+        }
         public void MoveToActive(int Id)
         {
 
@@ -107,52 +129,6 @@ namespace BusinessLogic
 
 
 
-        }
-
-        public List<CommonDropdownType> GetStatusList()
-        {
-
-            List<CommonDropdownType> StatusList = new List<CommonDropdownType>();
-            foreach (var item in new DAL_Todo().StatusList())
-            {
-                CommonDropdownType Status = new CommonDropdownType();
-
-                Status.id = item.statusID;
-                Status.text = item.statusName;
-
-                StatusList.Add(Status);
-            }
-            return StatusList;
-
-
-
-        }
-        public List<CommonDropdownType> GetUserList()
-        {
-
-            List<CommonDropdownType> userList = new List<CommonDropdownType>();
-            foreach (var item in new DAL_Todo().UserList())
-            {
-                CommonDropdownType user = new CommonDropdownType();
-
-                user.id = item.Id;
-                user.text = item.Username;
-
-                userList.Add(user);
-            }
-            return userList;
-
-
-
-        }
-
-        public void Delete(int id)
-        {
-
-           new DAL_Todo().Delete(id);
-
-
-           
         }
 
     }

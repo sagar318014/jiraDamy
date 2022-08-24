@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Collections.Generic;
+using ViewModel;
 
 namespace jiraDamy.ActionFilters
 {
@@ -8,14 +9,19 @@ namespace jiraDamy.ActionFilters
         public int actionId { get; set; }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            //List<int> Actions = new List<int>(((Controller)filterContext.Controller).Session["Actions"]);
-            //foreach (var Action in Actions) {
-            //    if (Action == actionId)
-            //    {
-            //        filterContext.Result = new RedirectResult("/Authentication/Login");
-            //        break;
-            //    }
-            //}
+            List<UserActions> Actions = (List<UserActions>)((Controller)filterContext.Controller).Session["Actions"];
+            var IsPresent = true;
+            foreach (var Action in Actions)
+            {
+                if (Action.ActionId == this.actionId)
+                {
+                    IsPresent = false;
+                }
+            }
+            if (IsPresent == true)
+            {
+                filterContext.Result = new RedirectResult("/Authentication/Unathorized");
+            }
         }
     }
 }

@@ -58,7 +58,7 @@ namespace DataAcess.Authentication
                 db.Open();
                 List<User> users = db.Query<User>(sql, new { username = username, password = password }).AsList();
                 db.Close();
-                return users[0];
+                return users.FirstOrDefault();
             }
         }
         public List<Role> RoleList()
@@ -74,14 +74,14 @@ namespace DataAcess.Authentication
 
         }
 
-        public List<int> GetActionList(int RoleId)
+        public List<Actions> GetActionList(int RoleId)
         {
 
-            string sql = "Select [ActionId] From [dbo].[ActionAccess] Where RoleId = @RoleId";
+            string sql = "Select A.* From [dbo].[ActionAccess] AS AA JOIN [dbo].[Actions] AS A ON AA.ActionId = A.ActionId  Where AA.RoleId = @RoleId";
             //"Select R.* from [Role] AS R JOIN [User] AS U On U.RoleId = R.Id Where U.[Username] = @Username";
             using (var db = new SqlConnection(connectionString))
             {
-                List<int> Actions = db.Query<int>(sql, new { RoleId = RoleId }).AsList();
+                List<Actions> Actions = db.Query<Actions>(sql, new { RoleId = RoleId }).AsList();
                 return Actions;
 
             }

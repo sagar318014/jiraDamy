@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="Authentication\DAL_Authentication.cs" />
     <Compile Include="DAL_Todo.cs" />
+    <Compile Include="entits\ActionAccess.cs" />
+    <Compile Include="entits\Actions.cs" />
     <Compile Include="entits\Role.cs" />
     <Compile Include="entits\statusTable.cs" />
     <Compile Include="entits\taskDataTable.cs" />

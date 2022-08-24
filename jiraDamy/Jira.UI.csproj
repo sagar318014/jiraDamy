@@ -193,6 +193,8 @@
     <Content Include="Views\Authentication\SignUp.cshtml" />
     <Content Include="Views\Home\CreateTeam.cshtml" />
     <Content Include="Views\Shared\PartialSideBar.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\Authentication\Unathorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

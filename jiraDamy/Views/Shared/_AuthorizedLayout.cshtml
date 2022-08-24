@@ -2,17 +2,20 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    var userActions = (List<ViewModel.UserActions>)Session["Actions"];
+}
 <div class="container">
     <div class="col-lg-2">
-        @RenderSection("SideBar", false)
+        @{Html.RenderPartial("PartialSideBar", userActions);}
     </div>
-    <div class="col-lg-4">
-        @RenderSection("AddTaskForm", false)
-    </div>
-    <div class="col-lg-6">
+    @*<div class="col-lg-4">
+            @RenderSection("AddTaskForm", false)
+        </div>*@
+    <div class="col-lg-10">
         @RenderSection("Grid", false)
     </div>
-    </div>
-    @section scripts{
-        @RenderSection("scripts", false)
-    }
+</div>
+@section scripts{
+    @RenderSection("scripts", false)
+}

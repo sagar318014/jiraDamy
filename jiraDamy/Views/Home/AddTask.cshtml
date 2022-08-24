@@ -3,11 +3,8 @@
     ViewBag.Title = "FilForm";
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
-@section SideBar{
-    @{Html.RenderPartial("PartialSideBar");}
-}
 
-@section AddTaskForm{
+@section Grid{
     @using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
     {
         <div style="font-weight:600;">Add new task</div>
@@ -49,15 +46,15 @@
             CommonNotifier.showError("Error");
         }
 
-                    //$(document).ready(() => {
-                    //    commonAjaxCall({
-                    //        url: '/home/GetTaskTypeList',
-                    //        success: res => {
-                    //            console.log(res)
-                    //        }
-                    //    });
+                            //$(document).ready(() => {
+                            //    commonAjaxCall({
+                            //        url: '/home/GetTaskTypeList',
+                            //        success: res => {
+                            //            console.log(res)
+                            //        }
+                            //    });
 
-                    //})
+                            //})
 
 
 

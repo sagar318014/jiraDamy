@@ -8,9 +8,16 @@ namespace BusinessLogic.Authentication
     public class BL_Authentication
     {
 
-        public void SaveUserData(User adddata)
+        public void SaveUserData(UserSignupViewModel model)
         {
-            new DAL_Authentication().SaveUserData(adddata);
+            User addData = new User();
+            addData.Id = model.Id;
+            addData.Username = model.Username;
+            addData.Password = model.Password;
+            addData.RoleId = model.RoleId;
+            addData.FirstName = model.FirstName;
+            addData.LastName = model.LastName;
+            new DAL_Authentication().SaveUserData(addData);
         }
         public UserLoginViewModel GetAutheticatedUser(UserLoginViewModel userLoginViewModel)
         {
@@ -30,13 +37,39 @@ namespace BusinessLogic.Authentication
             };
             return authenticated;
         }
-        public List<Role> GetRoleList()
+        public List<CommonDropdownType> GetRoleList()
         {
-            return new DAL_Authentication().RoleList();
+            List<Role> roleList = new DAL_Authentication().RoleList();
+            List<CommonDropdownType> roleDropdownList = new List<CommonDropdownType>();
+            foreach (var item in roleList)
+            {
+                CommonDropdownType role = new CommonDropdownType();
+
+                role.id = item.Id;
+                role.text = item.Name;
+
+                roleDropdownList.Add(role);
+            }
+
+            return roleDropdownList;
         }
-        public List<int> GetActionList(int RoleId)
+        public List<UserActions> GetActionList(int RoleId)
         {
-            return new DAL_Authentication().GetActionList(RoleId);
+            List<Actions> actions = new DAL_Authentication().GetActionList(RoleId);
+            List<UserActions> userActionList = new List<UserActions>();
+            foreach (var action in actions)
+            {
+                UserActions userAction = new UserActions()
+                {
+                    ActionId = action.ActionId,
+                    ControllerName = action.ControllerName,
+                    DisplayName = action.DisplayName,
+                    ActionName = action.ActionName,
+                    ShowInSideBar = action.ShowInSideBar
+                };
+                userActionList.Add(userAction);
+            }
+            return userActionList;
         }
     }
 }

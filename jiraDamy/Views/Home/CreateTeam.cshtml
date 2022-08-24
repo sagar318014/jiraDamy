@@ -4,12 +4,9 @@
     ViewBag.Title = "Create Team";
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
-@section SideBar{
-    @{Html.RenderPartial("PartialSideBar");}
-}
+
 @section Grid{
 
-    @{Html.RenderPartial("PartialLinksView", "CreateTeam");}
 
     @using (Html.BeginForm("CreateTeam", "Home", FormMethod.Post))
     {

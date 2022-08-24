@@ -3,9 +3,6 @@
     ViewBag.Title = "Completed";
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
-@section SideBar{
-    @{Html.RenderPartial("PartialSideBar");}
-}
 @section Grid{
     @{Html.RenderPartial("PartialLinksView", "Completed");}
     <div class="text-center">

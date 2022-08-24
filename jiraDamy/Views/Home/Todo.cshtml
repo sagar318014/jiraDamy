@@ -1,13 +1,10 @@
 ﻿
 
-@model List<ViewModel.TaskTableViewModel>
+@model List<ViewModel.TaskTableViewModel> 
 
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
-}
-@section SideBar{
-    @{Html.RenderPartial("PartialSideBar");}
 }
 @section Grid{
     @{Html.RenderPartial("PartialLinksView", "Todo");}
