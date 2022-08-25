@@ -20,6 +20,8 @@ namespace ViewModel
         public int? assigneeId { get; set; }
         public string userName { get; set; }
 
+        public string statusName { get; set; }
+
 
         public List<CommonDropdownType> taskStatusList { get; set; } = new List<CommonDropdownType>();
         public List<CommonDropdownType> userList { get; set; } = new List<CommonDropdownType>();

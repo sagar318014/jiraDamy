@@ -15,7 +15,10 @@ namespace ViewModel
         public int RoleId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Name { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
+
+        public List<CommonDropdownType> RoleIdList { get; set; } = new List<CommonDropdownType>();
     }
 }
