@@ -62,7 +62,7 @@ namespace BusinessLogic
 
                 TeamsViewModel.TeamID = item.TeamID;
                 TeamsViewModel.TeamName = item.TeamName;
-                TeamsViewModel.LeaderName = item.LeaderName;
+                TeamsViewModel.LeaderName = item.FirstName+ ' ' +item.LastName;
                 TeamsViewModel.MemberCount = item.MemberCount + 1;
 
 
@@ -73,6 +73,33 @@ namespace BusinessLogic
 
             return TeamList;
         }
+
+        public List<TeamsViewModel> MemberList(int TeamID)
+        {
+            List<TeamsViewModel> MemberList = new List<TeamsViewModel>();
+            List<TeamMember> model = new DAL_AddTeam().MemberList(TeamID);
+        
+
+            foreach (var item in model)
+            {
+                TeamsViewModel TeamsViewModel = new TeamsViewModel();
+
+                TeamsViewModel.Id = item.Id;
+                TeamsViewModel.TeamLeder = item.TeamLeder;
+                TeamsViewModel.TeamName = item.TeamName;
+                TeamsViewModel.LeaderName = item.FirstName + ' ' + item.LastName;
+                
+
+
+                MemberList.Add(TeamsViewModel);
+            }
+
+            return MemberList;
+        }
+
+
+
+
 
     }
 }

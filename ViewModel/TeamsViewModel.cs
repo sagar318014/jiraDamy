@@ -11,7 +11,7 @@ namespace ViewModel
     public class TeamsViewModel
     {
 
-
+        public int Id { get; set; }
         public int TeamID { get; set; }
         public string TeamName { get; set; }
         public Nullable<int> TeamLeder
@@ -20,6 +20,8 @@ namespace ViewModel
 
 
         }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string LeaderName { get; set; }
         public int MemberCount { get; set; }
         public List<int> TeamMember1 { get; set; } = new List<int>();

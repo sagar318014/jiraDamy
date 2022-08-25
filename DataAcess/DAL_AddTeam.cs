@@ -84,6 +84,19 @@ namespace DataAcess
             }
 
         }
+        public List<TeamMember> MemberList(int TeamID)
+        {
+            
+            string sql = @"EXEC [dbo].[Usp_GetMemberList] @TeamId ";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                List<TeamMember> MemberList = db.Query <TeamMember>(sql, new {TeamId = TeamID}).AsList();
+                db.Close();
+                return MemberList;
+            }
+        } 
 
         public List<Team> TeamsList()
         {

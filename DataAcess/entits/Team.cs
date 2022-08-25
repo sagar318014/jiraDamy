@@ -22,7 +22,8 @@ namespace DataAcess.entits
         public Nullable<int> TeamLeder { get; set; }
         public string LeaderName { get; set; }
         public int MemberCount { get; set; }
-
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public DataTable TeamMember { get; set; }
     }
 }
