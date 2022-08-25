@@ -1,9 +1,11 @@
 ﻿@model List<ViewModel.TaskTableViewModel>
 @{
-    ViewBag.Title = "UserManagement";
-    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+    //ViewBag.Title = "View task";
+    //Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+    Layout = null;
 }
-@section Grid{
+
+@*@section Grid{*@
 
 
 
@@ -19,7 +21,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody" style="height:200px;overflow-x:scroll; overflow-y:scroll">
                 @foreach (var item in Model)
                 {
                     <tr id="@item.taskId">
@@ -31,7 +33,8 @@
                         <td>
 
 
-                            <a href="@Url.Action("UnassigneeUser",new {id = item.taskId })" class="btn btn-success">Unassignee</a>
+                            @*<a href="@Url.Action("UnassigneeUser",new {id = item.taskId })" class="btn btn-success">Unassignee</a>*@
+                            <button type="button" onclick="UnassigneeTask(@item.taskId)" class="btn btn-success">Unassignee</button>
                         </td>
 
 
@@ -41,22 +44,44 @@
             </tbody>
 
         </table>
-        <div>
-            <a href="@Url.Action("UserManagement")" class="btn btn-default" style="float: left">  Back </a>
-
-        </div>
+       
 
     </div>
 
     
 
-}
+@*}*@
 
-@section scripts{
+@*@section scripts{*@
 
     <script>
+
+        function UnassigneeTask(id) {
+            commonAjaxCall({
+                /* window.location.replace("/Home/Delete?id="+id);*/
+                url: "/Home/UnassigneeUser?id=" + id,
+                success: (response) => {
+                    if (response.data == true) {
+                        $('#' + id).remove();
+                        let findTr = $("#tbody").find('tr');
+                       
+                        if (findTr.length == 0) {
+                            
+
+                            $("#edit_modal").modal('hide');
+                        }
+                    }
+                    else {
+                       
+
+                    }
+
+                }
+            })
+
+        }
        
 
 
     </script>
-}
+@*}*@
