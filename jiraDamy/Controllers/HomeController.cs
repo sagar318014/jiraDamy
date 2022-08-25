@@ -357,17 +357,55 @@ namespace jiraDamy.Controllers
 
         public ActionResult ViewTask(int id)
         {
-            List<TaskTableViewModel> model = new BL_Todo().UserTaskList(id);
 
 
-            return View("ViewTask", model);
+            try
+            {
+                List<TaskTableViewModel> model = new BL_Todo().UserTaskList(id);
+                return Json(new
+                {
+                    data = RenderPartialToString("ViewTask", model)
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
 
         }
 
         public ActionResult UnassigneeUser(int id)
         {
-            new BL_Todo().UnassigneeUser(id);
-            return RedirectToAction("ViewTas");
+            try
+            {
+                new BL_Todo().UnassigneeUser(id);
+                return Json(new
+                {
+                    data = true
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+           
+           // return RedirectToAction("ViewTask");
         }
     }
 }
