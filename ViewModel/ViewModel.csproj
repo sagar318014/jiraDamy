@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDropdownType.cs" />
+    <Compile Include="LableListViewModel.cs" />
     <Compile Include="MemberType.cs" />
+    <Compile Include="SprintListViewModel.cs" />
     <Compile Include="TaskstatusViewModel.cs" />
     <Compile Include="CreateTeamViewModel.cs" />
     <Compile Include="TaskTableViewModel.cs" />

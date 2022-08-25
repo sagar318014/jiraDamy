@@ -247,7 +247,7 @@ namespace jiraDamy.Controllers
            
 
         }
-
+        [ActionAccessValidation(actionId = 8)]
         public ActionResult UserManagement()
         {
             List<UserSignupViewModel> users = new BL_Todo().GetAllUserList();
@@ -407,5 +407,43 @@ namespace jiraDamy.Controllers
            
            // return RedirectToAction("ViewTask");
         }
+        [ActionAccessValidation(actionId = 9)]
+        public ActionResult LableListView()
+        {
+            List<LableListViewModel> model = new BL_Todo().GetLableList();
+         return View("LableListView",model); 
+        }
+        public ActionResult AddLable()
+        {
+            return View("AddLable");
+        }
+        [HttpPost]
+        public ActionResult AddLable( LableListViewModel model)
+        {
+            new BL_Todo().SaveLable(model);
+            return View("LableListView");
+        }
+
+
+        [ActionAccessValidation(actionId = 11)]
+        public ActionResult SprintList()
+        {
+            List<SprintListViewModel> model = new BL_Todo().GetSprintList();
+            return View("SprintListView",model);
+
+        }
+
+
+        public ActionResult AddSprint()
+        {
+            return View("AddSprint");
+        }
+        [HttpPost]
+        public ActionResult AddSprint(SprintListViewModel model)
+        {
+            new BL_Todo().SaveSprint(model);
+            return View("SprintListView");
+        }
+
     }
 }

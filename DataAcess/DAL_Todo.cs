@@ -285,6 +285,62 @@ namespace DataAcess
 
         }
 
+        public void SaveLable(LableList lableList)
+        {
+            string sql = "insert into LableList(LableName) values(@LableName)";
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                db.Query(sql, new { LableName = lableList.LableName });
+                db.Close();
+            }
+
+
+        }
+
+        public List<LableList> GetLableList()
+        {
+            string sql = "select * from [dbo].[LableList]";
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                List<LableList> LableList = db.Query<LableList>(sql).AsList();
+                db.Close();
+                return LableList;
+            }
+
+
+
+        }
+
+        public void SaveSprint(SprintList sprintList)
+        {
+            string sql = "insert into sprinttable(SprintName) values(@SprintName)";
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                db.Query(sql, new { SprintName = sprintList.SprintName });
+                db.Close();
+            }
+
+
+        }
+
+        public List<SprintList> GetSprintList()
+        {
+            string sql = "select * from sprinttable";
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                List<SprintList> sprintList = db.Query<SprintList>(sql).AsList();
+                db.Close();
+                return sprintList;
+            }
+
+
+
+        }
+
 
 
     }
