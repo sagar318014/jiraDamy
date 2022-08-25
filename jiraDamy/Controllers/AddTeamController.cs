@@ -55,13 +55,33 @@ namespace jiraDamy.Controllers
 
         }
 
-        public ActionResult TeamMemberList()
+        public ActionResult TeamMemberList(int TeamID)
         {
-            int TeamID;
-            //List<TeamsViewModel> TeamManagement = new BL_AddTeam().TeamsList();
 
 
-            return View();
+            try
+            {
+                List<TeamsViewModel> model = new  BL_AddTeam().MemberList(TeamID);
+                return Json(new
+                {
+                    data = RenderPartialToString("TeamMemberList", model)
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e)
+            {
+
+                return Json(new
+                {
+                    data = false
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+
+           
 
 
         }

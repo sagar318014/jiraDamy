@@ -1,7 +1,32 @@
-﻿
+﻿@model List<ViewModel.TeamsViewModel>
 @{
     ViewBag.Title = "TeamMemberList";
 }
 
-<h2>TeamMemberList</h2>
+<table  class="table table-striped">
+    <thead>
+        <tr>
+            <th>Designation</th>
+            <th>Team Member Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+
+        <tr >
+            <th style="text-align:center">
+                @if (item.Id == item.TeamLeder)
+                {
+                    <span>Leader</span>
+                }
+                else
+                { <span>Member</span>}
+            </th>
+            <th style="text-align:center">@item.LeaderName</th>
+        </tr>
+        }
+    </tbody>
+</table>
 
