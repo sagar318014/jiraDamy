@@ -16,23 +16,25 @@ namespace DataAcess
         string connectionString = ConfigurationManager.ConnectionStrings["devconnection"].ConnectionString;
         public void SaveTodo(TaskDataTable AddTask)
         {
-            string sql = @"INSERT INTO [dbo].[taskDataTable]
-                            ([taskName]
-                            ,[description]
-                            ,[taskStatus]
-                             ,[assigneeId])
-                        VALUES
-                            (@taskName
-                            ,@description
-                            ,@taskStatus
-                             ,@assigneeId)";
-
+            //string sql = @"INSERT INTO [dbo].[taskDataTable]
+            //                ([taskName]
+            //                ,[description]
+            //                ,[taskStatus]
+            //                 ,[assigneeId])
+            //            VALUES
+            //                (@taskName
+            //                ,@description
+            //                ,@taskStatus
+            //                 ,@assigneeId)";
+            string sql = @"EXEC [dbo].[usp_Addtask] @taskName, @description, @taskStatus, @assigneeId, @reporterId, @FlagList";
             object ts = new
             {
                 taskName = AddTask.taskName,
                 description = AddTask.description,
                 taskStatus = AddTask.taskStatus,
-                assigneeId = AddTask.assigneeId
+                assigneeId = AddTask.assigneeId,
+                reporterId = AddTask.reporterId,
+                FlagList = AddTask.FlagList.AsTableValuedParameter("AddMembers")
             };
             using (var db = new SqlConnection(connectionString))
             {
@@ -285,8 +287,38 @@ namespace DataAcess
 
         }
 
+        public void AddFlag(Flag Flag)
+        {
 
+            string sql = @"INSERT INTO [dbo].[FlagTable]
+                            ([FlagName])
+                        VALUES
+                            (@FlagName )";
+            using (var db = new SqlConnection(connectionString))
+            {
+                
 
+                db.Open();
+                db.Query(sql, new { FlagName = Flag.FlagName });
+                db.Close();
+            }
+        }
+        public List<Flag> GetFlagList()
+        {
+            
+            string sql = @"select * from [dbo].[FlagTable]";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                List<Flag> FlagList = db.Query<Flag>(sql).AsList();
+                db.Close();
+
+                return FlagList;
+            }
+
+           
+        }
     }
 
 }

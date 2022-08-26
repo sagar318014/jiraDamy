@@ -203,6 +203,8 @@
     <Content Include="Views\AddTeam\CreateTeam.cshtml" />
     <Content Include="Views\AddTeam\TeamManagement.cshtml" />
     <Content Include="Views\AddTeam\TeamMemberList.cshtml" />
+    <Content Include="Views\Home\FlagList.cshtml" />
+    <Content Include="Views\Home\CreateFlag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDropdownType.cs" />
+    <Compile Include="FlagViewModel.cs" />
+    <Compile Include="FlagType.cs" />
+    <Compile Include="LabelType.cs" />
     <Compile Include="MemberType.cs" />
     <Compile Include="TaskstatusViewModel.cs" />
     <Compile Include="CreateTeamViewModel.cs" />

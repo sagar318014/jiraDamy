@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel;
+using System.Data;
 
 namespace BusinessLogic
 {
@@ -18,7 +19,16 @@ namespace BusinessLogic
             AddTask.description = model.description;
             AddTask.taskStatus = model.taskStatus;
             AddTask.assigneeId = model.assigneeId;
-           
+            AddTask.reporterId = model.reporterId;
+            DataTable Flags2 = new DataTable();
+            Flags2.Columns.Add("userid", typeof(int));
+
+            foreach (var item in model.Flags)
+            {
+                Flags2.Rows.Add(item);
+            }
+            AddTask.FlagList = Flags2;
+
 
             new DAL_Todo().SaveTodo(AddTask);
 
@@ -290,7 +300,7 @@ namespace BusinessLogic
                 model.description = item.description;
                 model.taskStatus= item.taskStatus;
                 model.assigneeId = item.assigneeId;
-                model.statusName = item.statusName;
+                //model.statusName = item.statusName;
                 model.taskId = item.taskId;
                
                 users.Add(model);   
@@ -306,7 +316,39 @@ namespace BusinessLogic
         {
             new DAL_Todo().UnassigneeUser(id);
         }
+        public void AddFlag(FlagViewModel model)
+        {
+            Flag Flag = new Flag();
+            Flag.FlagName = model.FlagName;
 
+            new DAL_Todo().AddFlag(Flag);
+        }
+        public List<FlagViewModel> GetFlagList()
+        {
+               
+            List < FlagViewModel > Flaglist = new List<FlagViewModel>();
+            List<Flag> Flags = new DAL_Todo().GetFlagList();
+
+            foreach (var item in Flags)
+            {
+                FlagViewModel Flag = new FlagViewModel();
+
+
+
+                Flag.FlagId = item.FlagId;
+                Flag.FlagName = item.FlagName;
+
+
+
+
+
+                Flaglist.Add(Flag);
+            }
+
+          
+            return Flaglist;
+
+        }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,13 @@ namespace DataAcess.entits
 
         public int? assigneeId { get; set; }
 
+
+        public int? reporterId { get; set; }
+
         public string userName { get; set; }
 
         public string statusName { get; set; }
 
+        public DataTable FlagList { get; set; } 
     }
 }
