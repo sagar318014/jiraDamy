@@ -349,6 +349,63 @@ namespace BusinessLogic
             return Flaglist;
 
         }
+        public void SaveLable(LableListViewModel model)
+        { 
+          LableList lableList = new LableList();
+            lableList.LableName = model.LableName;
+
+            new DAL_Todo().SaveLable(lableList);
+        }
+
+        public List<LableListViewModel> GetLableList()
+        {
+            List<LableListViewModel> lableListViewModels = new List<LableListViewModel>();
+           
+            List<LableList> lableList = new DAL_Todo().GetLableList();
+
+            foreach (var item in lableList)
+            {
+                LableListViewModel model = new LableListViewModel();
+
+                model.LableName = item.LableName;
+
+                lableListViewModels.Add(model);
+            }
+
+            return lableListViewModels;
+        }
+
+
+        public List<SprintListViewModel> GetSprintList()
+        {
+            List<SprintListViewModel> listViewModels = new List<SprintListViewModel>();
+
+            List<SprintList> lableList = new DAL_Todo().GetSprintList();
+
+            foreach (var item in lableList)
+            {
+                SprintListViewModel model = new SprintListViewModel();
+
+                model.SprintName = item.SprintName;
+
+                listViewModels.Add(model);
+            }
+
+            return listViewModels;
+        }
+
+        public void SaveSprint(SprintListViewModel model)
+        {
+            SprintList sprintList = new SprintList();
+            sprintList.SprintName = model.SprintName;
+
+            new DAL_Todo().SaveSprint(sprintList);
+        }
+
+
 
     }
+
+
+
 }
