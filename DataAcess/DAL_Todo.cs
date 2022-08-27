@@ -59,7 +59,7 @@ namespace DataAcess
         //    //    }
         //    //    db.SaveChanges();
 
-               
+
         //    //}
 
         //}
@@ -71,7 +71,7 @@ namespace DataAcess
 
             //string sql = "Select * from taskDataTable where [taskStatus]=@taskStatus";
             string sql = "select t.taskId,t.taskName,t.taskStatus,t.description,u.userName,t.assigneeId from taskDataTable t left join [user] u on t.assigneeId = u.Id  where [taskStatus]=@taskStatus";
-            using(var db = new SqlConnection(connectionString))
+            using (var db = new SqlConnection(connectionString))
             {
                 List<TaskDataTable> TaskList = db.Query<TaskDataTable>(sql, new { taskStatus = id }).AsList();
                 return TaskList;
@@ -80,14 +80,14 @@ namespace DataAcess
 
         }
 
-       
-        public void MoveNext(int Id,int Status )
+
+        public void MoveNext(int Id, int Status)
         {
             string sql = "update taskDataTable set taskStatus = @Status Where taskId = @Id";
             using (var db = new SqlConnection(connectionString))
             {
                 db.Open();
-                db.Query(sql,new { Id = Id, Status = Status });
+                db.Query(sql, new { Id = Id, Status = Status });
                 db.Close();
             }
             //using (var db = new taskDatabaseEntities())
@@ -120,7 +120,7 @@ namespace DataAcess
             using (var db = new SqlConnection(connectionString))
             {
                 db.Open();
-                db.Query(sql, new { Id = Id});
+                db.Query(sql, new { Id = Id });
                 db.Close();
             }
         }
@@ -137,7 +137,7 @@ namespace DataAcess
 
         }
 
-      
+
         public List<User> UserList()
         {
 
@@ -222,10 +222,10 @@ namespace DataAcess
             {
                 Username = user.Username,
                 Password = user.Password,
-                RoleId =  user.RoleId,
+                RoleId = user.RoleId,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Id= user.Id,
+                Id = user.Id,
             };
             using (var db = new SqlConnection(connectionString))
             {
@@ -242,7 +242,7 @@ namespace DataAcess
             using (var db = new SqlConnection(connectionString))
             {
                 List<TaskDataTable> taskList = db.Query<TaskDataTable>(sql, new { Id = id }).AsList();
-              
+
                 return taskList;
 
             }
@@ -277,11 +277,11 @@ namespace DataAcess
         public void UnassigneeUser(int id)
         {
             string sql = "Update [TaskDataTable] set assigneeId=null where taskId= @id";
-           
+
             using (var db = new SqlConnection(connectionString))
             {
                 db.Open();
-                db.Query(sql, new { Id=id});
+                db.Query(sql, new { Id = id });
                 db.Close();
             }
 
@@ -296,7 +296,7 @@ namespace DataAcess
                             (@FlagName )";
             using (var db = new SqlConnection(connectionString))
             {
-                
+
 
                 db.Open();
                 db.Query(sql, new { FlagName = Flag.FlagName });
@@ -305,7 +305,7 @@ namespace DataAcess
         }
         public List<Flag> GetFlagList()
         {
-            
+
             string sql = @"select * from [dbo].[FlagTable]";
 
             using (var db = new SqlConnection(connectionString))
@@ -316,6 +316,7 @@ namespace DataAcess
 
                 return FlagList;
             }
+        }
         public void SaveLable(LableList lableList)
         {
             string sql = "insert into LableList(LableName) values(@LableName)";
@@ -372,9 +373,6 @@ namespace DataAcess
 
         }
 
-
-           
-        }
     }
 
 }

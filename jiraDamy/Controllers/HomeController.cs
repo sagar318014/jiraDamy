@@ -447,18 +447,6 @@ namespace jiraDamy.Controllers
             return RedirectToAction("FlagList");
         }
 
-    }
-
-
-
-
-
-
-
-
-
-
-
         [ActionAccessValidation(actionId = 9)]
         public ActionResult LableListView()
         {
