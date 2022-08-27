@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDropdownType.cs" />
+    <Compile Include="FlagViewModel.cs" />
+    <Compile Include="FlagType.cs" />
+    <Compile Include="LabelType.cs" />
     <Compile Include="LableListViewModel.cs" />
     <Compile Include="MemberType.cs" />
     <Compile Include="SprintListViewModel.cs" />
