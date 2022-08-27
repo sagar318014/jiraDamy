@@ -24,10 +24,11 @@ namespace jiraDamy.Controllers
         }
         [HttpPost]
         [ActionAccessValidation(actionId = 11)]
-        public ActionResult SetAction(UserActions modal)
+        [WithModelValidation]
+        public ActionResult SetAction(UserActions model)
         {
-            new BL_Action().SetAction(modal);
-            return View();
+            new BL_Action().SetAction(model);
+            return RedirectToAction("SetAction");
         }
     }
 }
