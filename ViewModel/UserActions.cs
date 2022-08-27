@@ -16,6 +16,9 @@ namespace ViewModel
 
         public Boolean ShowInSideBar { get; set; }
         public string DisplayName { get; set; }
+
+        public List<int> AccessRolls { get; set; } = new List<int>();
+
     }
 
 

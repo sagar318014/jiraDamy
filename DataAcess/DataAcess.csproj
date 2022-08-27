@@ -55,6 +55,7 @@
     <Compile Include="DAL_Todo.cs" />
     <Compile Include="entits\ActionAccess.cs" />
     <Compile Include="entits\Actions.cs" />
+    <Compile Include="entits\DAL_Action.cs" />
     <Compile Include="entits\Flag.cs" />
     <Compile Include="entits\Role.cs" />
     <Compile Include="entits\StatusTable.cs" />
