@@ -64,19 +64,24 @@ namespace DataAcess
 
 
 
-        public List<TaskDataTable> TaskList(int id)
+        public List<TaskDataTable> TaskList(int userId,int id)
         {
 
-            //string sql = "Select * from taskDataTable where [taskStatus]=@taskStatus";
-            string sql = "select t.taskId,t.taskName,t.taskStatus,t.description,u.userName,t.assigneeId from taskDataTable t left join [user] u on t.assigneeId = u.Id  where [taskStatus]=@taskStatus";
-            using(var db = new SqlConnection(connectionString))
+            string sql = "EXEC [dbo].[usp_getFilterTaskList] @userId,@taskStatus";
+            //string sql = "select t.taskId,t.taskName,t.taskStatus,t.description,u.userName,t.assigneeId from taskDataTable t left join [user] u on t.assigneeId = u.Id  where [taskStatus]=@taskStatus";
+
+            using (var db = new SqlConnection(connectionString))
             {
-                List<TaskDataTable> TaskList = db.Query<TaskDataTable>(sql, new { taskStatus = id }).AsList();
+                db.Open();
+                List<TaskDataTable> TaskList = db.Query<TaskDataTable>(sql, new { userId = userId,taskStatus = id }).AsList();
+                db.Close();
                 return TaskList;
 
             }
 
         }
+
+
 
        
         public void MoveNext(int Id,int Status )
