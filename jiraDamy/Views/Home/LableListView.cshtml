@@ -1,0 +1,53 @@
+﻿@model List<ViewModel.LableListViewModel>
+@{
+    ViewBag.Title = "LableListView";
+    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+
+}
+@section Grid{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <div class="text-center">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Lable Name</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.LableName</td>
+                    </tr>
+
+
+
+                }
+
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+
+
+    <div>
+        <button style="float:right;margin-right:100px;">@Html.ActionLink("Create label", "AddLable", "Home")</button>
+        @*<a href="@Url.Action("/home/AddLableList")" class="btn btn-default" style="float: left">  Add </a>*@
+    </div>
+
+
+
+
+
+}
+
+@section scripts{
+    <script>
+
+
+    </script>
+}

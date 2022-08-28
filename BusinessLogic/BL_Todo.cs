@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel;
+using System.Data;
 
 namespace BusinessLogic
 {
@@ -18,7 +19,16 @@ namespace BusinessLogic
             AddTask.description = model.description;
             AddTask.taskStatus = model.taskStatus;
             AddTask.assigneeId = model.assigneeId;
-           
+            AddTask.reporterId = model.reporterId;
+            DataTable Flags2 = new DataTable();
+            Flags2.Columns.Add("userid", typeof(int));
+
+            foreach (var item in model.Flags)
+            {
+                Flags2.Rows.Add(item);
+            }
+            AddTask.FlagList = Flags2;
+
 
             new DAL_Todo().SaveTodo(AddTask);
 
@@ -290,7 +300,7 @@ namespace BusinessLogic
                 model.description = item.description;
                 model.taskStatus= item.taskStatus;
                 model.assigneeId = item.assigneeId;
-                model.statusName = item.statusName;
+                //model.statusName = item.statusName;
                 model.taskId = item.taskId;
                
                 users.Add(model);   
@@ -306,7 +316,96 @@ namespace BusinessLogic
         {
             new DAL_Todo().UnassigneeUser(id);
         }
+        public void AddFlag(FlagViewModel model)
+        {
+            Flag Flag = new Flag();
+            Flag.FlagName = model.FlagName;
+
+            new DAL_Todo().AddFlag(Flag);
+        }
+        public List<FlagViewModel> GetFlagList()
+        {
+               
+            List < FlagViewModel > Flaglist = new List<FlagViewModel>();
+            List<Flag> Flags = new DAL_Todo().GetFlagList();
+
+            foreach (var item in Flags)
+            {
+                FlagViewModel Flag = new FlagViewModel();
+
+
+
+                Flag.FlagId = item.FlagId;
+                Flag.FlagName = item.FlagName;
+
+
+
+
+
+                Flaglist.Add(Flag);
+            }
+
+          
+            return Flaglist;
+
+        }
+        public void SaveLable(LableListViewModel model)
+        { 
+          LableList lableList = new LableList();
+            lableList.LableName = model.LableName;
+
+            new DAL_Todo().SaveLable(lableList);
+        }
+
+        public List<LableListViewModel> GetLableList()
+        {
+            List<LableListViewModel> lableListViewModels = new List<LableListViewModel>();
+           
+            List<LableList> lableList = new DAL_Todo().GetLableList();
+
+            foreach (var item in lableList)
+            {
+                LableListViewModel model = new LableListViewModel();
+
+                model.LableName = item.LableName;
+
+                lableListViewModels.Add(model);
+            }
+
+            return lableListViewModels;
+        }
+
+
+        public List<SprintListViewModel> GetSprintList()
+        {
+            List<SprintListViewModel> listViewModels = new List<SprintListViewModel>();
+
+            List<SprintList> lableList = new DAL_Todo().GetSprintList();
+
+            foreach (var item in lableList)
+            {
+                SprintListViewModel model = new SprintListViewModel();
+
+                model.SprintName = item.SprintName;
+
+                listViewModels.Add(model);
+            }
+
+            return listViewModels;
+        }
+
+        public void SaveSprint(SprintListViewModel model)
+        {
+            SprintList sprintList = new SprintList();
+            sprintList.SprintName = model.SprintName;
+
+            new DAL_Todo().SaveSprint(sprintList);
+        }
+
 
 
     }
+
+
+
 }
