@@ -2,11 +2,10 @@
 
 <nav class="navbar navbar-default">
 
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav" style="width:100%">
         @*<li class="nav-item @(Model == "AddTask"?"active":"")" style="font-size:30px">@Html.ActionLink("Form", "AddTask", "Home")</li>*@
-        <li class="nav-item @(Model == "Todo"?"active":"")" style="font-size:30px">@Html.ActionLink("Todo", "Todo", "Home")</li>
-        <li class="nav-item @(Model == "Active"?"active":"")" style="font-size:30px">@Html.ActionLink("Active", "Active", "Home")</li>
-        <li class="nav-item @(Model == "Completed"?"active":"")" style="font-size:30px">@Html.ActionLink("Completed", "Completed", "Home")</li>
-        <li class="nav-item @(Model == "CreateTeam"?"active":"")" style="font-size:30px">@Html.ActionLink("Team Management", "TeamManagement", "AddTeam")</li>
+        <li class="nav-item text-center @(Model == "Todo"?"active":"")" style="width:33%">@Html.ActionLink("Todo", "Todo", "Home")</li>
+        <li class="nav-item text-center @(Model == "Active"?"active":"")" style="width: 33% ">@Html.ActionLink("Active", "Active", "Home")</li>
+        <li class="nav-item text-center @(Model == "Completed"?"active":"")" style="width: 34% ">@Html.ActionLink("Completed", "Completed", "Home")</li>
     </ul>
 </nav>
