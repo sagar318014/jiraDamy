@@ -32,8 +32,28 @@ namespace BusinessLogic
 
 
             new DAL_Action().SetAction(Actions);
+           
+        }
+        public List<UserActions> GetActionList()
+        {
+
+            List<UserActions> ActionList2 = new List<UserActions>();
+            List<Actions> ActionList = new DAL_Action().GetActionList();
+
+            foreach (var item in ActionList)
+            {
+                UserActions Action = new UserActions();
+
+                Action.ActionName = item.ActionName;
+                Action.ControllerName = item.ControllerName;
+                Action.DisplayName = item.DisplayName;
+
+                ActionList2.Add(Action);
+            }
+
+
+            return ActionList2;
 
         }
-
     }
 }

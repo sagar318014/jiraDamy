@@ -439,6 +439,8 @@ namespace jiraDamy.Controllers
             return View("CreateFlag");
 
         }
+
+        
         public ActionResult AddFlag(FlagViewModel model)
         {
 
