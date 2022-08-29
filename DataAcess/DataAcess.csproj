@@ -51,12 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\DAL_Authentication.cs" />
+    <Compile Include="DAL_Action.cs" />
     <Compile Include="DAL_AddTeam.cs" />
     <Compile Include="DAL_Todo.cs" />
     <Compile Include="entits\ActionAccess.cs" />
     <Compile Include="entits\Actions.cs" />
     <Compile Include="entits\LableList.cs" />
-    <Compile Include="entits\DAL_Action.cs" />
     <Compile Include="entits\Flag.cs" />
     <Compile Include="entits\Role.cs" />
     <Compile Include="entits\SprintList.cs" />
