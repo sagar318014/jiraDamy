@@ -477,54 +477,7 @@ namespace BusinessLogic
 
         }
 
-        public List<CommonDropdownType> GetIssueTypeList()
-        {
-            List<CommonDropdownType> issutype = new List<CommonDropdownType>();
-           
-
-
-
-            foreach (var item in new DAL_Todo().GetIssueTypeList())
-            {
-                CommonDropdownType model = new CommonDropdownType();
-                model.id = item.IssueId;
-                model.text= item.IssueName;
-
-                issutype.Add(model);
-
-            }
-
-            return issutype;
-
-
-
-        }
-
-        public List<TaskTableViewModel> GetIssueTaskList()
-        {
-
-            List<TaskTableViewModel> tasklist = new List<TaskTableViewModel>();
-            List<TaskDataTable> tasks = new DAL_Todo().GetIssueTaskList();
-
-            foreach (var item in tasks)
-            {
-                TaskTableViewModel task = new TaskTableViewModel();
-
-                task.taskId = item.taskId;
-                task.taskName = item.taskName;
-
-
-
-
-
-
-
-                tasklist.Add(task);
-            }
-
-
-            return tasklist;
-        }
+       
 
        
     }

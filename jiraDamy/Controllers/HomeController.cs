@@ -145,24 +145,11 @@ namespace jiraDamy.Controllers
                 LabeList.Add(lable);
             }
 
-            List<CommonDropdownType> IssueTaskList = new List<CommonDropdownType>();
-            foreach (var item in new BL_Todo().GetIssueTaskList())
-            {
-                CommonDropdownType task = new CommonDropdownType();
-
-                task.id = item.IssueId;
-                task.text = item.IssueName;
-
-
-                IssueTaskList.Add(task);
-            }
-
             model.labelList = LabeList;
             model.sprintList = new BL_Todo().GetAllSprintList();
-            model.IssueTypeList = new BL_Todo().GetIssueTypeList();
-           
             model.FlagList = FlagList;
-            model.IssueTaskList = IssueTaskList;
+           
+
 
             return View(model);
         }

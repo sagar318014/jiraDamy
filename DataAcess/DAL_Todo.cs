@@ -378,33 +378,9 @@ namespace DataAcess
         }
 
 
-        public List<IssueType> GetIssueTypeList()
-        {
-            string sql = "select IssueId,IssueName from issuetype  ";
-            using (var db = new SqlConnection(connectionString))
-            {
-                db.Open();
-                List<IssueType> IssuType = db.Query<IssueType>(sql).AsList();
-                db.Close();
-                return IssuType;
-            }
-        }
+       
 
-
-        public List<TaskDataTable> GetIssueTaskList()
-        {
-            string sql = "select * from taskdatatable";
-            using (var db = new SqlConnection(connectionString))
-            {
-                db.Open();
-                List<TaskDataTable> taskList = db.Query<TaskDataTable>(sql).AsList();
-                db.Close();
-                return taskList;
-            }
-
-
-
-        }
+       
 
 
 
