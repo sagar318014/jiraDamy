@@ -36,10 +36,10 @@
                     <option value="@item.id" selected>@item.text</option>
                 }
             </select>
-           
-            
 
-        </div> 
+
+
+        </div>
         <div class="mt-1">
             <label style="display:block;">Reporters</label>
             <select name="reporterId" class="select-2 col-lg-3">
@@ -60,18 +60,46 @@
                 }
             </select>
         </div>
+
+
+
+        <div>
+            <lebel>Select Label Name</lebel>
+            <select id="LableName" name="LableName" class="select-2 col-lg-3" multiple>
+                @foreach (var item in Model.labelList)
+                {
+                    <option value="@item.id">@item.text</option>
+                }
+            </select>
+
+        </div>
+        <div>
+
+            <lebel>Sprint Name</lebel>
+            <select id="sprintName" name="sprintName" class="select-2 col-lg-3">
+                @foreach (var item in Model.sprintList)
+                {
+                    <option value="@item.id">@item.text</option>
+                }
+            </select>
+        </div>
+
+       
+
         <div style="margin-top:15px;">
 
             <button type="reset" class="btn btn-danger" style="float:right;margin-left:15px">Clear All</button>
             <button type="submit" style="float: right;" class="btn btn-success">Add</button>
 
         </div>
+       
 
     }
     <br />
     @Html.ActionLink("User Management", "UserManagement")
 }
 
+    }
 
 
 @section scripts{
@@ -81,22 +109,6 @@
             CommonNotifier.showInformation("hiee");
             CommonNotifier.showError("Error");
         }
-
-
-
-                                                //$(document).ready(() => {
-                                                //    commonAjaxCall({
-                                                //        url: '/home/GetTaskTypeList',
-                                                //        success: res => {
-                                                //            console.log(res)
-                                                //        }
-                                                //    });
-
-                                                //})
-
-
-
-        /*    loadDropdownAjax({ id: 'sagar', url: '/home/GetTaskTypeList' })*/
-
     </script>
+
 }

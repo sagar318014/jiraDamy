@@ -26,7 +26,8 @@ namespace DataAcess
             //                ,@description
             //                ,@taskStatus
             //                 ,@assigneeId)";
-            string sql = @"EXEC [dbo].[usp_Addtask] @taskName, @description, @taskStatus, @assigneeId, @reporterId, @FlagList";
+            string sql = @"EXEC [dbo].[usp_Addtask] @taskName, @description, @taskStatus, @assigneeId, @reporterId,
+                        @FlagList,@SprintName,@LableName";
             object ts = new
             {
                 taskName = AddTask.taskName,
@@ -34,7 +35,10 @@ namespace DataAcess
                 taskStatus = AddTask.taskStatus,
                 assigneeId = AddTask.assigneeId,
                 reporterId = AddTask.reporterId,
-                FlagList = AddTask.FlagList.AsTableValuedParameter("AddMembers")
+                SprintName = AddTask.sprintName,
+                FlagList = AddTask.FlagList.AsTableValuedParameter("AddMembers"),
+                LableName = AddTask.LableList.AsTableValuedParameter("AddMembers")
+
             };
             using (var db = new SqlConnection(connectionString))
             {
@@ -375,6 +379,13 @@ namespace DataAcess
 
 
         }
+
+
+       
+
+       
+
+
 
     }
 

@@ -68,6 +68,7 @@ namespace jiraDamy.Controllers
             {
                 item.taskStatusList = new BL_Todo().GetStatusList();
                 item.userList = new BL_Todo().GetUserList();
+                
             }
 
             return View("Active", Active);
@@ -180,10 +181,28 @@ namespace jiraDamy.Controllers
 
                 flag.id = item.FlagId;
                 flag.text = item.FlagName;
+            
 
                 FlagList.Add(flag);
             }
+
+            List<CommonDropdownType> LabeList = new List<CommonDropdownType>();
+            foreach (var item in new BL_Todo().GetLableListAll())
+            {
+                CommonDropdownType lable = new CommonDropdownType();
+
+                lable.id = item.LableId;
+                lable.text = item.LableName;
+
+
+                LabeList.Add(lable);
+            }
+
+            model.labelList = LabeList;
+            model.sprintList = new BL_Todo().GetAllSprintList();
             model.FlagList = FlagList;
+           
+
 
             return View(model);
         }
@@ -310,7 +329,7 @@ namespace jiraDamy.Controllers
            
 
         }
-        [ActionAccessValidation(actionId = 8)]
+        [ActionAccessValidation(actionId = 14)]
         public ActionResult UserManagement()
         {
             List<UserSignupViewModel> users = new BL_Todo().GetAllUserList();
@@ -515,7 +534,8 @@ namespace jiraDamy.Controllers
             return RedirectToAction("FlagList");
         }
 
-        [ActionAccessValidation(actionId = 9)]
+        [ActionAccessValidation(actionId = 12)]
+
         public ActionResult LableListView()
         {
             List<LableListViewModel> model = new BL_Todo().GetLableList();
@@ -533,7 +553,7 @@ namespace jiraDamy.Controllers
         }
 
 
-        [ActionAccessValidation(actionId = 11)]
+        [ActionAccessValidation(actionId = 13)]
         public ActionResult SprintList()
         {
             List<SprintListViewModel> model = new BL_Todo().GetSprintList();
@@ -552,6 +572,9 @@ namespace jiraDamy.Controllers
             new BL_Todo().SaveSprint(model);
             return View("SprintListView");
         }
+
+
+       
 
     }
 }

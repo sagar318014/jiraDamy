@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ViewModel</RootNamespace>
     <AssemblyName>ViewModel</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -44,15 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDropdownType.cs" />
+    <Compile Include="ComplexityViewModel.cs" />
     <Compile Include="FlagViewModel.cs" />
     <Compile Include="FlagType.cs" />
+    <Compile Include="IssuTypeViewModel.cs" />
     <Compile Include="LabelType.cs" />
     <Compile Include="LableListViewModel.cs" />
+    <Compile Include="LableType.cs" />
     <Compile Include="MemberType.cs" />
     <Compile Include="SprintListViewModel.cs" />
     <Compile Include="TaskstatusViewModel.cs" />
     <Compile Include="CreateTeamViewModel.cs" />
-    <Compile Include="taskTableData.cs" />
+    <Compile Include="TaskTableDataModel.cs" />
     <Compile Include="TaskTableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamsViewModel.cs" />
