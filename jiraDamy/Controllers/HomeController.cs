@@ -133,9 +133,36 @@ namespace jiraDamy.Controllers
                 FlagList.Add(flag);
             }
 
-            model.labelList = new BL_Todo().GetAllLableList();
+            List<CommonDropdownType> LabeList = new List<CommonDropdownType>();
+            foreach (var item in new BL_Todo().GetLableListAll())
+            {
+                CommonDropdownType lable = new CommonDropdownType();
+
+                lable.id = item.LableId;
+                lable.text = item.LableName;
+
+
+                LabeList.Add(lable);
+            }
+
+            List<CommonDropdownType> IssueTaskList = new List<CommonDropdownType>();
+            foreach (var item in new BL_Todo().GetIssueTaskList())
+            {
+                CommonDropdownType task = new CommonDropdownType();
+
+                task.id = item.IssueId;
+                task.text = item.IssueName;
+
+
+                IssueTaskList.Add(task);
+            }
+
+            model.labelList = LabeList;
             model.sprintList = new BL_Todo().GetAllSprintList();
+            model.IssueTypeList = new BL_Todo().GetIssueTypeList();
+           
             model.FlagList = FlagList;
+            model.IssueTaskList = IssueTaskList;
 
             return View(model);
         }
@@ -452,7 +479,8 @@ namespace jiraDamy.Controllers
             return RedirectToAction("FlagList");
         }
 
-        [ActionAccessValidation(actionId = 9)]
+        [ActionAccessValidation(actionId = 12)]
+
         public ActionResult LableListView()
         {
             List<LableListViewModel> model = new BL_Todo().GetLableList();
@@ -470,7 +498,7 @@ namespace jiraDamy.Controllers
         }
 
 
-        [ActionAccessValidation(actionId = 11)]
+        [ActionAccessValidation(actionId = 13)]
         public ActionResult SprintList()
         {
             List<SprintListViewModel> model = new BL_Todo().GetSprintList();
@@ -489,6 +517,9 @@ namespace jiraDamy.Controllers
             new BL_Todo().SaveSprint(model);
             return View("SprintListView");
         }
+
+
+       
 
     }
 }

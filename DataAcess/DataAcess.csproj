@@ -55,6 +55,8 @@
     <Compile Include="DAL_Todo.cs" />
     <Compile Include="entits\ActionAccess.cs" />
     <Compile Include="entits\Actions.cs" />
+    <Compile Include="entits\Complexity.cs" />
+    <Compile Include="entits\IssueType.cs" />
     <Compile Include="entits\LableList.cs" />
     <Compile Include="entits\DAL_Action.cs" />
     <Compile Include="entits\Flag.cs" />

@@ -44,10 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDropdownType.cs" />
+    <Compile Include="ComplexityViewModel.cs" />
     <Compile Include="FlagViewModel.cs" />
     <Compile Include="FlagType.cs" />
+    <Compile Include="IssuTypeViewModel.cs" />
     <Compile Include="LabelType.cs" />
     <Compile Include="LableListViewModel.cs" />
+    <Compile Include="LableType.cs" />
     <Compile Include="MemberType.cs" />
     <Compile Include="SprintListViewModel.cs" />
     <Compile Include="TaskstatusViewModel.cs" />

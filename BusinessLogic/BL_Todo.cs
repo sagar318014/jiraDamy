@@ -20,6 +20,9 @@ namespace BusinessLogic
             AddTask.taskStatus = model.taskStatus;
             AddTask.assigneeId = model.assigneeId;
             AddTask.reporterId = model.reporterId;
+            AddTask.sprintName = model.sprintName;  
+           
+
             DataTable Flags2 = new DataTable();
             Flags2.Columns.Add("userid", typeof(int));
 
@@ -29,6 +32,15 @@ namespace BusinessLogic
             }
             AddTask.FlagList = Flags2;
 
+            DataTable LableList2 = new DataTable();
+            LableList2.Columns.Add("userid", typeof(int));
+
+            foreach (var item in model.LableName)
+            {
+                LableList2.Rows.Add(item);
+            }
+            AddTask.LableList = LableList2;
+
 
             new DAL_Todo().SaveTodo(AddTask);
 
@@ -36,19 +48,19 @@ namespace BusinessLogic
 
         public List<TaskTableViewModel> TodoList(int id)
         {
-           
+
 
             List<TaskTableViewModel> Todo = new List<TaskTableViewModel>();
 
             List<TaskDataTable> TodoList = new DAL_Todo().TaskList(id);
-            
+
 
 
 
             foreach (var item in TodoList)
             {
                 TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
-               
+
 
                 taskTableViewModel.description = item.description;
                 taskTableViewModel.taskId = item.taskId;
@@ -56,17 +68,17 @@ namespace BusinessLogic
                 taskTableViewModel.taskStatus = item.taskStatus;
                 taskTableViewModel.assigneeId = item.assigneeId;
                 taskTableViewModel.userName = item.userName;
-               
+
 
 
 
                 Todo.Add(taskTableViewModel);
             }
-            return Todo; 
+            return Todo;
 
 
         }
-        
+
         public List<TaskTableViewModel> ActiveList(int id)
         {
 
@@ -84,7 +96,7 @@ namespace BusinessLogic
                 taskTableViewModel.taskName = item.taskName;
                 taskTableViewModel.taskStatus = item.taskStatus;
                 taskTableViewModel.assigneeId = item.assigneeId;
-                taskTableViewModel.userName= item.userName;
+                taskTableViewModel.userName = item.userName;
 
                 Active.Add(taskTableViewModel);
             }
@@ -111,7 +123,7 @@ namespace BusinessLogic
 
                 Completed.Add(taskTableViewModel);
             }
-            
+
             return Completed;
 
         }
@@ -152,7 +164,7 @@ namespace BusinessLogic
             new DAL_Todo().MoveNext(Id, 3);
 
 
-           
+
         }
 
         public List<CommonDropdownType> GetUserList()
@@ -175,9 +187,9 @@ namespace BusinessLogic
         }
 
         public void UpdateTask(TaskTableViewModel model)
-        { 
+        {
             TaskDataTable updateTable = new TaskDataTable();
-            
+
 
             updateTable.taskId = model.taskId;
             updateTable.assigneeId = model.assigneeId;
@@ -188,7 +200,7 @@ namespace BusinessLogic
         }
 
         public List<UserSignupViewModel> GetAllUserList()
-        { 
+        {
             List<UserSignupViewModel> user = new List<UserSignupViewModel>();
             List<User> userList = new DAL_Todo().GetAllUserList();
 
@@ -197,7 +209,7 @@ namespace BusinessLogic
                 UserSignupViewModel userViewModel = new UserSignupViewModel();
 
                 userViewModel.Id = item.Id;
-                userViewModel.Username= item.Username;
+                userViewModel.Username = item.Username;
                 userViewModel.Name = item.Name;
                 userViewModel.FirstName = item.FirstName;
                 userViewModel.LastName = item.LastName;
@@ -241,7 +253,7 @@ namespace BusinessLogic
                 userViewModel.RoleId = item.RoleId;
                 userViewModel.FirstName = item.FirstName;
                 userViewModel.LastName = item.LastName;
-                userViewModel.Password= item.Password;
+                userViewModel.Password = item.Password;
 
                 user.Add(userViewModel);
 
@@ -257,8 +269,8 @@ namespace BusinessLogic
 
             update.Username = model.Username;
             update.RoleId = model.RoleId;
-            update.FirstName = model.FirstName; 
-            update.LastName = model.LastName;   
+            update.FirstName = model.FirstName;
+            update.LastName = model.LastName;
             update.Password = model.Password;
             update.Id = model.Id;
 
@@ -269,9 +281,9 @@ namespace BusinessLogic
         {
             List<TaskDataTable> taskList = new DAL_Todo().GetTaskList(id);
             List<TaskDataTable> tempTasklist = new List<TaskDataTable>();
-            foreach(var task in taskList)
+            foreach (var task in taskList)
             {
-                if(task.taskStatus == 1 || task.taskStatus == 2)
+                if (task.taskStatus == 1 || task.taskStatus == 2)
                 {
                     tempTasklist.Add(task);
                 }
@@ -295,16 +307,16 @@ namespace BusinessLogic
             {
                 TaskTableViewModel model = new TaskTableViewModel();
 
-                model.taskName=item.taskName;
+                model.taskName = item.taskName;
                 model.userName = item.userName;
                 model.description = item.description;
-                model.taskStatus= item.taskStatus;
+                model.taskStatus = item.taskStatus;
                 model.assigneeId = item.assigneeId;
                 //model.statusName = item.statusName;
                 model.taskId = item.taskId;
-               
-                users.Add(model);   
-                
+
+                users.Add(model);
+
 
             }
             return users;
@@ -325,8 +337,8 @@ namespace BusinessLogic
         }
         public List<FlagViewModel> GetFlagList()
         {
-               
-            List < FlagViewModel > Flaglist = new List<FlagViewModel>();
+
+            List<FlagViewModel> Flaglist = new List<FlagViewModel>();
             List<Flag> Flags = new DAL_Todo().GetFlagList();
 
             foreach (var item in Flags)
@@ -345,13 +357,13 @@ namespace BusinessLogic
                 Flaglist.Add(Flag);
             }
 
-          
+
             return Flaglist;
 
         }
         public void SaveLable(LableListViewModel model)
-        { 
-          LableList lableList = new LableList();
+        {
+            LableList lableList = new LableList();
             lableList.LableName = model.LableName;
 
             new DAL_Todo().SaveLable(lableList);
@@ -360,7 +372,7 @@ namespace BusinessLogic
         public List<LableListViewModel> GetLableList()
         {
             List<LableListViewModel> lableListViewModels = new List<LableListViewModel>();
-           
+
             List<LableList> lableList = new DAL_Todo().GetLableList();
 
             foreach (var item in lableList)
@@ -402,7 +414,7 @@ namespace BusinessLogic
             new DAL_Todo().SaveSprint(sprintList);
         }
 
-       public List<CommonDropdownType> GetAllLableList()
+        public List<CommonDropdownType> GetAllLableList()
         {
             List<CommonDropdownType> labels = new List<CommonDropdownType>();
             foreach (var item in new DAL_Todo().GetLableList())
@@ -415,30 +427,105 @@ namespace BusinessLogic
                 labels.Add(label);
 
             }
-            return labels;  
-        
+            return labels;
+
         }
 
         public List<CommonDropdownType> GetAllSprintList()
-        { 
-        List<CommonDropdownType> Sprints = new List<CommonDropdownType>();
+        {
+            List<CommonDropdownType> Sprints = new List<CommonDropdownType>();
             foreach (var item in new DAL_Todo().GetSprintList())
             {
                 CommonDropdownType model = new CommonDropdownType();
-                model.id = item.SprintId;   
+                model.id = item.SprintId;
                 model.text = item.SprintName;
 
                 Sprints.Add(model);
             }
             return Sprints;
-        
+
 
         }
 
+        public List<LableListViewModel> GetLableListAll()
+        {
+
+            List<LableListViewModel> lablelist = new List<LableListViewModel>();
+            List<LableList> lables = new DAL_Todo().GetLableList();
+
+            foreach (var item in lables)
+            {
+                LableListViewModel lable = new LableListViewModel();
 
 
+
+                lable.LableId = item.LableId;
+                lable.LableName = item.LableName;
+
+
+
+
+
+                lablelist.Add(lable);
+            }
+
+
+            return lablelist;
+
+
+
+
+        }
+
+        public List<CommonDropdownType> GetIssueTypeList()
+        {
+            List<CommonDropdownType> issutype = new List<CommonDropdownType>();
+           
+
+
+
+            foreach (var item in new DAL_Todo().GetIssueTypeList())
+            {
+                CommonDropdownType model = new CommonDropdownType();
+                model.id = item.IssueId;
+                model.text= item.IssueName;
+
+                issutype.Add(model);
+
+            }
+
+            return issutype;
+
+
+
+        }
+
+        public List<TaskTableViewModel> GetIssueTaskList()
+        {
+
+            List<TaskTableViewModel> tasklist = new List<TaskTableViewModel>();
+            List<TaskDataTable> tasks = new DAL_Todo().GetIssueTaskList();
+
+            foreach (var item in tasks)
+            {
+                TaskTableViewModel task = new TaskTableViewModel();
+
+                task.taskId = item.taskId;
+                task.taskName = item.taskName;
+
+
+
+
+
+
+
+                tasklist.Add(task);
+            }
+
+
+            return tasklist;
+        }
+
+       
     }
-
-
-
-}
+    }
