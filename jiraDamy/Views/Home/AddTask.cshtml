@@ -8,16 +8,16 @@
     @using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
     {
         <div style="font-weight:600;">Add new task</div>
-        <lebel>Task Name</lebel>
+        <label>Task Name</label>
         <div>@Html.TextBoxFor(x => x.taskName)</div>
         @Html.ValidationMessageFor(x => x.taskName)
-        <lebel>Description</lebel>
+        <label>Description</label>
         <div>@Html.TextBoxFor(x => x.description)</div>
         @Html.ValidationMessageFor(x => x.description)
 
 
-        <div>
-            <lebel>Task Current Status</lebel>
+        <div class="mt-1">
+            <label>Task Current Status</label>
             <select id="sagar" name="taskStatus" class="select-2 col-lg-3">
                 @foreach (var item in Model.taskStatusList)
                 {
@@ -28,9 +28,21 @@
 
         </div>
 
-        <div>
-            <lebel>Assigneee</lebel>
+        <div class="mt-1">
+            <label>Assigneee</label>
             <select name="assigneeId" class="select-2 col-lg-3">
+                @foreach (var item in Model.userList)
+                {
+                    <option value="@item.id" selected>@item.text</option>
+                }
+            </select>
+           
+            
+
+        </div> 
+        <div class="mt-1">
+            <label>Reporters</label>
+            <select name="reporterId" class="select-2 col-lg-3">
                 @foreach (var item in Model.userList)
                 {
                     <option value="@item.id" selected>@item.text</option>
@@ -38,6 +50,15 @@
             </select>
 
 
+        </div>
+        <div class="mt-1">
+            <label>Flag</label>
+            <select id="Flags" name="Flags" class="select-2 col-lg-3" multiple>
+                @foreach (var item in Model.FlagList)
+                {
+                    <option value="@item.id">@item.text</option>
+                }
+            </select>
         </div>
         <div style="margin-top:15px;">
 
@@ -47,7 +68,7 @@
         </div>
 
     }
-    <br/>
+    <br />
     @Html.ActionLink("User Management", "UserManagement")
 }
 
@@ -55,7 +76,7 @@
 
 @section scripts{
     <script>
-        
+
         function Test() {
             CommonNotifier.showInformation("hiee");
             CommonNotifier.showError("Error");
@@ -63,15 +84,15 @@
 
 
 
-                                            //$(document).ready(() => {
-                                            //    commonAjaxCall({
-                                            //        url: '/home/GetTaskTypeList',
-                                            //        success: res => {
-                                            //            console.log(res)
-                                            //        }
-                                            //    });
+                                                //$(document).ready(() => {
+                                                //    commonAjaxCall({
+                                                //        url: '/home/GetTaskTypeList',
+                                                //        success: res => {
+                                                //            console.log(res)
+                                                //        }
+                                                //    });
 
-                                            //})
+                                                //})
 
 
 

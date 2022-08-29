@@ -23,26 +23,27 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr id="@item.taskId">
-                        <td id="@("taskname"+item.taskId)">@item.taskName</td>
-                        <td id="@("descriptionid"+item.taskId)">@item.description</td>
-                        <td>@item.userName</td>
+                <tr id="@item.taskId">
+                    <td id="@("taskname"+item.taskId)">@item.taskName</td>
+                    <td id="@("descriptionid"+item.taskId)">@item.description</td>
+                    <td>@item.userName</td>
 
-                        <td>
+                    <td>
 
-                            <a href="@Url.Action("MoveInToActive",new {id = item.taskId })" class="btn btn-success">Move</a>
-                            <button type="button" onclick="editTask(@item.taskId)" id="@("edit_id"+item.taskId)" class="btn btn-success" data-toggle="modal" data-target="#edit_modal">Edit </button>
-                            @*<a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>*@
-                            <button type="button" onclick="DeleteTask(@item.taskId)">Delete</button>
+                        <a href="@Url.Action("MoveInToActive",new {id = item.taskId })" class="btn btn-success">Move</a>
+                        <button type="button" onclick="editTask(@item.taskId)" id="@("edit_id"+item.taskId)" class="btn btn-success" data-toggle="modal" data-target="#edit_modal">Edit </button>
+                        @*<a href="@Url.Action("Delete",new {id = item.taskId })" class="btn btn-danger">Delete</a>*@
+                        <button type="button" onclick="DeleteTask(@item.taskId)">Delete</button>
 
-                        </td>
-                        <td style="visibility:hidden" id="@("statusid"+item.taskId)">@item.taskStatus</td>
-                        <td style="visibility:hidden" id="@("userid"+item.taskId)">@item.assigneeId</td>
-                        <td style="visibility:hidden" id="@("taskid"+item.taskId)" >@item.taskId</td>
+                    </td>
+                    <td style="visibility:hidden" id="@("statusid"+item.taskId)">@item.taskStatus</td>
+                    <td style="visibility:hidden" id="@("userid"+item.taskId)">@item.assigneeId</td>
+                    <td style="visibility:hidden" id="@("Reportuserid"+item.taskId)">@item.reporterId</td>
+                    <td style="visibility:hidden" id="@("taskid"+item.taskId)">@item.taskId</td>
 
 
 
-                    </tr>
+                </tr>
 
 
 
@@ -138,6 +139,15 @@
                 $("#user-id").select2()
             }
 
+            let ReportuserTd = $("#Reportuserid" + id).text();
+            if (userTd != '') {
+                $("#user-id").val(ReportuserTd)
+                $("#user-id").select2()
+            }
+            else {
+                $("#user-id").val("")
+                $("#user-id").select2()
+            }
 
         }
 

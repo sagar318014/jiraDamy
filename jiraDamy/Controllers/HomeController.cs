@@ -88,14 +88,7 @@ namespace jiraDamy.Controllers
           
 
         }
-        public ActionResult CreateTeam()
-        {
-            //List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
-
-            return View("CreateTeam");
-
-
-        }
+       
 
         
         public ActionResult ShowHomePage()
@@ -180,6 +173,17 @@ namespace jiraDamy.Controllers
 
             model.taskStatusList = new BL_Todo().GetStatusList();
             model.userList = new BL_Todo().GetUserList();
+            List<CommonDropdownType> FlagList = new List<CommonDropdownType>();
+            foreach (var item in new BL_Todo().GetFlagList())
+            {
+                CommonDropdownType flag = new CommonDropdownType();
+
+                flag.id = item.FlagId;
+                flag.text = item.FlagName;
+
+                FlagList.Add(flag);
+            }
+            model.FlagList = FlagList;
 
             return View(model);
         }
@@ -189,7 +193,7 @@ namespace jiraDamy.Controllers
         [ActionAccessValidation(actionId = 3)]
         public ActionResult AddTask(TaskTableViewModel model)
         {
-            //create one
+          //  create one
             if (!ModelState.IsValid)
             {
 
@@ -306,7 +310,7 @@ namespace jiraDamy.Controllers
            
 
         }
-
+        [ActionAccessValidation(actionId = 8)]
         public ActionResult UserManagement()
         {
             List<UserSignupViewModel> users = new BL_Todo().GetAllUserList();
@@ -466,5 +470,79 @@ namespace jiraDamy.Controllers
            
            // return RedirectToAction("ViewTask");
         }
+
+
+
+        /*===========FLAG AND REPORTS==============================*/
+        [ActionAccessValidation(actionId = 10)]
+        //public ActionResult FlagList(FlagViewModel model)
+        //{
+          
+
+        //    return View("FlagList", model); 
+        //}
+
+
+        public ActionResult FlagList()
+        {
+            List<FlagViewModel> model = new BL_Todo().GetFlagList();
+
+           
+
+            return View("FlagList", model);
+        }
+        public ActionResult CreateFlag()
+        {
+            new BL_Todo().GetFlagList();
+
+            return View("CreateFlag");
+
+        }
+        public ActionResult AddFlag(FlagViewModel model)
+        {
+
+            new BL_Todo().AddFlag(model);
+
+            return RedirectToAction("FlagList");
+        }
+
+        [ActionAccessValidation(actionId = 9)]
+        public ActionResult LableListView()
+        {
+            List<LableListViewModel> model = new BL_Todo().GetLableList();
+         return View("LableListView",model); 
+        }
+        public ActionResult AddLable()
+        {
+            return View("AddLable");
+        }
+        [HttpPost]
+        public ActionResult AddLable( LableListViewModel model)
+        {
+            new BL_Todo().SaveLable(model);
+            return View("LableListView");
+        }
+
+
+        [ActionAccessValidation(actionId = 11)]
+        public ActionResult SprintList()
+        {
+            List<SprintListViewModel> model = new BL_Todo().GetSprintList();
+            return View("SprintListView",model);
+
+        }
+
+
+        public ActionResult AddSprint()
+        {
+            return View("AddSprint");
+        }
+        [HttpPost]
+        public ActionResult AddSprint(SprintListViewModel model)
+        {
+            new BL_Todo().SaveSprint(model);
+            return View("SprintListView");
+        }
+
     }
 }

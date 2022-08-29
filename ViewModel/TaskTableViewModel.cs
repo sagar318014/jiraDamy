@@ -18,12 +18,14 @@ namespace ViewModel
         public string description { get; set; }
 
         public int? assigneeId { get; set; }
+        public int? reporterId { get; set; }
         public string userName { get; set; }
+        //public List<FlagType> Flags { get; set; } = new List<FlagType>();
 
-        public string statusName { get; set; }
-
-
+        public List<int> Flags { get; set; } = new List<int>();
+        public List<MemberType> Flags2 { get; set; } = new List<MemberType>();
         public List<CommonDropdownType> taskStatusList { get; set; } = new List<CommonDropdownType>();
         public List<CommonDropdownType> userList { get; set; } = new List<CommonDropdownType>();
+        public List<CommonDropdownType> FlagList { get; set; } = new List<CommonDropdownType>();
     }
 }
