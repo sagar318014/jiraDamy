@@ -67,6 +67,7 @@ namespace jiraDamy.Controllers
             {
                 item.taskStatusList = new BL_Todo().GetStatusList();
                 item.userList = new BL_Todo().GetUserList();
+                
             }
 
             return View("Active", Active);
@@ -127,6 +128,8 @@ namespace jiraDamy.Controllers
 
             model.taskStatusList = new BL_Todo().GetStatusList();
             model.userList = new BL_Todo().GetUserList();
+            model.labelList = new BL_Todo().GetAllLableList();
+            model.sprintList = new BL_Todo().GetAllSprintList();
 
             return View(model);
         }

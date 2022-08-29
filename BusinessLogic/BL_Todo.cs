@@ -360,6 +360,39 @@ namespace BusinessLogic
             new DAL_Todo().SaveSprint(sprintList);
         }
 
+       public List<CommonDropdownType> GetAllLableList()
+        {
+            List<CommonDropdownType> labels = new List<CommonDropdownType>();
+            foreach (var item in new DAL_Todo().GetLableList())
+            {
+                CommonDropdownType label = new CommonDropdownType();
+
+                label.id = item.LableId;
+                label.text = item.LableName;
+
+                labels.Add(label);
+
+            }
+            return labels;  
+        
+        }
+
+        public List<CommonDropdownType> GetAllSprintList()
+        { 
+        List<CommonDropdownType> Sprints = new List<CommonDropdownType>();
+            foreach (var item in new DAL_Todo().GetSprintList())
+            {
+                CommonDropdownType model = new CommonDropdownType();
+                model.id = item.SprintId;   
+                model.text = item.SprintName;
+
+                Sprints.Add(model);
+            }
+            return Sprints;
+        
+
+        }
+
 
 
     }

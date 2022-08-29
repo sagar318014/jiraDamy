@@ -25,5 +25,10 @@ namespace ViewModel
 
         public List<CommonDropdownType> taskStatusList { get; set; } = new List<CommonDropdownType>();
         public List<CommonDropdownType> userList { get; set; } = new List<CommonDropdownType>();
+
+        public List<CommonDropdownType> labelList { get; set; } = new List<CommonDropdownType>();
+
+        public List<CommonDropdownType> sprintList { get; set; } = new List<CommonDropdownType>();
+
     }
 }
