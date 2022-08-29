@@ -1,15 +1,18 @@
 ﻿@model ViewModel.FlagViewModel
 @{
     ViewBag.Title = "CreatFlag";
+    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
+@section Grid{
+    <h2>Create Flag</h2>
+    @using (Html.BeginForm("AddFlag", "Home", FormMethod.Post))
+    {
 
-<h2>Create Flag</h2>
-@using (Html.BeginForm("AddFlag", "Home", FormMethod.Post))
-{
 
+        <leble>Flag Name</leble>
+        <div>@Html.TextBoxFor(x => x.FlagName)</div>
+        @Html.ValidationMessageFor(x => x.FlagName)
+        <button type="submit" class="btn btn-success" style="float: right;">Add</button>
 
-    <leble>Flag Name</leble>
-    <div>@Html.TextBoxFor(x => x.FlagName)</div>
-    <button type="submit" style="background-color: lightgreen; float: right;">Add</button>
-
-}
+    }
+    }

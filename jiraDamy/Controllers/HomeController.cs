@@ -14,21 +14,21 @@ namespace jiraDamy.Controllers
     [SessionBaseAuthorize]
     public class HomeController : BaseController
     {
+
+
         [ActionAccessValidation(actionId = 4)]
         public ActionResult Todo()
         {
-            
-
-            List<TaskTableViewModel> Todo = new BL_Todo().TodoList(1);
-
+            int userId = (int)Session["UserId"];
+            List<TaskTableViewModel> Todo = new BL_Todo().FilterTaskList(userId, 1);
             foreach (var item in Todo)
-	        {
-             item.taskStatusList = new BL_Todo().GetStatusList();
-               item.userList = new BL_Todo().GetUserList();
-	        }
-            
-            
-                return View("Todo", Todo);
+            {
+                item.taskStatusList = new BL_Todo().GetStatusList();
+                item.userList = new BL_Todo().GetUserList();
+            }
+
+
+            return View("Todo", Todo);
            
 
            
@@ -62,7 +62,8 @@ namespace jiraDamy.Controllers
         [ActionAccessValidation(actionId = 5)]
         public ActionResult Active()
         {
-            List<TaskTableViewModel> Active = new BL_Todo().ActiveList(2);
+            int userId = (int)Session["UserId"];
+            List<TaskTableViewModel> Active = new BL_Todo().FilterTaskList(userId,2);
             foreach (var item in Active)
             {
                 item.taskStatusList = new BL_Todo().GetStatusList();
@@ -81,7 +82,8 @@ namespace jiraDamy.Controllers
         [ActionAccessValidation(actionId = 6)]
         public ActionResult Completed()
         {
-            List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
+            int userId = (int)Session["UserId"];
+            List<TaskTableViewModel> Completed = new BL_Todo().FilterTaskList(userId,3);
 
             return View("Completed", Completed);
           
@@ -92,12 +94,63 @@ namespace jiraDamy.Controllers
         
         public ActionResult ShowHomePage()
         {
-            TaskTableViewModel model = new TaskTableViewModel();
+            int userId = (int)Session["UserId"];
+            List<TaskTableViewModel> Todo = new BL_Todo().FilterTaskList(userId, 1);
+
+            foreach (var item in Todo)
+            {
+                item.taskStatusList = new BL_Todo().GetStatusList();
+                item.userList = new BL_Todo().GetUserList();
+            }
+            List<TaskTableViewModel> Active = new BL_Todo().FilterTaskList(userId, 2);
+            foreach (var item in Active)
+            {
+                item.taskStatusList = new BL_Todo().GetStatusList();
+                item.userList = new BL_Todo().GetUserList();
+            }
+            List<TaskTableViewModel> Completed = new BL_Todo().FilterTaskList(userId, 3);
+            TaskTableDataModel TaskLists = new TaskTableDataModel();
+            TaskLists.Todo = Todo;
+            TaskLists.Active = Active;
+            TaskLists.Completed = Completed;
 
             //this.UpdateActions();
             //model.actions = this.actions;
-            return View("Home",model);
+            return View("Home", TaskLists);
         }
+        //public ActionResult GetTask(int TaskID,int statusId)
+        //{
+
+
+        //    try
+        //    {
+        //        int userId = (int)Session["UserId"];
+        //        TaskTableViewModel model = new BL_Todo().GetFilterTaskt(userId, TaskID, statusId);
+        //        model.taskStatusList = new BL_Todo().GetStatusList();
+        //        model.userList = new BL_Todo().GetUserList();
+        //        return Json(new
+        //        {
+        //            data = RenderPartialToString("PartialViewForAddTask", model)
+
+        //        }, JsonRequestBehavior.AllowGet);
+
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        return Json(new
+        //        {
+        //            data = false
+
+        //        }, JsonRequestBehavior.AllowGet);
+
+        //    }
+
+
+
+
+
+        //}
 
         [HttpPost]
         public ActionResult AddTeam(TaskTableViewModel model)
@@ -184,21 +237,27 @@ namespace jiraDamy.Controllers
 
         }
 
+        public ActionResult MoveInToToDo(int Id)
+        {
 
+            new BL_Todo().MoveToToDo(Id);
+
+            return RedirectToAction("ShowHomePage");
+        }
 
         public ActionResult MoveInToActive(int Id)
         {           
 
             new BL_Todo().MoveToActive(Id);
 
-            return RedirectToAction("Active");
+            return RedirectToAction("ShowHomePage");
         }
 
         public ActionResult MoveInToCompleted(int Id)
         {
             new BL_Todo().MoveToCompleted(Id);
 
-            return RedirectToAction("Completed");
+            return RedirectToAction("ShowHomePage");
         }
 
         public ActionResult Delete(int id)
@@ -437,12 +496,12 @@ namespace jiraDamy.Controllers
         [ActionAccessValidation(actionId = 10)]
         //public ActionResult FlagList(FlagViewModel model)
         //{
-          
+
 
         //    return View("FlagList", model); 
         //}
 
-
+      
         public ActionResult FlagList()
         {
             List<FlagViewModel> model = new BL_Todo().GetFlagList();
@@ -451,6 +510,8 @@ namespace jiraDamy.Controllers
 
             return View("FlagList", model);
         }
+
+        
         public ActionResult CreateFlag()
         {
             new BL_Todo().GetFlagList();
@@ -458,8 +519,15 @@ namespace jiraDamy.Controllers
             return View("CreateFlag");
 
         }
+
+        
         public ActionResult AddFlag(FlagViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+
+                return View("CreateFlag", model);
+            }
 
             new BL_Todo().AddFlag(model);
 
