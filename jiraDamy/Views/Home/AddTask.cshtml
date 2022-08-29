@@ -17,7 +17,7 @@
 
 
         <div class="mt-1">
-            <label>Task Current Status</label>
+            <label style="display:block;">Task Current Status</label>
             <select id="sagar" name="taskStatus" class="select-2 col-lg-3">
                 @foreach (var item in Model.taskStatusList)
                 {
@@ -29,7 +29,7 @@
         </div>
 
         <div class="mt-1">
-            <label>Assigneee</label>
+            <label style="display:block;">Assignee</label>
             <select name="assigneeId" class="select-2 col-lg-3">
                 @foreach (var item in Model.userList)
                 {
@@ -41,7 +41,7 @@
 
         </div> 
         <div class="mt-1">
-            <label>Reporters</label>
+            <label style="display:block;">Reporters</label>
             <select name="reporterId" class="select-2 col-lg-3">
                 @foreach (var item in Model.userList)
                 {
@@ -52,7 +52,7 @@
 
         </div>
         <div class="mt-1">
-            <label>Flag</label>
+            <label style="display:block;">Flag</label>
             <select id="Flags" name="Flags" class="select-2 col-lg-3" multiple>
                 @foreach (var item in Model.FlagList)
                 {
@@ -62,8 +62,8 @@
         </div>
         <div style="margin-top:15px;">
 
-            <button type="reset" style="background-color:lightcoral;float:right;">Clear All</button>
-            <button type="submit" style="background-color: lightgreen; float: right;">Add</button>
+            <button type="reset" class="btn btn-danger" style="float:right;margin-left:15px">Clear All</button>
+            <button type="submit" style="float: right;" class="btn btn-success">Add</button>
 
         </div>
 

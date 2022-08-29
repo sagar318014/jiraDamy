@@ -9,9 +9,9 @@ namespace ViewModel
 {
     public class FlagViewModel
     {
-        [Required]
         public int FlagId { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "please enter Flag name")]
         public string FlagName { get; set; }
     }
 }
