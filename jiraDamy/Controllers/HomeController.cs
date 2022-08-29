@@ -20,27 +20,15 @@ namespace jiraDamy.Controllers
         public ActionResult Todo()
         {
             int userId = (int)Session["UserId"];
-            List<TaskTableViewModel> Todo = new BL_Todo().FilterTaskList(userId,1);
-
+            List<TaskTableViewModel> Todo = new BL_Todo().FilterTaskList(userId, 1);
             foreach (var item in Todo)
-	        {
-             item.taskStatusList = new BL_Todo().GetStatusList();
-               item.userList = new BL_Todo().GetUserList();
-	        }
-            List<TaskTableViewModel> Active = new BL_Todo().FilterTaskList(userId, 2);
-            foreach (var item in Active)
             {
                 item.taskStatusList = new BL_Todo().GetStatusList();
                 item.userList = new BL_Todo().GetUserList();
             }
-            List<TaskTableViewModel> Completed = new BL_Todo().FilterTaskList(userId, 3);
-            TaskTableDataModel TaskLists = new TaskTableDataModel();
-                TaskLists.Todo = Todo;
-                TaskLists.Active = Active;
-                TaskLists.Completed = Completed;
 
 
-            return View("Todo", TaskLists);
+            return View("Todo", Todo);
            
 
            
@@ -112,11 +100,29 @@ namespace jiraDamy.Controllers
         
         public ActionResult ShowHomePage()
         {
-            TaskTableViewModel model = new TaskTableViewModel();
+            int userId = (int)Session["UserId"];
+            List<TaskTableViewModel> Todo = new BL_Todo().FilterTaskList(userId, 1);
+
+            foreach (var item in Todo)
+            {
+                item.taskStatusList = new BL_Todo().GetStatusList();
+                item.userList = new BL_Todo().GetUserList();
+            }
+            List<TaskTableViewModel> Active = new BL_Todo().FilterTaskList(userId, 2);
+            foreach (var item in Active)
+            {
+                item.taskStatusList = new BL_Todo().GetStatusList();
+                item.userList = new BL_Todo().GetUserList();
+            }
+            List<TaskTableViewModel> Completed = new BL_Todo().FilterTaskList(userId, 3);
+            TaskTableDataModel TaskLists = new TaskTableDataModel();
+            TaskLists.Todo = Todo;
+            TaskLists.Active = Active;
+            TaskLists.Completed = Completed;
 
             //this.UpdateActions();
             //model.actions = this.actions;
-            return View("Home",model);
+            return View("Home", TaskLists);
         }
         public ActionResult GetTask(int TaskID,int statusId)
         {
