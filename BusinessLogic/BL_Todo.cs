@@ -47,21 +47,13 @@ namespace BusinessLogic
 
         }
 
-        public List<TaskTableViewModel> FilterTaskList(int userId,int id)
+        public List<TaskTableViewModel> FilterTaskList(int userId, int id)
         {
 
 
             List<TaskTableViewModel> TaskList = new List<TaskTableViewModel>();
-            List<TaskDataTable> FilterTaskList = new DAL_Todo().TaskList(userId,id);
+            List<TaskDataTable> FilterTaskList = new DAL_Todo().TaskList(userId, id);
             foreach (var item in FilterTaskList)
-            List<TaskTableViewModel> Todo = new List<TaskTableViewModel>();
-
-            List<TaskDataTable> TodoList = new DAL_Todo().TaskList(id);
-
-
-
-
-            foreach (var item in TodoList)
             {
                 TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
 
@@ -78,7 +70,7 @@ namespace BusinessLogic
 
                 TaskList.Add(taskTableViewModel);
             }
-            return TaskList; 
+            return TaskList;
 
 
         }

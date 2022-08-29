@@ -329,7 +329,7 @@ namespace jiraDamy.Controllers
            
 
         }
-        [ActionAccessValidation(actionId = 8)]
+        [ActionAccessValidation(actionId = 14)]
         public ActionResult UserManagement()
         {
             List<UserSignupViewModel> users = new BL_Todo().GetAllUserList();
