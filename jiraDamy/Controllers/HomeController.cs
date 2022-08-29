@@ -418,12 +418,12 @@ namespace jiraDamy.Controllers
         [ActionAccessValidation(actionId = 10)]
         //public ActionResult FlagList(FlagViewModel model)
         //{
-          
+
 
         //    return View("FlagList", model); 
         //}
 
-
+      
         public ActionResult FlagList()
         {
             List<FlagViewModel> model = new BL_Todo().GetFlagList();
@@ -432,6 +432,8 @@ namespace jiraDamy.Controllers
 
             return View("FlagList", model);
         }
+
+        
         public ActionResult CreateFlag()
         {
             new BL_Todo().GetFlagList();
@@ -443,6 +445,11 @@ namespace jiraDamy.Controllers
         
         public ActionResult AddFlag(FlagViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+
+                return View("CreateFlag", model);
+            }
 
             new BL_Todo().AddFlag(model);
 

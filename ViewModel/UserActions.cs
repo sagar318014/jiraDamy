@@ -13,18 +13,19 @@ namespace ViewModel
         public int ActionId { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "please enter controller name")]
         public string ControllerName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "please enter action name")]
         public string ActionName { get; set; }
 
-        [Required]
+        
         public Boolean ShowInSideBar { get; set; }
-       
-        [Required]
+
+        [Required(ErrorMessage = "please enter display name")]
         public string DisplayName { get; set; }
 
+        [Required(ErrorMessage = "please select role")]
         public List<int> AccessRolls { get; set; } = new List<int>();
 
     }
