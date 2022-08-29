@@ -53,25 +53,25 @@ namespace BusinessLogic
 
         }
 
-        public TaskTableViewModel GetFilterTaskList(int userId, int taskId,int statusId)
-        {
-            List<TaskDataTable> FilterTaskList = new DAL_Todo().TaskList(userId, statusId);
-            TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
-            foreach (var item in FilterTaskList)
-            {
-                if (item.taskId == taskId) {
-                    taskTableViewModel.description = item.description;
-                    taskTableViewModel.taskId = item.taskId;
-                    taskTableViewModel.taskName = item.taskName;
-                    taskTableViewModel.taskStatus = item.taskStatus;
-                    taskTableViewModel.assigneeId = item.assigneeId;
-                    taskTableViewModel.userName = item.userName;
-                }
-            }
-            return taskTableViewModel;
+        //public TaskTableViewModel GetFilterTaskt(int userId, int taskId,int statusId)
+        //{
+        //    List<TaskDataTable> FilterTaskList = new DAL_Todo().TaskList(userId, statusId);
+        //    TaskTableViewModel taskTableViewModel = new TaskTableViewModel();
+        //    foreach (var item in FilterTaskList)
+        //    {
+        //        if (item.taskId == taskId) {
+        //            taskTableViewModel.description = item.description;
+        //            taskTableViewModel.taskId = item.taskId;
+        //            taskTableViewModel.taskName = item.taskName;
+        //            taskTableViewModel.taskStatus = item.taskStatus;
+        //            taskTableViewModel.assigneeId = item.assigneeId;
+        //            taskTableViewModel.userName = item.userName;
+        //        }
+        //    }
+        //    return taskTableViewModel;
 
 
-        }
+        //}
 
         //public List<TaskTableViewModel> ActiveList(int userId,int id)
         //{
@@ -142,6 +142,14 @@ namespace BusinessLogic
             }
 
             return statusDropdownList;
+        }
+        public void MoveToToDo(int Id)
+        {
+
+            new DAL_Todo().MoveNext(Id,1);
+
+
+
         }
         public void MoveToActive(int Id)
         {

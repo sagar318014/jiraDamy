@@ -124,37 +124,39 @@ namespace jiraDamy.Controllers
             //model.actions = this.actions;
             return View("Home", TaskLists);
         }
-        public ActionResult GetTask(int TaskID,int statusId)
-        {
+        //public ActionResult GetTask(int TaskID,int statusId)
+        //{
 
 
-            try
-            {
-                int userId = (int)Session["UserId"];
-                TaskTableViewModel model = new BL_Todo().GetFilterTaskList(userId, TaskID, statusId);
-                return Json(new
-                {
-                    data = RenderPartialToString("PartialViewForAddTask", model)
+        //    try
+        //    {
+        //        int userId = (int)Session["UserId"];
+        //        TaskTableViewModel model = new BL_Todo().GetFilterTaskt(userId, TaskID, statusId);
+        //        model.taskStatusList = new BL_Todo().GetStatusList();
+        //        model.userList = new BL_Todo().GetUserList();
+        //        return Json(new
+        //        {
+        //            data = RenderPartialToString("PartialViewForAddTask", model)
 
-                }, JsonRequestBehavior.AllowGet);
+        //        }, JsonRequestBehavior.AllowGet);
 
-            }
-            catch (Exception e)
-            {
+        //    }
+        //    catch (Exception e)
+        //    {
 
-                return Json(new
-                {
-                    data = false
+        //        return Json(new
+        //        {
+        //            data = false
 
-                }, JsonRequestBehavior.AllowGet);
+        //        }, JsonRequestBehavior.AllowGet);
 
-            }
-
-
+        //    }
 
 
 
-        }
+
+
+        //}
 
         [HttpPost]
         public ActionResult AddTeam(TaskTableViewModel model)
@@ -212,7 +214,13 @@ namespace jiraDamy.Controllers
 
         }
 
+        public ActionResult MoveInToToDo(int Id)
+        {
 
+            new BL_Todo().MoveToToDo(Id);
+
+            return RedirectToAction("ShowHomePage");
+        }
 
         public ActionResult MoveInToActive(int Id)
         {           

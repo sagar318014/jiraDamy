@@ -119,7 +119,7 @@ namespace DataAcess
         }
         public void DeleteRecord(int Id)
         {
-            string sql = "delete form taskDataTable Where taskId = @Id";
+            string sql = "delete from taskDataTable Where taskId = @Id";
             using (var db = new SqlConnection(connectionString))
             {
                 db.Open();
