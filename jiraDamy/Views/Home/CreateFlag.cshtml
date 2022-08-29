@@ -1,0 +1,15 @@
+﻿@model ViewModel.FlagViewModel
+@{
+    ViewBag.Title = "CreatFlag";
+}
+
+<h2>Create Flag</h2>
+@using (Html.BeginForm("AddFlag", "Home", FormMethod.Post))
+{
+
+
+    <leble>Flag Name</leble>
+    <div>@Html.TextBoxFor(x => x.FlagName)</div>
+    <button type="submit" style="background-color: lightgreen; float: right;">Add</button>
+
+}

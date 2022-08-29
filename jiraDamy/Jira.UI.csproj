@@ -141,6 +141,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActionController.cs" />
     <Compile Include="Controllers\AddTeamController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -203,6 +204,9 @@
     <Content Include="Views\AddTeam\CreateTeam.cshtml" />
     <Content Include="Views\AddTeam\TeamManagement.cshtml" />
     <Content Include="Views\AddTeam\TeamMemberList.cshtml" />
+    <Content Include="Views\Home\FlagList.cshtml" />
+    <Content Include="Views\Home\CreateFlag.cshtml" />
+    <Content Include="Views\Action\SetAction.cshtml" />
     <Content Include="Views\Home\LableListView.cshtml" />
     <Content Include="Views\Home\AddLable.cshtml" />
     <Content Include="Views\Home\SprintListView.cshtml" />

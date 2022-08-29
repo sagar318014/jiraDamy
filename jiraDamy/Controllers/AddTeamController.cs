@@ -64,7 +64,7 @@ namespace jiraDamy.Controllers
 
             try
             {
-                List<TeamsViewModel> model = new  BL_AddTeam().MemberList(TeamID);
+                List<TeamsViewModel> model = new BL_AddTeam().MemberList(TeamID);
                 return Json(new
                 {
                     data = RenderPartialToString("TeamMemberList", model)
@@ -72,7 +72,7 @@ namespace jiraDamy.Controllers
                 }, JsonRequestBehavior.AllowGet);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 return Json(new
@@ -82,10 +82,6 @@ namespace jiraDamy.Controllers
                 }, JsonRequestBehavior.AllowGet);
 
             }
-
-
-           
-
 
         }
 
