@@ -23,6 +23,9 @@ namespace DataAcess.entits
 
         public string statusName { get; set; }
 
-        public DataTable FlagList { get; set; } 
+        public DataTable FlagList { get; set; }
+        public DataTable LableList { get; set; }
+
+        public int sprintName { get; set; }
     }
 }

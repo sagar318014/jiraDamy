@@ -35,7 +35,20 @@ namespace DataAcess.entits
                 db.Close();
             }
         }
+        public List<Actions> GetActionList()
+        {
 
+            string sql = @"select * from [dbo].[Actions]";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                List<Actions> ActionList = db.Query<Actions>(sql).AsList();
+                db.Close();
+
+                return ActionList;
+            }
+        }
 
     }
 }

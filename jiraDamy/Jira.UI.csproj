@@ -211,6 +211,7 @@
     <Content Include="Views\Home\AddLable.cshtml" />
     <Content Include="Views\Home\SprintListView.cshtml" />
     <Content Include="Views\Home\AddSprint.cshtml" />
+    <Content Include="Views\Action\ActionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

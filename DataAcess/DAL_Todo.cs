@@ -26,7 +26,8 @@ namespace DataAcess
             //                ,@description
             //                ,@taskStatus
             //                 ,@assigneeId)";
-            string sql = @"EXEC [dbo].[usp_Addtask] @taskName, @description, @taskStatus, @assigneeId, @reporterId, @FlagList";
+            string sql = @"EXEC [dbo].[usp_Addtask] @taskName, @description, @taskStatus, @assigneeId, @reporterId,
+                        @FlagList,@SprintName,@LableName";
             object ts = new
             {
                 taskName = AddTask.taskName,
@@ -34,7 +35,10 @@ namespace DataAcess
                 taskStatus = AddTask.taskStatus,
                 assigneeId = AddTask.assigneeId,
                 reporterId = AddTask.reporterId,
-                FlagList = AddTask.FlagList.AsTableValuedParameter("AddMembers")
+                SprintName = AddTask.sprintName,
+                FlagList = AddTask.FlagList.AsTableValuedParameter("AddMembers"),
+                LableName = AddTask.LableList.AsTableValuedParameter("AddMembers")
+
             };
             using (var db = new SqlConnection(connectionString))
             {
@@ -66,14 +70,17 @@ namespace DataAcess
 
 
 
-        public List<TaskDataTable> TaskList(int id)
+        public List<TaskDataTable> TaskList(int userId,int id)
         {
 
-            //string sql = "Select * from taskDataTable where [taskStatus]=@taskStatus";
-            string sql = "select t.taskId,t.taskName,t.taskStatus,t.description,u.userName,t.assigneeId from taskDataTable t left join [user] u on t.assigneeId = u.Id  where [taskStatus]=@taskStatus";
+            string sql = "EXEC [dbo].[usp_getFilterTaskList] @userId,@taskStatus";
+            //string sql = "select t.taskId,t.taskName,t.taskStatus,t.description,u.userName,t.assigneeId from taskDataTable t left join [user] u on t.assigneeId = u.Id  where [taskStatus]=@taskStatus";
+
             using (var db = new SqlConnection(connectionString))
             {
-                List<TaskDataTable> TaskList = db.Query<TaskDataTable>(sql, new { taskStatus = id }).AsList();
+                db.Open();
+                List<TaskDataTable> TaskList = db.Query<TaskDataTable>(sql, new { userId = userId,taskStatus = id }).AsList();
+                db.Close();
                 return TaskList;
 
             }
@@ -116,7 +123,7 @@ namespace DataAcess
         }
         public void DeleteRecord(int Id)
         {
-            string sql = "delete form taskDataTable Where taskId = @Id";
+            string sql = "delete from taskDataTable Where taskId = @Id";
             using (var db = new SqlConnection(connectionString))
             {
                 db.Open();
@@ -372,6 +379,13 @@ namespace DataAcess
 
 
         }
+
+
+       
+
+       
+
+
 
     }
 

@@ -6,13 +6,13 @@
 }
 @section Grid{
 
-    @{Html.RenderPartial("PartialLinksView", "CreateTeam");}
+
 
     @using (Html.BeginForm("AddTeam", "AddTeam", FormMethod.Post))
     {
-        <label>Team Name</label>
+        <label style="display:block">Team Name</label>
         <div>@Html.TextBoxFor(x => x.TeamName)</div>
-
+        @Html.ValidationMessageFor(x => x.TeamName)
 
         <label style="display:block">Team Leader Name</label>
         <select id="TeamLeder" name="TeamLeder" class="select-2 col-lg-3">
@@ -21,8 +21,8 @@
                 <option value="@item.id">@item.text</option>
             }
         </select>
-
-        <label>Team Member Name</label>
+        
+        <label style="display:block">Team Member Name</label>
         <select id="TeamMember" name="TeamMember1" class="select-2 col-lg-3" multiple>
             @foreach (var item in Model.TeamLeders)
             {
@@ -33,7 +33,7 @@
         <div style="margin-top:15px;">
 
 
-            <button type="submit" style="background-color: lightgreen; float: right;">Add</button>
+            <button type="submit" class="btn btn-success" style="float: right;">Add</button>
 
         </div>
 

@@ -6,10 +6,9 @@
             <h2>TMS</h2>
         </div>
 
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Setting</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
+        @*<ul class="list-unstyled components">
+            <li class="active">*@
+                <ul>
                     <li>
                         <a>@Html.ActionLink("Home", "ShowHomePage", "Home")</a>
                     </li>
@@ -27,9 +26,9 @@
                         <a>@Html.ActionLink("Log Out", "Logout", "Authentication")</a>
                     </li>
                 </ul>
-            </li>
+            @*</li>
 
-        </ul>
+        </ul>*@
     </nav>
 
 </div>
