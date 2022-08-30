@@ -3,15 +3,12 @@
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h2>TMS</h2>
+            <h1  style="background-color:lightblue">@Html.ActionLink("TMS", "ShowHomePage", "Home")</h1>
         </div>
 
         @*<ul class="list-unstyled components">
             <li class="active">*@
-                <ul>
-                    <li>
-                        <a>@Html.ActionLink("Home", "ShowHomePage", "Home")</a>
-                    </li>
+                <ul style="list-style-type: none;padding-left:0px;background-color:lightsteelblue;height:600px">
                     @foreach (var item in Model)
                     {
                         if (item.ShowInSideBar == true)

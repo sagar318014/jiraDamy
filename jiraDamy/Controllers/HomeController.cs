@@ -16,25 +16,25 @@ namespace jiraDamy.Controllers
     {
 
 
-        [ActionAccessValidation(actionId = 4)]
-        public ActionResult Todo()
-        {
-            int userId = (int)Session["UserId"];
-            List<TaskTableViewModel> Todo = new BL_Todo().FilterTaskList(userId, 1);
-            foreach (var item in Todo)
-            {
-                item.taskStatusList = new BL_Todo().GetStatusList();
-                item.userList = new BL_Todo().GetUserList();
-            }
+        //[ActionAccessValidation(actionId = 4)]
+        //public ActionResult Todo()
+        //{
+        //    int userId = (int)Session["UserId"];
+        //    List<TaskTableViewModel> Todo = new BL_Todo().FilterTaskList(userId, 1);
+        //    foreach (var item in Todo)
+        //    {
+        //        item.taskStatusList = new BL_Todo().GetStatusList();
+        //        item.userList = new BL_Todo().GetUserList();
+        //    }
 
 
-            return View("Todo", Todo);
+        //    return View("Todo", Todo);
            
 
            
 
 
-        }
+        //}
 
         //public ActionResult getdata()
         //{
@@ -59,36 +59,36 @@ namespace jiraDamy.Controllers
         //    }, JsonRequestBehavior.AllowGet);
         //}
 
-        [ActionAccessValidation(actionId = 5)]
-        public ActionResult Active()
-        {
-            int userId = (int)Session["UserId"];
-            List<TaskTableViewModel> Active = new BL_Todo().FilterTaskList(userId,2);
-            foreach (var item in Active)
-            {
-                item.taskStatusList = new BL_Todo().GetStatusList();
-                item.userList = new BL_Todo().GetUserList();
+        //[ActionAccessValidation(actionId = 5)]
+        //public ActionResult Active()
+        //{
+        //    int userId = (int)Session["UserId"];
+        //    List<TaskTableViewModel> Active = new BL_Todo().FilterTaskList(userId,2);
+        //    foreach (var item in Active)
+        //    {
+        //        item.taskStatusList = new BL_Todo().GetStatusList();
+        //        item.userList = new BL_Todo().GetUserList();
                 
-            }
+        //    }
 
-            return View("Active", Active);
+        //    return View("Active", Active);
            
 
 
-        }
+        //}
 
 
 
-        [ActionAccessValidation(actionId = 6)]
-        public ActionResult Completed()
-        {
-            int userId = (int)Session["UserId"];
-            List<TaskTableViewModel> Completed = new BL_Todo().FilterTaskList(userId,3);
+        //[ActionAccessValidation(actionId = 6)]
+        //public ActionResult Completed()
+        //{
+        //    int userId = (int)Session["UserId"];
+        //    List<TaskTableViewModel> Completed = new BL_Todo().FilterTaskList(userId,3);
 
-            return View("Completed", Completed);
+        //    return View("Completed", Completed);
           
 
-        }
+        //}
        
 
         
@@ -151,17 +151,6 @@ namespace jiraDamy.Controllers
 
 
         //}
-
-        [HttpPost]
-        public ActionResult AddTeam(TaskTableViewModel model)
-        {
-           
-
-            //TaskTableViewModel model = new TaskTableViewModel();
-
-            return View(model);
-        }
-
 
 
         // Form show

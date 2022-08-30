@@ -12,9 +12,12 @@
     @*<div class="col-lg-4">
             @RenderSection("AddTaskForm", false)
         </div>*@
-    <div class="col-lg-10">
+<div class="col-lg-10">
+    <h1 class="text-center" style="background-color:lightgray">Welcome To task management System</h1>
+    <div style="height: 600px; background-color: ghostwhite">
         @RenderSection("Grid", false)
     </div>
+</div>
 </div>
 @section scripts{
     @RenderSection("scripts", false)
