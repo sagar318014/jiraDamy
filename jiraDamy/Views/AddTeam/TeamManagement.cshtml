@@ -6,16 +6,16 @@
 @section Grid
  {
     <h1 style="text-align:center">Team Management</h1>
-    @*<a href="@Url.Action("CreateTeam")" class="btn btn-success">Create Team</a>*@
-    <button style="float:right;margin-right:100px;">@Html.ActionLink("Create Team", "CreateTeam", "AddTeam")</button>
+    <a href="@Url.Action("CreateTeam", "AddTeam")" class="btn btn-success" style="float:right">Create Team</a>
+    @*<button style="float:right;margin-right:100px;">@Html.ActionLink("Create Team", "CreateTeam", "AddTeam")</button>*@
     <table class="table table-striped">
         <thead>
             <tr>
 
                 <th>Team Name</th>
-                <th>Team Leder</th>
-                <th>Number Of Member  (includding leader)</th>
-                <th>Details</th>
+                <th>Team Leader</th>
+                <th>Number Of Member (includding leader)</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -56,33 +56,33 @@
             </div>
         </div>
     </div>
-    }
-    @section scripts{
+}
+@section scripts{
 
-        <script>
-
-
-            function ViewTeamMember(id) {
-                commonAjaxCall({
-                    /* window.location.replace("/Home/Delete?id="+id);*/
-                    url: "/AddTeam/TeamMemberList?TeamID=" + id,
-                    success: (response) => {
-
-                        if (response.data != false) {
-
-                            $("#modal-body-id").html(response.data);
-                        }
-                        else {
+    <script>
 
 
-                        }
+        function ViewTeamMember(id) {
+            commonAjaxCall({
+                /* window.location.replace("/Home/Delete?id="+id);*/
+                url: "/AddTeam/TeamMemberList?TeamID=" + id,
+                success: (response) => {
+
+                    if (response.data != false) {
+
+                        $("#modal-body-id").html(response.data);
                     }
-                })
-
-            }
+                    else {
 
 
+                    }
+                }
+            })
+
+        }
 
 
-        </script>
-    }
+
+
+    </script>
+}

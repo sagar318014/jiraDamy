@@ -5,31 +5,42 @@
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
 }
 @section Grid{
+    <h1 style="text-align:center">Create Team</h1>
 
 
-
-    @using (Html.BeginForm("AddTeam", "AddTeam", FormMethod.Post))
+    @using (Html.BeginForm("CreateTeam", "AddTeam", FormMethod.Post))
     {
-        <label style="display:block">Team Name</label>
-        <div>@Html.TextBoxFor(x => x.TeamName)</div>
-        @Html.ValidationMessageFor(x => x.TeamName)
-
-        <label style="display:block">Team Leader Name</label>
-        <select id="TeamLeder" name="TeamLeder" class="select-2 col-lg-3">
-            @foreach (var item in Model.TeamLeders)
-            {
-                <option value="@item.id">@item.text</option>
-            }
-        </select>
-        
-        <label style="display:block">Team Member Name</label>
-        <select id="TeamMember" name="TeamMember1" class="select-2 col-lg-3" multiple>
-            @foreach (var item in Model.TeamLeders)
-            {
-                <option value="@item.id">@item.text</option>
-            }
-        </select>
-
+<div class="pb-1">
+    <label style="display:block">Team Name</label>
+    <div>
+        @Html.TextBoxFor(x => x.TeamName)
+        @Html.ValidationMessageFor(x => x.TeamName, "", new { @class = "text-danger" })
+    </div>
+    
+</div>
+<div class="pb-1">
+    <label style="display:block">Team Leader Name</label>
+    <select id="TeamLeder" name="TeamLeder" class="select-2 col-lg-3">
+        <option ></option>
+        @foreach (var item in Model.TeamLeders)
+        {
+            <option value="@item.id">@item.text</option>
+        }
+    </select>
+    @Html.ValidationMessageFor(x => x.TeamLeder, "", new { @class = "text-danger" })
+</div>
+<div class="pb-1">
+    <label style="display:block">Team Member Name</label>
+    <select id="TeamMember" name="TeamMember1" class="select-2 col-lg-3" multiple>
+        <option></option>
+        @foreach (var item in Model.TeamLeders)
+        {
+            <option value="@item.id">@item.text</option>
+        }
+    </select>
+    @Html.ValidationMessageFor(x => x.TeamMember1, "", new { @class = "text-danger" })
+    @*<span class="field-validation-error text-danger" data-valmsg-for="TeamLeder" data-valmsg-replace="true">please enter team leader name</span>*@
+</div>
         <div style="margin-top:15px;">
 
 

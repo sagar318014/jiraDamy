@@ -11,7 +11,7 @@ namespace ViewModel
     {
         public int FlagId { get; set; }
 
-        [Required(ErrorMessage = "please enter Flag name")]
+        [Required(ErrorMessage = "please enter flag name")]
         public string FlagName { get; set; }
     }
 }

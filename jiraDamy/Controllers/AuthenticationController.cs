@@ -40,6 +40,7 @@ namespace jiraDamy.Controllers
             }
             Session["Username"] = authenticatedUserModel.Username;
             Session["UserId"] = authenticatedUserModel.Id;
+            Session["RoleId"] = authenticatedUserModel.RoleId;
             List<UserActions> Actions = new BL_Authentication().GetActionList(authenticatedUserModel.RoleId);
             Session["Actions"] = Actions;
 

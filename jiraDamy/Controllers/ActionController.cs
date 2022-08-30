@@ -6,9 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ViewModel;
 using BusinessLogic;
-
-
-
+using BusinessLogic.Authentication;
 
 namespace jiraDamy.Controllers
 {
@@ -27,6 +25,8 @@ namespace jiraDamy.Controllers
         public ActionResult SetAction()
         {
             UserActions modal = new UserActions();
+            List<UserActions> Actions = new BL_Authentication().GetActionList((int)Session["RoleId"]);
+            Session["Actions"] = Actions;
             return View(modal);
         }
         [HttpPost]

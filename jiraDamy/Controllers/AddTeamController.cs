@@ -12,46 +12,47 @@ namespace jiraDamy.Controllers
     [SessionBaseAuthorize]
     public class AddTeamController : BaseController
     {
-        [HttpGet]
-        public ActionResult AddTeam()
         
-        
-        
-        {
-            ViewBag.Message = "Your application description page.";
+        //public ActionResult AddTeam()
+        //{
+            
 
-            TeamsViewModel model = new TeamsViewModel();
+        //    TeamsViewModel model = new TeamsViewModel();
 
-            model.TeamLeders = new BL_Todo().GetUserList();
+        //    model.TeamLeders = new BL_Todo().GetUserList();
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
         [HttpPost]
-       
-        public ActionResult AddTeam(TeamsViewModel model)
+        
+        public ActionResult CreateTeam(TeamsViewModel model)
         {
-
+            if (!ModelState.IsValid)
+            {
+                model.TeamLeders = new BL_Todo().GetUserList();
+                return View("CreateTeam", model);
+            }
             new BL_AddTeam().SaveTeam(model);
             //TaskTableViewModel model = new TaskTableViewModel();
 
-            return RedirectToAction("CreateTeam",model);
+            return RedirectToAction("TeamManagement");
         }
-        [ActionAccessValidation(actionId = 7)]
+        [HttpGet]
         public ActionResult CreateTeam()
         {
             //List<TaskTableViewModel> Completed = new BL_Todo().CompletedList(3);
-            TeamsViewModel ViewMOdel = new TeamsViewModel();
+            TeamsViewModel model = new TeamsViewModel();
 
-            ViewMOdel.TeamLeders = new BL_Todo().GetUserList();
-            return View("CreateTeam", ViewMOdel);
+            model.TeamLeders = new BL_Todo().GetUserList();
+            return View("CreateTeam", model);
 
 
         }
-      
+        [ActionAccessValidation(actionId = 7)]
         public ActionResult TeamManagement()
         {
             List<TeamsViewModel> TeamManagement = new BL_AddTeam().TeamsList();
-            
+
 
             return View("TeamManagement", TeamManagement);
 

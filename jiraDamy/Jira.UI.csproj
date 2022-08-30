@@ -205,7 +205,7 @@
     <Content Include="Views\AddTeam\TeamManagement.cshtml" />
     <Content Include="Views\AddTeam\TeamMemberList.cshtml" />
     <Content Include="Views\Home\FlagList.cshtml" />
-    <Content Include="Views\Home\CreateFlag.cshtml" />
+    <Content Include="Views\Home\AddFlag.cshtml" />
     <Content Include="Views\Action\SetAction.cshtml" />
     <Content Include="Views\Home\LableListView.cshtml" />
     <Content Include="Views\Home\AddLable.cshtml" />

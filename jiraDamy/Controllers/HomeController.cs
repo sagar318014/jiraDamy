@@ -512,21 +512,21 @@ namespace jiraDamy.Controllers
         }
 
         
-        public ActionResult CreateFlag()
+        public ActionResult AddFlag()
         {
-            new BL_Todo().GetFlagList();
+            //new BL_Todo().GetFlagList();
 
-            return View("CreateFlag");
+            return View();
 
         }
 
-        
+        [HttpPost]
         public ActionResult AddFlag(FlagViewModel model)
         {
             if (!ModelState.IsValid)
             {
 
-                return View("CreateFlag", model);
+                return View("AddFlag", model);
             }
 
             new BL_Todo().AddFlag(model);
