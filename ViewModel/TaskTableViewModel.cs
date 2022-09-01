@@ -12,6 +12,7 @@ namespace ViewModel
 
         [Required(ErrorMessage = "please enter task name")]
         public string taskName { get; set; }
+
         public int? taskStatus { get; set; }
 
         [Required(ErrorMessage = "pleas enter description")]
