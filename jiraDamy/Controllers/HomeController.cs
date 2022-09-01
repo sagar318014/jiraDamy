@@ -360,8 +360,20 @@ namespace jiraDamy.Controllers
 
         public ActionResult EditUser(UserSignupViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                model.RoleIdList = new BL_Todo().GetRoleList();
+                return RedirectToAction("EditUser", model);
+                return Json(new
+                {
+                    data = true
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
             try
             {
+
                 new BL_Todo().UpdateUser(model);
                 return Json(new
                 {
@@ -384,6 +396,7 @@ namespace jiraDamy.Controllers
 
             
 
+        
         }
 
         public ActionResult GetUserCount(int id)
@@ -543,13 +556,19 @@ namespace jiraDamy.Controllers
         }
         public ActionResult AddLable()
         {
+
             return View("AddLable");
         }
         [HttpPost]
         public ActionResult AddLable( LableListViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+
+                return View("AddLable", model);
+            }
             new BL_Todo().SaveLable(model);
-            return View("LableListView");
+            return RedirectToAction("LableListView");
         }
 
 

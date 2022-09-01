@@ -336,7 +336,7 @@ namespace BusinessLogic
                 model.description = item.description;
                 model.taskStatus = item.taskStatus;
                 model.assigneeId = item.assigneeId;
-                //model.statusName = item.statusName;
+                model.statusName = item.statusName;
                 model.taskId = item.taskId;
 
                 users.Add(model);

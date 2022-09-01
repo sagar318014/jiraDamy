@@ -7,6 +7,7 @@
 @section Grid{
 
     <div> <h1 style="font-weight:bold;text-align:center">Sprint List</h1></div>
+    <a href="@Url.Action("AddSprint", "Home")" class="btn btn-success" style="float:right">Create Sprint</a>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <div class="text-center">
         <table class="table table-striped">
@@ -23,8 +24,6 @@
                         <td>@item.SprintName</td>
                     </tr>
 
-
-
                 }
 
             </tbody>
@@ -33,17 +32,6 @@
 
 
     </div>
-
-
-
-    <div>
-        <button style="float:right;margin-right:100px;">@Html.ActionLink("Create label", "AddLable", "Home")</button>
-        @*<a href="@Url.Action("/home/AddLableList")" class="btn btn-default" style="float: left">  Add </a>*@
-    </div>
-
-
-
-
 
 }
 

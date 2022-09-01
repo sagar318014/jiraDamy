@@ -58,13 +58,10 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="SignUp" class="btn btn-default" />
+            <a href="@Url.Action("ShowHomePage", "Home")" class="btn btn-default" > Home </a>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            @Html.ActionLink("click to LogIn", "Login")
-        </div>
-    </div>
+   
 </div>
 }
 @section scripts{

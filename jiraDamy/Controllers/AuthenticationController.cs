@@ -43,24 +43,7 @@ namespace jiraDamy.Controllers
             List<UserActions> Actions = new BL_Authentication().GetActionList(authenticatedUserModel.RoleId);
             Session["Actions"] = Actions;
 
-            //this.actions.userCreation = false;
-            //this.actions.taskCreation = false;
-            //this.actions.teamCreation = false;
-            //foreach (var Action in Actions.ActionId)
-            //{
-            //    if (Action == 1) {
-            //        this.actions.userCreation = true;
-            //    }
-            //    if (Action == 3)
-            //    {
-            //        this.actions.taskCreation = true;
-            //    }
-            //    if (Action == 7)
-            //    {
-            //        this.actions.teamCreation = true;
-            //    }
-            //}
-                return RedirectToAction("ShowHomePage", "Home");
+            return RedirectToAction("ShowHomePage", "Home");
         }
 
         public ActionResult Logout()
@@ -72,6 +55,7 @@ namespace jiraDamy.Controllers
         {
             return View("Unathorized");
         }
+        [HttpGet]
         [SessionBaseAuthorize]
         [ActionAccessValidation(actionId = 1)]
         public ActionResult SignUp()
@@ -86,15 +70,13 @@ namespace jiraDamy.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("SignUp");
+                model.RoleIdList = new BL_Authentication().GetRoleList();
+                return View(model);
             }
             new BL_Authentication().SaveUserData(model) ;
             return RedirectToAction("Login");
         }
 
-        //    public ActionResult GetRoleIdTypeList()
-        //    {
-        //        return new BL_Authentication().GetRoleList();
-        //}
+       
     }
 }

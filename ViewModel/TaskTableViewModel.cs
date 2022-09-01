@@ -25,6 +25,7 @@ namespace ViewModel
         public int IssueId { get; set; }
 
         public int issueType { get; set; }
+        public string statusName { get; set; }
 
         public string IssueName { get; set; }
         //public List<FlagType> Flags { get; set; } = new List<FlagType>();

@@ -10,9 +10,11 @@
 
 
         <leble>Flag Name</leble>
-        <div>@Html.TextBoxFor(x => x.FlagName)</div>
-        @Html.ValidationMessageFor(x => x.FlagName)
-        <button type="submit" class="btn btn-success" style="float: right;">Add</button>
+        <div>
+            @Html.TextBoxFor(x => x.FlagName)
+                @Html.ValidationMessageFor(x => x.FlagName)
+                <button type="submit" class="btn btn-success">Add</button>
+        </div>
 
     }
     }

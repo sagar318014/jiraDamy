@@ -7,27 +7,15 @@
 }
 @section Grid{
 
-   
+
 
     @using (Html.BeginForm("AddLable", "Home", FormMethod.Post))
     {
-        <lebel>Label Name</lebel>
-        <div>@Html.TextBoxFor(x => x.SprintName, new { id = "sprintid" }) </div>
-        <div> <input type="submit" class="btn btn-default" /></div>
-
-
-
-
-
+        <lebel>Sprint Name</lebel>
+        <div>
+            @Html.TextBoxFor(x => x.SprintName, new { id = "sprintid" })
+                @Html.ValidationMessageFor(x => x.SprintName)
+                <button type="submit" class="btn btn-success">Add</button>
+        </div>
     }
-}
-
-@section scripts{
-
-    <script>
-
-
-
-    </script>
-
 }
