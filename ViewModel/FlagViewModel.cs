@@ -11,7 +11,8 @@ namespace ViewModel
     {
         public int FlagId { get; set; }
 
-        [Required(ErrorMessage = "please enter flag name")]
+        [Required(ErrorMessage = "Please enter flag name")]
+        [StringLength(10, ErrorMessage = "Flag name not be more than 10 charecter")]
         public string FlagName { get; set; }
     }
 }

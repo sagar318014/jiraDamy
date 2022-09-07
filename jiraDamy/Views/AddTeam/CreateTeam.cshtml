@@ -13,7 +13,7 @@
 <div class="pb-1">
     <label style="display:block">Team Name</label>
     <div>
-        @Html.TextBoxFor(x => x.TeamName)
+        @Html.TextBoxFor(x => x.TeamName, new { Style="width:25%" })
         @Html.ValidationMessageFor(x => x.TeamName, "", new { @class = "text-danger" })
     </div>
     
@@ -31,8 +31,11 @@
 </div>
 <div class="pb-1">
     <label style="display:block">Team Member Name</label>
+    @*<div>
+        @Html.ListBoxFor(x => x.TeamMember1, Model.TeamLeders)
+    </div>*@
     <select id="TeamMember" name="TeamMember1" class="select-2 col-lg-3" multiple>
-        <option></option>
+       
         @foreach (var item in Model.TeamLeders)
         {
             <option value="@item.id">@item.text</option>
@@ -44,7 +47,7 @@
         <div style="margin-top:15px;">
 
 
-            <button type="submit" class="btn btn-success" style="float: right;">Add</button>
+            <button type="submit" class="btn btn-success" style="float: right;">Create Team</button>
 
         </div>
 
